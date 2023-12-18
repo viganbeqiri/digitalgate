@@ -12,33 +12,20 @@
                     <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"
                         aria-label="Close"></button>
                 </div>
-                <div class="row">
-                    <div class="offcanvas-body ms-lg-auto d-flex flex-column h-100">
-                        <ul class="navbar-nav">
-                            <li class="nav-item" v-for="menuItem in menuItems">
-                                <Link class="nav-link" v-if="menuItem.link != '#'" :href="route(menuItem.link)"
-                                    @click="subMenuHide">{{
-                                        menuItem.label }}</Link>
+                <div class="offcanvas-body ms-lg-auto d-flex flex-column h-100">
+                    <ul class="navbar-nav">
+                        <li class="nav-item" v-for="menuItem in menuItems">
+                            <Link class="nav-link" v-if="menuItem.link != '#'" :href="route(menuItem.link)"
+                                @click="subMenuHide($event)">{{
+                                    menuItem.label }}</Link>
 
-                                <a href="#" class="nav-link" v-else @click="showSubMenu(menuItem.subMenu)">{{
-                                    menuItem.label }}</a>
-                            </li>
-                        </ul>
+                            <a href="#" class="nav-link" v-else @click="showSubMenu(menuItem.subMenu, $event)">{{
+                                menuItem.label }}</a>
+                        </li>
+                    </ul>
 
-                        <!-- /.offcanvas-footer -->
-                    </div>
-                    <div class="offcanvas-body ms-lg-auto d-flex flex-column" v-if="subMenu">
-                        <ul class="navbar-nav secondary-nav">
-                            <li class="nav-item" v-for="subMenu in subMenu">
-                                <Link class="nav-link" v-if="subMenu.link != '#'" :href="route(subMenu.link)">{{
-                                    subMenu.label }}</Link>
+                    <!-- /.offcanvas-footer -->
 
-
-                            </li>
-                        </ul>
-
-                        <!-- /.offcanvas-footer -->
-                    </div>
                 </div>
 
                 <!-- /.offcanvas-body -->
@@ -77,6 +64,25 @@
                 <!-- /.navbar-nav -->
             </div>
             <!-- /.navbar-other -->
+        </div>
+        <!-- /.container -->
+    </nav>
+    <nav class="navbar navbar-expand-lg center-nav navbar-light navbar-bg-light seconday-nav-header">
+        <div class="container flex-lg-row flex-nowrap align-items-center">
+            <div class="w-50"></div>
+
+            <div class="navbar-collapse offcanvas offcanvas-nav offcanvas-start">
+                <div class="offcanvas-body ms-lg-auto d-flex justify-content-start" v-if="subMenu">
+                    <ul class="navbar-nav secondary-nav">
+                        <li class="nav-item" v-for="subMenu in subMenu">
+                            <Link class="nav-link opacity-50 hover-opacity-100 weight-100" v-if="subMenu.link != '#'"
+                                :href="route(subMenu.link)">{{
+                                    subMenu.label }}</Link>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
         </div>
         <!-- /.container -->
     </nav>
@@ -139,14 +145,19 @@ export default {
         return {
             menuItems: [
                 {
+                    id: 1,
+
                     label: 'Overview',
                     link: 'home'
                 },
                 {
+                    id: 2,
+
                     label: 'Services',
                     link: '#',
                     subMenu: [
                         {
+                            id: 1,
                             label: 'Desktop App Development',
                             link: 'services.desktop-app-development'
                         },
@@ -169,6 +180,8 @@ export default {
                     ]
                 },
                 {
+                    id: 3,
+
                     label: 'Outsourcing',
                     link: '#',
                     subMenu: [
@@ -187,10 +200,14 @@ export default {
                     ]
                 },
                 {
+                    id: 4,
+
                     label: 'Portofolio',
                     link: 'portofolio'
                 },
                 {
+                    id: 5,
+
                     label: 'Incubator',
                     link: '#',
                     subMenu: [
@@ -221,10 +238,16 @@ export default {
 
     },
     methods: {
-        showSubMenu(item) {
+        showSubMenu(item, event) {
             this.subMenu = item
+            const link = event.target
+            link.classList.remove('active')
+            link.classList.add('active')
         },
-        subMenuHide() {
+        subMenuHide(event) {
+            const link = event.target
+            link.classList.add('active')
+
             this.subMenu = null
         }
     }
@@ -254,5 +277,18 @@ export default {
     padding-top: 0 !important;
     padding-bottom: 0 !important;
     /* --bs-nav-link-padding-y: 0 !important; */
+}
+
+.secondary-nav>a {
+    font-weight: 100 !important;
+}
+
+.weight-100 {
+    font-weight: 100 !important;
+    font-size: small;
+}
+
+.seconday-nav-header {
+    background: var(--bs-gray-200) !important;
 }
 </style>
