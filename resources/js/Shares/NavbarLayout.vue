@@ -12,15 +12,35 @@
                     <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"
                         aria-label="Close"></button>
                 </div>
-                <div class="offcanvas-body ms-lg-auto d-flex flex-column h-100">
-                    <ul class="navbar-nav">
-                        <li class="nav-item active"><a class="nav-link" href="#">Overview</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#">Outsourcing</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#">Portifolio</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#">Incubator</a></li>
-                    </ul>
-                    <!-- /.offcanvas-footer -->
+                <div class="row">
+                    <div class="offcanvas-body ms-lg-auto d-flex flex-column h-100">
+                        <ul class="navbar-nav">
+                            <li class="nav-item" v-for="menuItem in menuItems">
+                                <Link class="nav-link" v-if="menuItem.link != '#'" :href="route(menuItem.link)"
+                                    @click="subMenuHide">{{
+                                        menuItem.label }}</Link>
+
+                                <a href="#" class="nav-link" v-else @click="showSubMenu(menuItem.subMenu)">{{
+                                    menuItem.label }}</a>
+                            </li>
+                        </ul>
+
+                        <!-- /.offcanvas-footer -->
+                    </div>
+                    <div class="offcanvas-body ms-lg-auto d-flex flex-column" v-if="subMenu">
+                        <ul class="navbar-nav secondary-nav">
+                            <li class="nav-item" v-for="subMenu in subMenu">
+                                <Link class="nav-link" v-if="subMenu.link != '#'" :href="route(subMenu.link)">{{
+                                    subMenu.label }}</Link>
+
+
+                            </li>
+                        </ul>
+
+                        <!-- /.offcanvas-footer -->
+                    </div>
                 </div>
+
                 <!-- /.offcanvas-body -->
             </div>
 
@@ -109,7 +129,106 @@
 </template>
 
 <script>
-export default {}
+import { Link } from '@inertiajs/vue3'
+
+export default {
+    components: {
+        Link
+    },
+    data() {
+        return {
+            menuItems: [
+                {
+                    label: 'Overview',
+                    link: 'home'
+                },
+                {
+                    label: 'Services',
+                    link: '#',
+                    subMenu: [
+                        {
+                            label: 'Desktop App Development',
+                            link: 'services.desktop-app-development'
+                        },
+                        {
+                            label: 'Web Development',
+                            link: 'services.web-development'
+                        },
+                        {
+                            label: 'Cross-Platform Development',
+                            link: 'services.cross-platform-development'
+                        },
+                        {
+                            label: 'Mobile App Development',
+                            link: 'services.mobile-app-development'
+                        },
+                        {
+                            label: 'Design Service',
+                            link: 'services.design-service'
+                        }
+                    ]
+                },
+                {
+                    label: 'Outsourcing',
+                    link: '#',
+                    subMenu: [
+                        {
+                            label: 'Team as a Service',
+                            link: 'outsourcing.team-as-a-service'
+                        },
+                        {
+                            label: 'IT Outsourcing Services',
+                            link: 'outsourcing.it-outsourcing-services'
+                        },
+                        {
+                            label: 'Cyber Security Services',
+                            link: 'outsourcing.cyber-security-services'
+                        }
+                    ]
+                },
+                {
+                    label: 'Portofolio',
+                    link: 'portofolio'
+                },
+                {
+                    label: 'Incubator',
+                    link: '#',
+                    subMenu: [
+                        {
+                            label: 'Why us?',
+                            link: 'incubator.why-us'
+                        },
+                        {
+                            label: 'Cohort',
+                            link: 'incubator.cohort'
+                        },
+                        {
+                            label: 'Incubation',
+                            link: 'incubator.incubation'
+                        },
+                        {
+                            label: 'Acceleration',
+                            link: 'incubator.acceleration'
+                        }
+                    ]
+                }
+            ],
+            subMenu: null
+        }
+    },
+    mounted() {
+        console.log(this.menuItems)
+
+    },
+    methods: {
+        showSubMenu(item) {
+            this.subMenu = item
+        },
+        subMenuHide() {
+            this.subMenu = null
+        }
+    }
+}
 </script>
 
 <style>
@@ -129,5 +248,11 @@ export default {}
 
 .form-control-rounded {
     border-radius: 50px;
+}
+
+.secondary-nav>.nav-item>.nav-link {
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+    /* --bs-nav-link-padding-y: 0 !important; */
 }
 </style>

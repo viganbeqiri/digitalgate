@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="./assets/css/style.css">
     <link rel="stylesheet" href="./assets/css/colors/sky.css">
     <link rel="preload" href="./assets/css/fonts/space.css" as="style" onload="this.rel='stylesheet'">
-
+    @routes
     @vite(['resources/js/app.js', 'resources/assets/scss/style.scss'])
     @inertiaHead
 </head>
