@@ -1,13 +1,8 @@
 <template>
-    <footer class="bg-navy text-inverse">
+    <footer class="bg-soft-ash ">
         <div class="container pt-15 pt-md-17 pb-13 pb-md-15">
-            <div class="d-lg-flex flex-row align-items-lg-center">
-                <h3 class="display-4 mb-6 mb-lg-0 pe-lg-20 pe-xl-22 pe-xxl-25 text-white">Join our community by using our
-                    services and grow your business.</h3>
-                <a href="#" class="btn btn-primary rounded-pill mb-0 text-nowrap">Try It For Free</a>
-            </div>
             <!--/div -->
-            <hr class="mt-11 mb-12" />
+
             <div class="row gy-6 gy-lg-0">
                 <div class="col-md-4 col-lg-3">
                     <div class="widget">
@@ -28,16 +23,16 @@
                 <!-- /column -->
                 <div class="col-md-4 col-lg-3">
                     <div class="widget">
-                        <h4 class="widget-title text-white mb-3">Get in Touch</h4>
+                        <h4 class="widget-title text-ash mb-3">Get in Touch</h4>
                         <address class="pe-xl-15 pe-xxl-17">Moonshine St. 14/05 Light City, London, United Kingdom</address>
                         <a href="mailto:#">info@email.com</a><br /> 00 (123) 456 78 90
                     </div>
                     <!-- /.widget -->
                 </div>
                 <!-- /column -->
-                <div class="col-md-4 col-lg-3">
+                <div class="col-md-4 col-lg-3 text-color-primary">
                     <div class="widget">
-                        <h4 class="widget-title text-white mb-3">Learn More</h4>
+                        <h4 class="widget-title text-ash mb-3">Learn More</h4>
                         <ul class="list-unstyled  mb-0">
                             <li><a href="#">About Us</a></li>
                             <li><a href="#">Our Story</a></li>
@@ -51,7 +46,7 @@
                 <!-- /column -->
                 <div class="col-md-12 col-lg-3">
                     <div class="widget">
-                        <h4 class="widget-title text-white mb-3">Our Newsletter</h4>
+                        <h4 class="widget-title text-ash mb-3">Our Newsletter</h4>
                         <p class="mb-5">Subscribe to our newsletter to get our news & deals delivered to you.</p>
                         <div class="newsletter-wrapper">
                             <!-- Begin Mailchimp Signup Form -->
@@ -98,3 +93,9 @@ export default {
 
 }
 </script>
+
+<style>
+footer {
+    color: var(--bs-primary);
+}
+</style>

@@ -8,24 +8,23 @@
             </div>
             <div class="navbar-collapse offcanvas offcanvas-nav offcanvas-start">
                 <div class="offcanvas-header d-lg-none">
-                    <h3 class="text-white fs-30 mb-0">Sandbox</h3>
+                    <h3 class="text-white fs-30 mb-0">Digital Gate</h3>
                     <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"
                         aria-label="Close"></button>
                 </div>
                 <div class="offcanvas-body ms-lg-auto d-flex flex-column h-100">
-                    <ul class="navbar-nav">
+                    <ul class="navbar-nav nav-phills">
                         <li class="nav-item" v-for="menuItem in menuItems">
-                            <Link class="nav-link" v-if="menuItem.link != '#'" :href="route(menuItem.link)"
-                                @click="subMenuHide($event)">{{
-                                    menuItem.label }}</Link>
+                            <NavLink :active="$page.url == menuItem.link" v-if="menuItem.link != '#'"
+                                :href="route(menuItem.link)" @click="handleMenuClick($event)">
+                                {{ menuItem.label }}
+                            </NavLink>
 
-                            <a href="#" class="nav-link" v-else @click="showSubMenu(menuItem.subMenu, $event)">{{
+
+                            <a href="#" class="nav-link" v-else @click="handleMenuClick($event, menuItem.subMenu)">{{
                                 menuItem.label }}</a>
                         </li>
                     </ul>
-
-                    <!-- /.offcanvas-footer -->
-
                 </div>
 
                 <!-- /.offcanvas-body -->
@@ -55,7 +54,7 @@
                         </ul>
                     </li>
                     <li class="nav-item d-none d-md-block">
-                        <a href="./contact.html" class="btn btn-sm btn-primary rounded-pill">Sign up</a>
+                        <Link :href="route('auth.index')" class="btn btn-sm btn-primary rounded-pill">Sign Up</Link>
                     </li>
                     <li class="nav-item d-lg-none">
                         <button class="hamburger offcanvas-nav-btn"><span></span></button>
@@ -69,14 +68,12 @@
     </nav>
     <nav class="navbar navbar-expand-lg center-nav navbar-light navbar-bg-light seconday-nav-header">
         <div class="container flex-lg-row flex-nowrap align-items-center">
-            <div class="w-50"></div>
-
-            <div class="navbar-collapse offcanvas offcanvas-nav offcanvas-start">
-                <div class="offcanvas-body ms-lg-auto d-flex justify-content-start" v-if="subMenu">
+            <div class="navbar-collapse  mx-17">
+                <div class="offcanvas-body ms-lg-auto d-flex " v-if="subMenu">
                     <ul class="navbar-nav secondary-nav">
                         <li class="nav-item" v-for="subMenu in subMenu">
-                            <Link class="nav-link opacity-50 hover-opacity-100 weight-100" v-if="subMenu.link != '#'"
-                                :href="route(subMenu.link)">{{
+                            <Link class="nav-link opacity-50 hover-opacity-100 weight-100" @click="handleMenuClick($event)"
+                                v-if="subMenu.link != '#'" :href="route(subMenu.link)">{{
                                     subMenu.label }}</Link>
                         </li>
                     </ul>
@@ -136,23 +133,23 @@
 
 <script>
 import { Link } from '@inertiajs/vue3'
+import NavLink from '../Components/NavLink.vue'
 
 export default {
     components: {
-        Link
+        Link,
+        NavLink
     },
     data() {
         return {
             menuItems: [
                 {
                     id: 1,
-
                     label: 'Overview',
-                    link: 'home'
+                    link: 'home',
                 },
                 {
                     id: 2,
-
                     label: 'Services',
                     link: '#',
                     subMenu: [
@@ -249,6 +246,12 @@ export default {
             link.classList.add('active')
 
             this.subMenu = null
+        },
+        handleMenuClick(event, data = {}) {
+            if (data) {
+                this.subMenu = data
+            }
+            console.log(event.target)
         }
     }
 }
@@ -290,5 +293,11 @@ export default {
 
 .seconday-nav-header {
     background: var(--bs-gray-200) !important;
+}
+
+.nav-pills .nav-link.active,
+.nav-pills .show>.nav-link {
+    color: #fff;
+    background-color: #0d6efd;
 }
 </style>

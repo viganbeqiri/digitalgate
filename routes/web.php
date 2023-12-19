@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -73,4 +74,11 @@ Route::prefix('incubator')->name('incubator.')->group(function () {
     Route::get('/acceleration', function () {
         return Inertia::render('Services', []);
     })->name('acceleration');
+});
+
+Route::prefix('auth')->name('auth.')->group(function () {
+    Route::get('/', function () {
+        return Inertia::render('Auth', []);
+    })->name('index');
+    Route::post('register', [AuthController::class, 'register'])->name('register');
 });
