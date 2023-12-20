@@ -82,3 +82,14 @@ Route::prefix('auth')->name('auth.')->group(function () {
     })->name('index');
     Route::post('register', [AuthController::class, 'register'])->name('register');
 });
+
+Route::get('sign-up', function () {
+    return Inertia::render('Auth/SignUp', []);
+})->name('sign-up');
+
+Route::get('sign-in', function () {
+    return Inertia::render('Auth/SignIn', []);
+})->name('sign-in');
+
+
+
