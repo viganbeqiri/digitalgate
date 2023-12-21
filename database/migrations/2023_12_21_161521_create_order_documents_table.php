@@ -13,12 +13,9 @@ return new class extends Migration
     {
         Schema::create('order_documents', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('order_id')->constrained('orders')->onDelete('cascade');
-            $table->string('full_name');
-            $table->tinyInteger('order_type')->default(0)->comment('0 = order, 1 = return');
-            $table->tinyInteger('has_business_license')->default(0)->comment('0: no, 1: yes');
-            $table->text('document_url');
-            $table->text('license_url')->nullable();
+            $table->foreignId('order_id')->constrained()->onDelete('cascade');
+            $table->text('nda_file_url')->nullable();
+            $table->text('license_file_url')->nullable();
             $table->timestamps();
         });
     }
