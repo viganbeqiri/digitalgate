@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('title');
             $table->string('subtitle')->nullable();
+            $table->foreignId('category_id')->constrained()->onDelete('cascade');
             $table->string('slug');
             $table->text('description')->nullable();
             $table->text('contents')->nullable()->comment('json [{title, description, link?, image?}]');
