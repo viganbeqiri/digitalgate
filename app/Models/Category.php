@@ -18,4 +18,9 @@ class Category extends Model
     {
         return $this->belongsTo(Category::class, 'parent_id');
     }
+
+    public function pages()
+    {
+        return $this->hasMany(Page::class);
+    }
 }
