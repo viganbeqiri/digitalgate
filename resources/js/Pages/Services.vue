@@ -1,36 +1,22 @@
 <template>
-    <section class="wrapper bg-light">
-        <div class="swiper-container swiper-hero dots-over" data-margin="0" data-autoplay="true" data-autoplaytime="7000"
-            data-nav="true" data-dots="true" data-items="1">
-            <div class="swiper">
-                <div class="swiper-wrapper">
-                    <div class="swiper-slide bg-overlay bg-overlay-400 bg-dark bg-image"
-                        v-for="sliderContent in sliderContents" v-bind:data-image-src="sliderContent.media_url">
-                        <div class="container h-100">
-                            <div class="row h-100">
-                                <div
-                                    class="col-md-8 offset-md-1 col-lg-7 offset-lg-0 col-xl-6 col-xxl-5 text-center text-lg-start justify-content-center align-self-center align-items-start">
-                                    <h2
-                                        class="display-1 fs-56 mb-4 text-white animate__animated animate__slideInDown animate__delay-1s">
-                                        {{ sliderContent.title }}</h2>
-                                    <p
-                                        class="lead fs-23 lh-sm mb-7 text-white animate__animated animate__slideInRight animate__delay-2s">
-                                        {{ sliderContent.subtitle }}
-                                    </p>
-                                    <div class="animate__animated animate__slideInUp animate__delay-3s"><a href="#"
-                                            class="btn btn-lg btn-outline-white rounded-pill">Read More</a></div>
-                                </div>
-                                <!--/column -->
-                            </div>
-                            <!--/.row -->
-                        </div>
-                        <!--/.container -->
-                    </div>
-                    <!--/.swiper-slide -->
-                </div>
-                <!--/.swiper-wrapper -->
+    <section class="wrapper bg-light container-fluid mt-5">
+        <div class="d-flex justify-content-between align-items-center pb-3">
+            <div>
+                <Link v-if="data.previous_page" :href="route(data.previous_page)">
+                <img src="@/img/back.png" alt="back" />
+                </Link>
             </div>
-            <!-- /.swiper -->
+            <div>
+                <div>
+                    <img src="@/img/background/desktop-app-development.png"
+                        style="height: 100%;width: 100%; object-fit: none" class="img-fluid" alt="desktop-app" />
+                </div>
+            </div>
+            <div>
+                <Link v-if="data.next_page" :href="route(data.next_page)">
+                <img src="@/img/next.png" alt="next" />
+                </Link>
+            </div>
         </div>
         <!-- /.swiper-container -->
     </section>
@@ -108,14 +94,16 @@
 <script>
 import FrontLayout from '../Shares/FrontLayout.vue';
 import { ref, onMounted, defineProps } from 'vue'
-import { usePage, Head } from '@inertiajs/vue3'
+import { usePage, Head, Link, router } from '@inertiajs/vue3'
 //local storage
 
 
 export default {
     name: "Services",
-
     layout: FrontLayout,
+    components: {
+        Link
+    },
     data() {
         return {
         }

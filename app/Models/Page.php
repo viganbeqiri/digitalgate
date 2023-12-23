@@ -9,6 +9,9 @@ class Page extends Model
 {
     use HasFactory;
 
+    public $guarded = [];
+    public $appends = ['next_page', 'previous_page'];
+
     public function category()
     {
         return $this->belongsTo(Category::class, 'category_id');
@@ -17,5 +20,23 @@ class Page extends Model
     public function products()
     {
         return $this->hasMany(Product::class);
+    }
+
+    public function getNextPageAttribute()
+    {
+        $next = $this->category->pages()->where('id', '>', $this->id)->first();
+        if ($next) {
+            return 'services.' . $next->slug;
+        }
+        return null;
+    }
+
+    public function getPreviousPageAttribute()
+    {
+        $prev = $this->category->pages()->where('id', '<', $this->id)->orderBy('id', 'desc')->first();
+        if ($prev) {
+            return 'services.' . $prev->slug;
+        }
+        return null;
     }
 }
