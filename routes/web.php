@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Models\Category;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -20,24 +21,10 @@ Route::get('/', function () {
 })->name('home');
 
 Route::prefix('services')->name('services.')->group(function () {
-    Route::get('/desktop-app-development', function () {
-        return Inertia::render('Services', []);
-    })->name('desktop-app-development');
-
-    Route::get('/mobile-app-development', function () {
-        return Inertia::render('Services', []);
-    })->name('mobile-app-development');
-
-    Route::get('/web-development', function () {
-        return Inertia::render('Services', []);
-    })->name('web-development');
-    Route::get('/cross-platform-development', function () {
-        return Inertia::render('Services', []);
-    })->name('cross-platform-development');
-
-    Route::get('/design-service', function () {
-        return Inertia::render('Services', []);
-    })->name('design-service');
+    $pages = Category::where('slug', 'services')->with('pages')->firstOrFail();
+    foreach ($pages->pages as $page) {
+        Route::get($page->slug, [App\Http\Controllers\ServicesController::class, 'index'])->name($page->slug);
+    }
 });
 
 Route::prefix('outsourcing')->name('outsourcing.')->group(function () {
@@ -90,6 +77,3 @@ Route::get('sign-up', function () {
 Route::get('sign-in', function () {
     return Inertia::render('Auth/SignIn', []);
 })->name('sign-in');
-
-
-

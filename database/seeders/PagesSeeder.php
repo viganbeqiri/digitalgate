@@ -15,8 +15,8 @@ class PagesSeeder extends Seeder
     {
         $contents = [
             [
-                'title' => 'Destop App Development',
-                'slug' => 'destop-app-development',
+                'title' => 'Desktop App Development',
+                'slug' => 'desktop-app-development',
                 'category_id' => 'services',
                 'has_slider' => 1,
                 'contents' => '[{"title":"test","description":"test","image":"https://placehold.co/400x400"},{"title":"test","description":"test","image":"https://placehold.co/400x400"},{"title":"test","description":"test","image":"https://placehold.co/400x400"}]',

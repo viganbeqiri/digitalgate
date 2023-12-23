@@ -43,8 +43,8 @@ export default {
         }
     },
     mounted() {
-        console.log(this.count) // 0
         theme.init()
+        console.log(this.count) // 0
     }
 
 }

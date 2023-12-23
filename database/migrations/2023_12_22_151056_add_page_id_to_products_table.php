@@ -13,6 +13,11 @@ return new class extends Migration
     {
         Schema::table('products', function (Blueprint $table) {
             $table->foreignId('page_id')->after('category_id')->nullable()->constrained('pages')->onDelete('cascade');
+            $table->string('slug')->after('page_id');
+            $table->boolean('highlighted')->default(0);
+            $table->tinyInteger('pricing_scheme')->default(1)->comment('1 => outright, 2 => monthly subscription');
+            $table->text('image')->nullable();
+            $table->text('note')->nullable();
         });
     }
 
@@ -23,6 +28,11 @@ return new class extends Migration
     {
         Schema::table('products', function (Blueprint $table) {
             $table->dropConstrainedForeignId('page_id');
+            $table->dropColumn('slug');
+            $table->dropColumn('highlighted');
+            $table->dropColumn('pricing_scheme');
+            $table->dropColumn('image');
+            $table->dropColumn('note');
         });
     }
 };

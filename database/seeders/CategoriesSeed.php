@@ -20,8 +20,8 @@ class CategoriesSeed extends Seeder
                 'parent_id' => null,
             ],
             [
-                'title' => 'Destop App Development',
-                'slug' => 'destop-app-development',
+                'title' => 'Desktop App Development',
+                'slug' => 'desktop-app-development',
                 'parent_id' => 'services',
             ],
             [

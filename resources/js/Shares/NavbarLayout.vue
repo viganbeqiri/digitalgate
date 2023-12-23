@@ -4,8 +4,7 @@
             <div class="navbar-brand w-50">
                 <a href="#">
                     <img src="@/img/digital-gate-logo.png" srcset="@/img/digital-gate-logo.png 2x" alt="logo"
-                        style="height: 1rem"
-                    />
+                        style="height: 1rem" />
                 </a>
             </div>
             <div class="navbar-collapse offcanvas offcanvas-nav offcanvas-start">
@@ -135,7 +134,7 @@
 </template>
 
 <script>
-import { Link } from '@inertiajs/vue3'
+import { Link, usePage } from '@inertiajs/vue3'
 
 export default {
     components: {
@@ -234,7 +233,6 @@ export default {
         }
     },
     mounted() {
-        console.log(this.menuItems)
 
     },
     methods: {
@@ -250,6 +248,8 @@ export default {
 
             this.subMenu = null
         }
+    },
+    computed() {
     }
 }
 </script>
