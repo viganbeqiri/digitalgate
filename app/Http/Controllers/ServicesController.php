@@ -12,7 +12,12 @@ class ServicesController extends Controller
     {
         $path =  explode('/', $request->path());
         $page = Page::where('slug', $path[1])->first();
-        $products = $page->products()->get();
+        if ($path[1] == 'design-service') {
+            $products = $page->products()->where('mandatory', 1)->with('childProduct')->get();
+        } else {
+            $products = $page->products()->get();
+        }
+        // return $products;
         return Inertia::render('Services', [
             'data' => $page,
             'products' => $products,

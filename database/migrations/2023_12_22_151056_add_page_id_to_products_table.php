@@ -15,7 +15,7 @@ return new class extends Migration
             $table->foreignId('page_id')->after('category_id')->nullable()->constrained('pages')->onDelete('cascade');
             $table->string('slug')->after('page_id');
             $table->boolean('highlighted')->default(0);
-            $table->tinyInteger('pricing_scheme')->default(1)->comment('1 => outright, 2 => monthly subscription');
+            $table->tinyInteger('pricing_scheme')->default(1)->comment('1 => outright, 2 => monthly subscription, 3 => quote');
             $table->text('image')->nullable();
             $table->text('note')->nullable();
         });

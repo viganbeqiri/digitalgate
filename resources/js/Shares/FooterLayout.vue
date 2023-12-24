@@ -6,8 +6,8 @@
             <div class="row gy-6 gy-lg-0">
                 <div class="col-md-4 col-lg-3">
                     <div class="widget">
-                        <img class="mb-4" style="height: 1rem" src="@/img/digital-gate-logo.png" srcset="@/img/digital-gate-logo.png 2x"
-                            alt="" />
+                        <img class="mb-4" style="height: 1rem" src="@/img/digital-gate-logo.png"
+                            srcset="@/img/digital-gate-logo.png 2x" alt="" />
                         <p class="mb-4 fs-16">Copyright ©<br class="d-none d-lg-block" />DigitalGate Macedonia</p>
                         <nav class="nav social social-muted">
                             <a href="#"><i class="uil uil-twitter"></i></a>
@@ -39,7 +39,7 @@
                         <h4 class="widget-title text-ash mb-3">Company</h4>
                         <ul class="list-unstyled  mb-0">
                             <li><a href="#">About</a></li>
-                            <li><a href="#">Careers</a></li>
+                            <li><a href="#">Team</a></li>
                             <li><a href="#">GDRP</a></li>
                             <li><a href="#">Contact</a></li>
                         </ul>

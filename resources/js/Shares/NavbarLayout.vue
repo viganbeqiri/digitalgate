@@ -36,7 +36,7 @@
                 <!-- /.offcanvas-body -->
             </div>
 
-            <div class="navbar-other w-100 d-flex ms-auto">
+            <div class="navbar-other w-100 d-flex ms-auto p-2">
                 <ul class="navbar-nav flex-row align-items-center ms-auto w-75">
                     <li class="nav-item dropdown language-select w-100">
                         <div class="form-group">
@@ -60,11 +60,11 @@
                         </ul>
                     </li>
                     <li class="nav-item d-none d-md-block" v-if="!auth">
-                        <a href="/sign-up" class="btn btn-sm btn-primary rounded-pill">Sign up</a>
+                        <a href="/sign-up" class="btn btn-sm btn-primary rounded-pill pt-1 pb-1">Sign up</a>
                     </li>
 
                     <li class="nav-item d-none d-md-block" v-if="auth">
-                        <a href="/sign-up" class="btn btn-sm btn-primary rounded-pill">Logout</a>
+                        <a href="/sign-up" class="btn btn-sm btn-primary rounded-pill pt-1 pb-1">Logout</a>
                     </li>
 
                     <li class="nav-item d-lg-none">
@@ -89,6 +89,7 @@
                         </li>
                     </ul>
                 </div>
+
             </div>
 
         </div>

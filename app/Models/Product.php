@@ -10,7 +10,17 @@ class Product extends Model
     use HasFactory;
 
     public $guarded = [];
-    public $appends = ['image_url', 'has_child_product', 'child_slug', 'has_parent_product', 'parent_slug'];
+    public $appends = ['image_url', 'has_child_product'];
+
+    const OUTRIGHT = 1;
+    const MONTHLY_SUBSCRIPTION = 2;
+    const QUOTE = 3;
+    const PRICING_SCHEMES = [
+        self::OUTRIGHT => 'Outright',
+        self::MONTHLY_SUBSCRIPTION => 'Monthly Subscription',
+        self::QUOTE => 'Quote',
+    ];
+
     public function getAdditionalInfoAttribute($value)
     {
         return json_decode($value);
