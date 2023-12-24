@@ -43,13 +43,30 @@ class Page extends Model
     public function getContentsAttribute($value)
     {
         $contents = json_decode($value);
-
         return collect($contents)->map(function ($content) {
-            $image = filter_var($content->image, FILTER_VALIDATE_URL) ? $content->image : asset('/' . $content->image);
+            $imageSource = $content->image ?? null;
+
+            $image = $imageSource ? (filter_var($content->image, FILTER_VALIDATE_URL) ? $content->image : asset('/' . $content->image)) : null;
             return [
                 'title' => $content->title,
                 'description' => $content->description,
-                'image' => $image
+                'image' => $image,
+                'link' => $content->link ?? null,
+                'subtitle' => $content->subtitle ?? null,
+            ];
+        });
+    }
+    public function getSliderContentsAttribute($value)
+    {
+        $contents = json_decode($value);
+
+        return collect($contents)->map(function ($content) {
+            $image = filter_var($content->media_url, FILTER_VALIDATE_URL) ? $content->media_url : asset('/' . $content->media_url);
+            return [
+                'media_url' => $image ?? null,
+                'title' => $content->title ?? null,
+                'subtitle' => $content->subtitle ?? null,
+                'link' => $content->link ?? null,
             ];
         });
     }

@@ -1,5 +1,5 @@
 <template>
-    <section class="wrapper bg-light container-fluid mt-5">
+    <section class="wrapper bg-light container-fluid">
         <div class="d-flex justify-content-between align-items-center pb-3">
             <div>
                 <Link :class="page.previous_page ? '' : 'disabled'"
@@ -39,7 +39,7 @@
 
             <div class="row mt-5 pt-5">
                 <div class="col-lg-10 col-xl-9 col-xxl-8 mx-auto text-center">
-                    <h3 class="display-4 text-primary">{{ page.title }}</h3>
+                    <h3 class="display-4 text-primary text-uppercase">{{ page.title }}</h3>
                     <h2 class="fs-15 text-muted mb-3">{{ page.subtitle }}</h2>
                 </div>
                 <!--/column -->
@@ -54,7 +54,7 @@
                                 <img :src="product.image_url" alt="" height="24px" />
                             </div>
                             <div class="card-body mx-1 mr-1" :class="!product.mandatory ? 'pricing-body' : 'shadow-xl'">
-                                <h4 class="card-title">{{ product.name }}</h4>
+                                <h4 class="card-title text-uppercase">{{ product.name }}</h4>
                                 <div class="prices text-dark">
                                     <div class="price price-show"><span class="fs-28 text-primary"> {{ new
                                         Intl.NumberFormat('en-US', {
@@ -163,7 +163,7 @@ export default {
         const { data } = usePage()
         const { page, products } = usePage().props
 
-        const sliderContents = JSON.parse(page.slider_contents)
+        const sliderContents = page.slider_contents
         const contents = page.contents
 
         return {
@@ -189,12 +189,13 @@ export default {
     },
 
     computed() {
+        console.log(this.page)
     },
 
     mounted() {
         theme.init()
         this.getMaxHeight()
-
+        console.log(this.page)
 
     },
     onMounted() {
@@ -214,9 +215,7 @@ export default {
                 }
 
                 console.log(cardElements)
-                console.log('Max Height:', maxHeight);
             } else {
-                console.warn('No card elements found.');
             }
         },
         doOrder(product) {

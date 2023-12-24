@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Category;
+use App\Models\Page;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -64,19 +65,30 @@ class PagesSeeder extends Seeder
 
             ],
             [
-                'title' => 'Team as a Service',
-                'slug' => 'team-as-a-service',
+                'title' => 'Outsourcing',
+                'slug' => 'outsourcing',
                 'category_id' => 'outsourcing',
                 'has_slider' => 1,
-                'contents' => '[{"title":"test","description":"test","image":"https://placehold.co/400x400"},{"title":"test","description":"test","image":"https://placehold.co/400x400"},{"title":"test","description":"test","image":"https://placehold.co/400x400"}]',
-                'slider_contents' => '[{"media_url":"https://placehold.co/1080x720","title":"test","subtitle":"tessss","link":"https://facebook.com"},{"media_url":"https://placehold.co/1080x720","title":"test","subtitle":"tessss","link":"https://facebook.com"},{"media_url":"https://placehold.co/1080x720","title":"test","subtitle":"tessss","link":"https://facebook.com"},{"media_url":"https://placehold.co/1080x720","title":"test","subtitle":"tessss","link":"https://facebook.com"}]'
+                'contents' => '[{"title":"Team as a Service","description":"IT Out-staffing. Expand your Team, not your overhead: Outsource with us for top talent, optimized costs, and unparalleled flexibility.","image":"assets/uploads/outsourcing/group.png","link":"outsourcing.team-as-a-service"},{"title":"IT Outsourcing Services","description":"Outsource your projects to us, where efficiency meets expertise, driving your business forward with ease.","image":"assets/uploads/outsourcing/adhoc.png","link":"outsourcing.it-outsourcing-service"},{"title":"Cybersecurity Services","description":"Secure your digital assets with our cybersecurity services; essential| protection for peace of mind and business continuity.","image":"assets/uploads/outsourcing/secure.png","link":"outsourcing.cybersecurity-service"}]',
+                'slider_contents' => '[{"media_url":"assets/uploads/outsourcing/circle.png","title":"test","subtitle":"tessss","link":"https://facebook.com"}]'
 
             ],
+            [
+                'title' => 'Team as a Service',
+                'subtitle' => 'IT Out-staffing. Expand your Team, not your overhead: Outsource with us for top talent, optimized costs, and unparalleled flexibility.',
+                'slug' => 'team-as-a-service',
+                'category_id' => 'outsourcing',
+                'parent_id' => 'outsourcing',
+                'has_slider' => 0,
+                'contents' => '[{"title":"More staff - zero liabilities. Hassle-free resource allocation","subtittle":"An ability to manage the whole development process","description":"Earlier this week, at the expansive Computer History Museum in Mountain View, Calif., Y Combinator introduced an exhaustive.."},{"title":"Keep your current structure Hire on-demand","subtittle":"A quick and straightforward hiring procedure and easy onboarding","description":"It\'s no secret that much of the legal industry is build on reusable content. Most law firms have their own customized set of standard..."},{"title":"Access to a broad range of IT experts","subtittle":"Flexibility to scale your resources up or down depending on changing circumstances","description":"Cost-effectiveness and no pitfalls: the total budget is discussed and calculated beforehand"}]',
+            ],
+
             [
                 'title' => 'IT Outsourcing Service',
                 'slug' => 'it-outsourcing-service',
                 'category_id' => 'outsourcing',
-                'has_slider' => 1,
+                'parent_id' => 'outsourcing',
+                'has_slider' => 0,
                 'contents' => '[{"title":"test","description":"test","image":"https://placehold.co/400x400"},{"title":"test","description":"test","image":"https://placehold.co/400x400"},{"title":"test","description":"test","image":"https://placehold.co/400x400"}]',
                 'slider_contents' => '[{"media_url":"https://placehold.co/1080x720","title":"test","subtitle":"tessss","link":"https://facebook.com"},{"media_url":"https://placehold.co/1080x720","title":"test","subtitle":"tessss","link":"https://facebook.com"},{"media_url":"https://placehold.co/1080x720","title":"test","subtitle":"tessss","link":"https://facebook.com"},{"media_url":"https://placehold.co/1080x720","title":"test","subtitle":"tessss","link":"https://facebook.com"}]'
 
@@ -99,6 +111,11 @@ class PagesSeeder extends Seeder
             unset($content['category_id']);
             if (empty($category)) {
                 continue;
+            }
+            if (!empty($content['parent_id'])) {
+                $parentPage = Page::where('slug', $content['parent_id'])->first();
+                $content['parent_id'] = $parentPage->id;
+                unset($content['parent_id']);
             }
             $category->pages()->updateOrCreate(['slug' => $content['slug']], $content);
         }

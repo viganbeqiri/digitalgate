@@ -1,7 +1,7 @@
 
 import NavbarLayout from './NavbarLayout.vue';
 <template>
-    <div class="content-wrapper">
+    <div class="content-wrapper mt-15">
         <header class="wrapper bg-soft-primary">
             <NavbarLayout :user="auth" />
         </header>

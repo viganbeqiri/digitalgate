@@ -1,5 +1,6 @@
 <template>
-    <nav class="navbar navbar-expand-lg center-nav navbar-light navbar-bg-light border-bottom border-secondary">
+    <nav class="navbar fixed-top navbar-expand-lg center-nav navbar-light navbar-bg-light border-bottom border-secondary"
+        style="z-index: 9999999;">
         <div class="container flex-lg-row flex-nowrap align-items-center">
             <div class="navbar-brand w-50">
                 <a href="#">
@@ -39,7 +40,7 @@
                 <ul class="navbar-nav flex-row align-items-center ms-auto w-75">
                     <li class="nav-item dropdown language-select w-100">
                         <div class="form-group">
-                            <input id="textInputExample" type="text" class="form-control form-control-rounded"
+                            <input id="search-form" type="text" class="form-control form-control-rounded"
                                 placeholder="Search Here">
                             <i class="uil uil-search form-control-icon"></i>
 
@@ -78,7 +79,7 @@
 
         <!-- /.container -->
     </nav>
-    <nav class="navbar navbar-expand-lg center-nav navbar-light navbar-bg-light seconday-nav-header">
+    <nav class="navbar fixed-top pt-12  navbar-expand-lg center-nav navbar-light navbar-bg-light seconday-nav-header">
         <div class="container flex-lg-row flex-nowrap align-items-center justify-content-center">
             <div class="navbar-collapse offcanvas offcanvas-nav offcanvas-start">
                 <div class="offcanvas-body d-flex justify-content-center" style="margin-left: 8vw" v-if="subMenu">

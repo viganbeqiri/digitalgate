@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Models\Category;
+use App\Models\Page;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -32,7 +33,10 @@ Route::prefix('services')->name('services.')->group(function () {
 
 Route::prefix('outsourcing')->name('outsourcing.')->group(function () {
     Route::get('/', function () {
-        return Inertia::render('Outsourcing', []);
+        $page = Page::where('slug', 'outsourcing')->firstOrFail();
+        return Inertia::render('Outsourcing', [
+            'page' => $page
+        ]);
     })->name('index');
     $pages = Category::where('slug', 'outsourcing')->with('pages')->firstOrFail();
     foreach ($pages->pages as $page) {
