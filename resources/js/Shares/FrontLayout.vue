@@ -3,7 +3,7 @@ import NavbarLayout from './NavbarLayout.vue';
 <template>
     <div class="content-wrapper">
         <header class="wrapper bg-soft-primary">
-            <NavbarLayout />
+            <NavbarLayout :user="auth" />
         </header>
         <slot />
         <FooterLayout />
@@ -17,6 +17,9 @@ import { ref, onMounted } from 'vue'
 
 export default {
     components: { NavbarLayout, FooterLayout },
+    props: {
+        auth: Object
+    },
     setup() {
         const count = ref(0)
         return {
@@ -25,8 +28,9 @@ export default {
     },
 
     mounted() {
-        console.log(this.count) // 0
+        console.log(this.auth) // 0
         theme.init()
+
     }
 };
 </script>

@@ -17,7 +17,9 @@ use Inertia\Inertia;
 */
 
 Route::get('/', function () {
-    return Inertia::render('Overview', []);
+    return Inertia::render('Overview', [
+        'active' => ['home']
+    ]);
 })->name('home');
 
 Route::prefix('services')->name('services.')->group(function () {
@@ -28,21 +30,26 @@ Route::prefix('services')->name('services.')->group(function () {
 });
 
 Route::prefix('outsourcing')->name('outsourcing.')->group(function () {
+    Route::get('/', function () {
+        return Inertia::render('Outsourcing', []);
+    })->name('index');
+
     Route::get('/team-as-a-service', function () {
-        return Inertia::render('Services', []);
+        return Inertia::render('Outsourcing', []);
     })->name('team-as-a-service');
 
+
     Route::get('/it-outsourcing-services', function () {
-        return Inertia::render('Services', []);
+        return Inertia::render('Outsourcing', []);
     })->name('it-outsourcing-services');
 
     Route::get('/cyber-security-services', function () {
-        return Inertia::render('Services', []);
+        return Inertia::render('Outsourcing', []);
     })->name('cyber-security-services');
 });
 
 Route::get('/portofolio', function () {
-    return Inertia::render('Services', []);
+    return Inertia::render('Portofolio', []);
 })->name('portofolio');
 
 
@@ -68,6 +75,7 @@ Route::prefix('auth')->name('auth.')->group(function () {
         return Inertia::render('Auth', []);
     })->name('index');
     Route::post('register', [AuthController::class, 'register'])->name('register');
+    Route::post('login', [AuthController::class, 'login'])->name('login');
 });
 
 Route::get('sign-up', function () {

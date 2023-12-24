@@ -2,7 +2,8 @@
     <section class="wrapper bg-light container-fluid mt-5">
         <div class="d-flex justify-content-between align-items-center pb-3">
             <div>
-                <Link v-if="data.previous_page" :href="route(data.previous_page)">
+                <Link :class="data.previous_page ? '' : 'disabled'"
+                    :href="data.previous_page ? route(data.previous_page) : ''">
                 <img src="@/img/back.png" alt="back" />
                 </Link>
             </div>
@@ -13,7 +14,7 @@
                 </div>
             </div>
             <div>
-                <Link v-if="data.next_page" :href="route(data.next_page)">
+                <Link :class="data.next_page ? '' : 'disabled'" :href="data.next_page ? route(data.next_page) : ''">
                 <img src="@/img/next.png" alt="next" />
                 </Link>
             </div>
@@ -93,7 +94,6 @@
 
 <script>
 import FrontLayout from '../Shares/FrontLayout.vue';
-import { ref, onMounted, defineProps } from 'vue'
 import { usePage, Head, Link, router } from '@inertiajs/vue3'
 //local storage
 
@@ -113,7 +113,7 @@ export default {
         const data = usePage().props.data
         const products = usePage().props.products
         const sliderContents = JSON.parse(data.slider_contents)
-        const contents = JSON.parse(data.contents)
+        const contents = data.contents
         return {
             sliderContents,
             contents,

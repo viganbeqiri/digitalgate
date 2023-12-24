@@ -39,4 +39,18 @@ class Page extends Model
         }
         return null;
     }
+
+    public function getContentsAttribute($value)
+    {
+        $contents = json_decode($value);
+
+        return collect($contents)->map(function ($content) {
+            $image = filter_var($content->image, FILTER_VALIDATE_URL) ? $content->image : asset('/' . $content->image);
+            return [
+                'title' => $content->title,
+                'description' => $content->description,
+                'image' => $image
+            ];
+        });
+    }
 }

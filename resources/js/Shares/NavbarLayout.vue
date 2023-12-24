@@ -9,19 +9,23 @@
             </div>
             <div class="navbar-collapse offcanvas offcanvas-nav offcanvas-start">
                 <div class="offcanvas-header d-lg-none">
-                    <h3 class="text-white fs-30 mb-0">Sandbox</h3>
+                    <h3 class="text-white fs-30 mb-0">Digital Gate</h3>
                     <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"
                         aria-label="Close"></button>
                 </div>
                 <div class="offcanvas-body ms-lg-auto d-flex flex-column h-100">
-                    <ul class="navbar-nav">
+                    <ul class="navbar-nav align-items-center">
                         <li class="nav-item" v-for="menuItem in menuItems">
-                            <Link class="nav-link" v-if="menuItem.link != '#'" :href="route(menuItem.link)"
+                            <Link class="nav-link pb-1 pt-1 "
+                                :class="route().current() == menuItem.link ? 'bg-pale-ash text-primary rounded-pill' : ''"
+                                v-if="!menuItem.link.startsWith('#')" :href="route(menuItem.link)"
                                 @click="subMenuHide($event)">{{
                                     menuItem.label }}</Link>
 
-                            <a href="#" class="nav-link" v-else @click="showSubMenu(menuItem.subMenu, $event)">{{
-                                menuItem.label }}</a>
+                            <a href="#" class="nav-link pb-1 pt-1 "
+                                :class="route().current().split('.')[0] == menuItem.link.split('#')[1] ? 'bg-pale-ash text-primary rounded-pill' : ''"
+                                v-else @click="showSubMenu(menuItem.subMenu, menuItem.link)">{{
+                                    menuItem.label }}</a>
                         </li>
                     </ul>
 
@@ -55,9 +59,14 @@
                             <li class="nav-item"><a class="dropdown-item" href="#">English</a></li>
                         </ul>
                     </li>
-                    <li class="nav-item d-none d-md-block">
+                    <li class="nav-item d-none d-md-block" v-if="!auth">
                         <a href="/sign-up" class="btn btn-sm btn-primary rounded-pill">Sign up</a>
                     </li>
+
+                    <li class="nav-item d-none d-md-block" v-if="auth">
+                        <a href="/sign-up" class="btn btn-sm btn-primary rounded-pill">Logout</a>
+                    </li>
+
                     <li class="nav-item d-lg-none">
                         <button class="hamburger offcanvas-nav-btn"><span></span></button>
                     </li>
@@ -140,6 +149,7 @@ export default {
     components: {
         Link
     },
+    inheritAttrs: false,
     data() {
         return {
             menuItems: [
@@ -153,7 +163,7 @@ export default {
                     id: 2,
 
                     label: 'Services',
-                    link: '#',
+                    link: '#services',
                     subMenu: [
                         {
                             id: 1,
@@ -182,7 +192,7 @@ export default {
                     id: 3,
 
                     label: 'Outsourcing',
-                    link: '#',
+                    link: '#outsourcing',
                     subMenu: [
                         {
                             label: 'Team as a Service',
@@ -208,7 +218,7 @@ export default {
                     id: 5,
 
                     label: 'Incubator',
-                    link: '#',
+                    link: '#incubator',
                     subMenu: [
                         {
                             label: 'Why us?',
@@ -232,24 +242,44 @@ export default {
             subMenu: null
         }
     },
+    setup() {
+        const auth = usePage().props.auth
+        const active = usePage().props.active
+        return {
+            auth, active
+        }
+    },
     mounted() {
 
+        console.log(route().current())
     },
     methods: {
         showSubMenu(item, event) {
             this.subMenu = item
-            const link = event.target
-            link.classList.remove('active')
-            link.classList.add('active')
+            console.log(event)
         },
         subMenuHide(event) {
             const link = event.target
-            link.classList.add('active')
 
             this.subMenu = null
+            console.log(this.active)
+
+        },
+        checkIfIsLogged() {
+            let token = this.$localStorage.get('access_token')
+            if (token) {
+                return true
+            } else {
+                return false
+            }
         }
     },
     computed() {
+        console.log(active)
+
+    },
+    onMounted() {
+        console.log(usePage().props)
     }
 }
 </script>

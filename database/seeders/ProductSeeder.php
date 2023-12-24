@@ -17,6 +17,70 @@ class ProductSeeder extends Seeder
     {
         $products = [
             [
+                'category_id' => 'desktop-app-development',
+                'page_id' => 'desktop-app-development',
+                'name' => 'Visual Studio (.NET Framework)',
+                'slug' => 'desktop-app-development-visual-studio-dotnet-framework',
+                'subtitle' => 'Starting form',
+                'mandatory' => false,
+                'description' => null,
+                'additional_info' => [
+                    'User Authentication and Authorization',
+                    'Data Encryption and Security Measures',
+                    'Resource and Project Management Features',
+                    'Automated Workflows and Task Management',
+                    'Offline Function and Syncing'
+                ],
+                'status' => 1,
+                'price' => 199900,
+                'parent_id' => null,
+                'highlighted' => 0,
+                'pricing_scheme' => 1,
+            ],
+
+            [
+                'category_id' => 'desktop-app-development',
+                'page_id' => 'desktop-app-development',
+                'name' => 'Enchanced Security Add-on',
+                'slug' => 'desktop-app-development-enchanced-security-addon',
+                'subtitle' => 'Applicable for both Windows and Macos selection',
+                'mandatory' => false,
+                'description' => null,
+                'additional_info' => [
+                    'Cloud-based Data Storage and Backup',
+                    'Multilingual Support',
+                    'Two-Factor Authentication',
+                    'Multi-modal backup system'
+                ],
+                'status' => 1,
+                'price' => 3490,
+                'parent_id' => null,
+                'highlighted' => 1,
+                'pricing_scheme' => 2,
+            ],
+
+            [
+                'category_id' => 'desktop-app-development',
+                'page_id' => 'desktop-app-development',
+                'name' => 'Xcode (Swift)',
+                'slug' => 'desktop-app-development-xcode-swift',
+                'subtitle' => 'Advanced features such as e-commerce integration, custom graphics and interactive elements',
+                'mandatory' => false,
+                'description' => null,
+                'additional_info' => [
+                    'Unlimited',
+                    '10GB Bandwidth',
+                    '1 Domain, 1 Email *'
+                ],
+                'status' => 1,
+                'price' => 199900,
+                'parent_id' => null,
+                'highlighted' => 0,
+                'pricing_scheme' => 1,
+            ],
+
+
+            [
                 'category_id' => 'web-development',
                 'page_id' => 'web-development',
                 'name' => 'Basic Plan',
@@ -243,10 +307,12 @@ class ProductSeeder extends Seeder
         foreach ($products as $product) {
             $category = Category::where('slug', $product['category_id'])->first();
             if (!$category) {
+                $this->command->info('Category not found: ' . $product['category_id']);
                 continue;
             }
             $page = Page::where('slug', $product['page_id'])->first();
             if (!$page) {
+                $this->command->info('Page not found: ' . $product['page_id']);
                 continue;
             }
             $newProduct = Product::firstOrNew([
@@ -255,6 +321,7 @@ class ProductSeeder extends Seeder
             if (!empty($product['parent_id'])) {
                 $parent = Product::where('slug', $product['parent_id'])->first();
                 if (!$parent) {
+                    $this->command->info('Parent not found: ' . $product['parent_id']);
                     continue;
                 }
                 $newProduct->parent_id = $parent->id;
@@ -270,7 +337,6 @@ class ProductSeeder extends Seeder
             unset($product['parent_id']);
             $newProduct->fill($product);
             $newProduct->save();
-            $this->command->info('Creating product: ' . $newProduct);
         }
     }
 }
