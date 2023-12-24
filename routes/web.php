@@ -26,6 +26,7 @@ Route::prefix('services')->name('services.')->group(function () {
     $pages = Category::where('slug', 'services')->with('pages')->firstOrFail();
     foreach ($pages->pages as $page) {
         Route::get($page->slug, [App\Http\Controllers\ServicesController::class, 'index'])->name($page->slug);
+        Route::get($page->slug . '/order', [App\Http\Controllers\ServicesController::class, 'order'])->name($page->slug . '.order');
     }
 });
 
@@ -33,19 +34,10 @@ Route::prefix('outsourcing')->name('outsourcing.')->group(function () {
     Route::get('/', function () {
         return Inertia::render('Outsourcing', []);
     })->name('index');
-
-    Route::get('/team-as-a-service', function () {
-        return Inertia::render('Outsourcing', []);
-    })->name('team-as-a-service');
-
-
-    Route::get('/it-outsourcing-services', function () {
-        return Inertia::render('Outsourcing', []);
-    })->name('it-outsourcing-services');
-
-    Route::get('/cyber-security-services', function () {
-        return Inertia::render('Outsourcing', []);
-    })->name('cyber-security-services');
+    $pages = Category::where('slug', 'outsourcing')->with('pages')->firstOrFail();
+    foreach ($pages->pages as $page) {
+        Route::get($page->slug, [App\Http\Controllers\OutsourcingController::class, 'index'])->name($page->slug);
+    }
 });
 
 Route::get('/portofolio', function () {

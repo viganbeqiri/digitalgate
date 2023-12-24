@@ -64,8 +64,8 @@ class PagesSeeder extends Seeder
 
             ],
             [
-                'title' => 'Team as Service',
-                'slug' => 'team-as-service',
+                'title' => 'Team as a Service',
+                'slug' => 'team-as-a-service',
                 'category_id' => 'outsourcing',
                 'has_slider' => 1,
                 'contents' => '[{"title":"test","description":"test","image":"https://placehold.co/400x400"},{"title":"test","description":"test","image":"https://placehold.co/400x400"},{"title":"test","description":"test","image":"https://placehold.co/400x400"}]',

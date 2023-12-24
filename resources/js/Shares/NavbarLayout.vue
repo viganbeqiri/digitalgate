@@ -17,18 +17,17 @@
                     <ul class="navbar-nav align-items-center">
                         <li class="nav-item" v-for="menuItem in menuItems">
                             <Link class="nav-link pb-1 pt-1 "
-                                :class="route().current() == menuItem.link ? 'bg-pale-ash text-primary rounded-pill' : ''"
+                                :class="route().current() == menuItem.link || route().current().split('.')[0] == menuItem.link.split('.')[0] ? 'bg-pale-ash text-primary rounded-pill' : ''"
                                 v-if="!menuItem.link.startsWith('#')" :href="route(menuItem.link)"
-                                @click="subMenuHide($event)">{{
-                                    menuItem.label }}</Link>
+                                @click="subMenuHide(menuItem, $event)">{{
+                                    menuItem.label }} </Link>
 
                             <a href="#" class="nav-link pb-1 pt-1 "
-                                :class="route().current().split('.')[0] == menuItem.link.split('#')[1] ? 'bg-pale-ash text-primary rounded-pill' : ''"
-                                v-else @click="showSubMenu(menuItem.subMenu, menuItem.link)">{{
+                                :class="route().current().split('.')[0] == menuItem.link.split('#')[1] ? 'bg-pale-ash text-primary rounded-pill' : (route().current().split('.')[0] == menuItem.link.split('#')[1] ? 'bg-pale-ash text-primary rounded-pill' : '')"
+                                v-else @click="showSubMenu(menuItem.subMenu)">{{
                                     menuItem.label }}</a>
                         </li>
                     </ul>
-
                     <!-- /.offcanvas-footer -->
 
                 </div>
@@ -75,6 +74,8 @@
             </div>
             <!-- /.navbar-other -->
         </div>
+
+
         <!-- /.container -->
     </nav>
     <nav class="navbar navbar-expand-lg center-nav navbar-light navbar-bg-light seconday-nav-header">
@@ -83,9 +84,11 @@
                 <div class="offcanvas-body d-flex justify-content-center" style="margin-left: 8vw" v-if="subMenu">
                     <ul class="navbar-nav secondary-nav">
                         <li class="nav-item" v-for="subMenu in subMenu">
-                            <Link class="nav-link opacity-50 hover-opacity-100 weight-100" v-if="subMenu.link != '#'"
-                                :href="route(subMenu.link)">{{
-                                    subMenu.label }}</Link>
+                            <Link class="nav-link opacity-100 hover-opacity-100 weight-100" v-if="subMenu.link != '#'"
+                                :href="route(subMenu.link)"
+                                :class="route().current().split('.')[1] == subMenu.link.split('.')[1] ? 'text-primary' : ''">
+                            {{
+                                subMenu.label }}</Link>
                         </li>
                     </ul>
                 </div>
@@ -193,7 +196,7 @@ export default {
                     id: 3,
 
                     label: 'Outsourcing',
-                    link: '#outsourcing',
+                    link: 'outsourcing.index',
                     subMenu: [
                         {
                             label: 'Team as a Service',
@@ -201,11 +204,11 @@ export default {
                         },
                         {
                             label: 'IT Outsourcing Services',
-                            link: 'outsourcing.it-outsourcing-services'
+                            link: 'outsourcing.it-outsourcing-service'
                         },
                         {
                             label: 'Cyber Security Services',
-                            link: 'outsourcing.cyber-security-services'
+                            link: 'outsourcing.cybersecurity-service'
                         }
                     ]
                 },
@@ -217,7 +220,6 @@ export default {
                 },
                 {
                     id: 5,
-
                     label: 'Incubator',
                     link: '#incubator',
                     subMenu: [
@@ -251,20 +253,30 @@ export default {
         }
     },
     mounted() {
-
-        console.log(route().current())
+        const currentRoute = route().current().split('.')
+        const menuItems = this.menuItems.map(item => {
+            const mainMenu = item.link.startsWith('#') ? item.link.split('#')[1] : item.link.split('.')[0]
+            return {
+                ...item,
+                mainMenu: mainMenu
+            }
+        })
+        const currentMenu = menuItems.find(item => item.mainMenu === currentRoute[0])
+        this.showSubMenu(currentMenu.subMenu)
+        console.log(currentMenu)
     },
     methods: {
-        showSubMenu(item, event) {
+        showSubMenu(item) {
             this.subMenu = item
-            console.log(event)
         },
-        subMenuHide(event) {
+        subMenuHide(menuItem, event) {
+            console.log(menuItem)
             const link = event.target
 
             this.subMenu = null
-            console.log(this.active)
-
+            if (menuItem.subMenu) {
+                this.showSubMenu(menuItem.subMenu)
+            }
         },
         checkIfIsLogged() {
             let token = this.$localStorage.get('access_token')

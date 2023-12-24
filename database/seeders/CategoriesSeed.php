@@ -50,8 +50,8 @@ class CategoriesSeed extends Seeder
                 'parent_id' => null,
             ],
             [
-                'title' => 'Team as Service',
-                'slug' => 'team-as-service',
+                'title' => 'Team as a Service',
+                'slug' => 'team-as-a-service',
                 'parent_id' => 'outsourcing',
             ],
             [

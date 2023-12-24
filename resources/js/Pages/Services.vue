@@ -2,8 +2,8 @@
     <section class="wrapper bg-light container-fluid mt-5">
         <div class="d-flex justify-content-between align-items-center pb-3">
             <div>
-                <Link :class="data.previous_page ? '' : 'disabled'"
-                    :href="data.previous_page ? route(data.previous_page) : ''">
+                <Link :class="page.previous_page ? '' : 'disabled'"
+                    :href="page.previous_page ? route(page.previous_page) : ''">
                 <img src="@/img/back.png" alt="back" />
                 </Link>
             </div>
@@ -14,7 +14,7 @@
                 </div>
             </div>
             <div>
-                <Link :class="data.next_page ? '' : 'disabled'" :href="data.next_page ? route(data.next_page) : ''">
+                <Link :class="page.next_page ? '' : 'disabled'" :href="page.next_page ? route(page.next_page) : ''">
                 <img src="@/img/next.png" alt="next" />
                 </Link>
             </div>
@@ -22,6 +22,7 @@
         <!-- /.swiper-container -->
     </section>
     <section class=" bg-light">
+
         <div class="container py-4">
 
             <div class="d-flex flex-sm-column flex-lg-row justify-content-between py-5 my-5">
@@ -38,8 +39,8 @@
 
             <div class="row mt-5 pt-5">
                 <div class="col-lg-10 col-xl-9 col-xxl-8 mx-auto text-center">
-                    <h3 class="display-4 text-primary">{{ data.title }}</h3>
-                    <h2 class="fs-15 text-muted mb-3">{{ data.subtitle }}</h2>
+                    <h3 class="display-4 text-primary">{{ page.title }}</h3>
+                    <h2 class="fs-15 text-muted mb-3">{{ page.subtitle }}</h2>
                 </div>
                 <!--/column -->
             </div>
@@ -75,13 +76,13 @@
                             </div>
                             <!--/.card-body -->
                             <div class="card-footer" v-if="product.mandatory == false">
-                                <a href="#" class="btn rounded-pill"
+                                <button @click="doOrder(product)" class="btn rounded-pill"
                                     :class="product.highlighted ? 'btn-primary' : 'btn-outline-primary'">
                                     <span class="px-3">Order</span>
-                                </a>
+                                </button>
                             </div>
                         </div>
-                        <div class="row" v-if="data.slug == 'design-service'">
+                        <div class="row" v-if="page.slug == 'design-service'">
                             <div class="col-12 p-3" v-for="child_product in product.child_product">
                                 <div class="pricing card text-center border"
                                     :class="child_product.highlighted && !child_product.mandatory ? 'border border-3 border-primary shadow shadow-lg' : ''">
@@ -139,9 +140,13 @@
 <script>
 import FrontLayout from '../Shares/FrontLayout.vue';
 import { usePage, Head, Link, router } from '@inertiajs/vue3'
+import { ref, onMounted, onBeforeUnmount, watch } from 'vue';  // Import the watch function
+
 //local storage
 
-
+const addToOrder = (product) => {
+    const cart = JSON.parse(localStorage.getItem('cart')) || [];
+}
 export default {
     name: "Services",
     layout: FrontLayout,
@@ -150,19 +155,22 @@ export default {
     },
     data() {
         return {
+            count: 0
         }
 
     },
     setup() {
-        const data = usePage().props.data
-        const products = usePage().props.products
-        const sliderContents = JSON.parse(data.slider_contents)
-        const contents = data.contents
+        const { data } = usePage()
+        const { page, products } = usePage().props
+
+        const sliderContents = JSON.parse(page.slider_contents)
+        const contents = page.contents
+
         return {
             sliderContents,
             contents,
-            data,
-            products
+            page,
+            products,
         }
     },
 
@@ -170,16 +178,26 @@ export default {
         user: Object,
         data: Object
     },
-    beforeMount() {
-        console.log(this.data)
+    state: {
+        cart: []
     },
+    beforeMount() {
+    },
+
+    beforeUnmount() {
+        // saveCartToLocalStorage();
+    },
+
     computed() {
-        console.log(this.data)
     },
 
     mounted() {
         theme.init()
         this.getMaxHeight()
+
+
+    },
+    onMounted() {
 
     },
     methods: {
@@ -200,9 +218,19 @@ export default {
             } else {
                 console.warn('No card elements found.');
             }
-
-
         },
+        doOrder(product) {
+            const newItem = {
+                product: product,
+                quantity: 1,
+            };
+            cart.value.push(newItem);
+        },
+        // saveCartToLocalStorage() {
+        //     localStorage.setItem('cart', JSON.stringify(cart.value));
+        // }
+
+
     }
 
 }

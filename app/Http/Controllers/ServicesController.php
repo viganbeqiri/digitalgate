@@ -19,10 +19,15 @@ class ServicesController extends Controller
         }
         // return $products;
         return Inertia::render('Services', [
-            'data' => $page,
+            'page' => $page,
             'products' => $products,
             'active' => $path
 
         ]);
+    }
+
+    public function order(Request $request)
+    {
+        return Inertia::render('Order', []);
     }
 }
