@@ -18,7 +18,7 @@
                     <ul class="navbar-nav align-items-center">
                         <li class="nav-item" v-for="menuItem in menuItems">
                             <Link class="nav-link pb-1 pt-1 "
-                                :class="route().current() == menuItem.link || route().current().split('.')[0] == menuItem.link.split('.')[0] ? 'bg-pale-ash text-primary rounded-pill' : ''"
+                                :class="route().current() === menuItem.link || route().current().split('.')[0] === menuItem.link.split('.')[0] ? 'bg-pale-ash text-primary rounded-pill' : ''"
                                 v-if="!menuItem.link.startsWith('#')" :href="route(menuItem.link)"
                                 @click="subMenuHide(menuItem, $event)">{{
                                     menuItem.label }} </Link>

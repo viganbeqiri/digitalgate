@@ -10,7 +10,7 @@ class Product extends Model
     use HasFactory;
 
     public $guarded = [];
-    public $appends = ['image_url', 'has_child_product'];
+    public $appends = ['image_url', 'has_child_product', 'has_parent_product'];
 
     const OUTRIGHT = 1;
     const MONTHLY_SUBSCRIPTION = 2;
@@ -41,14 +41,14 @@ class Product extends Model
         return $this->belongsTo(Product::class, 'parent_id');
     }
 
-    public function getHasChildProductAttribute()
+    public function getHasChildProductAttribute(): bool
     {
         return $this->childProduct()->count() > 0;
     }
 
-    public function getHasParentProductAttribute()
+    public function getHasParentProductAttribute(): bool
     {
-        return $this->parentProduct ? true : false;
+        return (bool)$this->parentProduct;
     }
 
     public function getChildSlugAttribute()

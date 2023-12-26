@@ -113,7 +113,7 @@
                                             us for price</span>
 
                                         <div class="order-btn">
-                                            <a href="#" class="btn btn-primary rounded-pill">
+                                            <a @click="doOrder(child_product)" class="btn btn-primary rounded-pill">
                                                 <span class="px-3">{{ child_product.pricing_scheme == '1' ? 'Order' :
                                                     'Request Quote' }}</span>
                                             </a>
@@ -155,7 +155,7 @@ export default {
     },
     data() {
         return {
-            count: 0
+            orderItem: [],
         }
 
     },
@@ -195,7 +195,6 @@ export default {
     mounted() {
         theme.init()
         this.getMaxHeight()
-        console.log(this.page)
 
     },
     onMounted() {
@@ -214,28 +213,26 @@ export default {
                     cardElements[i].style.minHeight = maxHeight + 'px';
                 }
 
-                console.log(cardElements)
             } else {
             }
         },
         doOrder(product) {
-            const newItem = {
-                product: product,
-                quantity: 1,
-            };
-            cart.value.push(newItem);
+            this.orderItem = [product]
+            this.saveCartToLocalStorage()
+            const currentRoute = usePage().url
+            const orderUrl = currentRoute + '/order'
+            router.visit(orderUrl)
         },
-        // saveCartToLocalStorage() {
-        //     localStorage.setItem('cart', JSON.stringify(cart.value));
-        // }
-
+        saveCartToLocalStorage() {
+            if (localStorage.getItem('order_item')) {
+                localStorage.removeItem('order_item');
+            }
+            localStorage.setItem('order_item', JSON.stringify(this.orderItem));
+        }
 
     }
 
 }
 
-</script>
-
-<script setup>
 </script>
 

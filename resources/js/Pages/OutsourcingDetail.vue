@@ -24,7 +24,7 @@
                     <div class="col-md-4 col-lg-4 col-sm-6 col-12" v-for="content in contents">
                         <div class="card">
                             <div class="card-body text-justify">
-                                <p>{{ content.subtitle }}</p>
+                                <p v-if="content.subtitle">{{ content.subtitle }}</p>
                                 <p class="text-primary ">{{ content.title }}</p>
                                 <p class="text-muted">{{ content.description }}</p>
                             </div>
