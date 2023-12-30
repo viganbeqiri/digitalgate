@@ -1444,7 +1444,7 @@ input::-ms-input-placeholder {
     color: #fff
 }
 
-.inner .form-row .form-holder select {
+/* .inner .form-row .form-holder select {
     background: #fff url(../images/wizard_v6_icon.png) no-repeat scroll;
     background-position: right 16px center;
     z-index: 1;
@@ -1453,7 +1453,7 @@ input::-ms-input-placeholder {
     position: relative;
     font-weight: 400;
     font-size: 16px
-}
+} */
 
 .inner .form-row .form-holder select#room,
 .inner .form-row .form-holder #day,
