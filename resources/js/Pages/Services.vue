@@ -1,19 +1,107 @@
 <template>
-    <section class="wrapper bg-light container-fluid">
+    <section class="wrapper bg-light container pt-10">
         <div class="d-flex justify-content-between align-items-center pb-3">
-            <div>
+            <div class="col-1">
                 <Link :class="page.previous_page ? '' : 'disabled'"
                     :href="page.previous_page ? route(page.previous_page) : ''">
                 <img src="@/img/back.png" alt="back" />
                 </Link>
             </div>
-            <div>
-                <div>
-                    <img src="@/img/background/desktop-app-development.png"
-                        style="height: 100%;width: 100%; object-fit: none" class="img-fluid" alt="desktop-app" />
+            <div class="col-10">
+                <div class="" v-if="page.slug === 'desktop-app-development'">
+                    <div class="d-flex justify-content-between container">
+                        <div class="page-title">
+                            <div class="col-6">
+                                <h1 class="text-primary fw-light" style="font-size: 50px;">{{ page.title }}</h1>
+
+                            </div>
+                        </div>
+                        <div class="cta-button align-items-end d-flex">
+                            <Link href="#" class="btn btn-primary">Get Quote</Link>
+                        </div>
+                    </div>
+                    <div class="mt-0 d-flex justify-content-between col-9">
+
+                        <img src="@/img/background/desktop-app-development.png"
+                            style="width: 444px; height: 400px; object-fit: cover; object-position: -20% 0;"
+                            class="img-fluid" alt="desktop-app" />
+                        <div class="text-start fs-21 ms-5">
+                            {{ page.description }}
+                        </div>
+
+                    </div>
                 </div>
+
+                <div class="" v-if="page.slug === 'web-development'">
+                    <div class="d-flex justify-content-between container">
+                        <div class="page-title">
+                            <div class="col-6">
+                                <h1 class="text-primary fw-light" style="font-size: 50px;">{{ page.title }}</h1>
+
+                            </div>
+                        </div>
+                        <div class="cta-button align-items-end d-flex">
+                            <Link href="#" class="btn btn-primary">Get Quote</Link>
+                        </div>
+                    </div>
+                    <div class="mt-0 d-flex justify-content-between col-9 container mt-5"
+                        style="background: url(/assets/img/background/web-app-dev.png);background-size: cover;">
+
+                        <div class="text-start fs-21 ms-5 mt-5">
+                            {{ page.description }}
+                        </div>
+
+                    </div>
+                </div>
+                <div class="" v-if="page.slug === 'cross-platform-development'"
+                    style="background: url(/assets/img/background/cross-app-dev.png);background-size: cover;min-height: 450px;">
+                    <div class="d-flex justify-content-between container">
+                        <div class="page-title">
+                            <h1 class="text-primary fw-light" style="font-size: 50px;">{{ page.title }}</h1>
+                            <div class="text-start fs-21 mt-5 col-8">
+                                {{ page.description }}
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="" v-if="page.slug === 'mobile-app-development'"
+                    style="background: url(/assets/img/background/mobile-app-dev.png);background-size: cover;min-height: 450px;">
+                    <div class="d-flex justify-content-between container">
+                        <div class="col-6">
+                            <div class="page-title">
+                                <h1 class="text-primary fw-light" style="font-size: 50px;">{{ page.title }}</h1>
+                                <div class="text-start fs-21  mt-5">
+                                    {{ page.description }}
+                                </div>
+                                <div class="cta-button align-items-end d-flex mt-5">
+                                    <Link href="#" class="btn btn-primary">Get Quote</Link>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="" v-if="page.slug === 'design-service'"
+                    style="background: url(/assets/img/background/design-service.png);background-size: cover;min-height: 450px;">
+                    <div class="d-flex justify-content-between container">
+                        <div class="col-6">
+                            <div class="page-title">
+                                <h1 class="text-primary fw-light" style="font-size: 50px;">{{ page.title }}</h1>
+                                <div class="text-start fs-21  mt-5">
+                                    {{ page.description }}
+                                </div>
+                                <div class="cta-button align-items-end d-flex mt-5">
+                                    <Link href="#" class="btn btn-primary">Get Quote</Link>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
             </div>
-            <div>
+            <div class="col-1">
                 <Link :class="page.next_page ? '' : 'disabled'" :href="page.next_page ? route(page.next_page) : ''">
                 <img src="@/img/next.png" alt="next" />
                 </Link>
@@ -221,11 +309,15 @@ export default {
             }
         },
         doOrder(product, parent = null) {
+            if (!parent) {
+                parent = product.parent_product
+            }
             console.log(this.auth)
             if (!this.auth.user) {
                 toast("You need to login first !", {
                     onClose: () => router.get('/sign-in'),
                 });
+                return false;
             }
 
             product.service = this.page
@@ -257,4 +349,20 @@ export default {
 }
 
 </script>
+<style>
+.top-left {
+    position: absolute;
+    top: 8px;
+    left: 16px;
+}
+
+.text-container {
+    position: absolute;
+    color: rgb(255, 255, 255);
+    left: 18rem;
+    top: 2rem;
+    background-color: rgb(41, 41, 41, 0.8);
+    padding: 0 1rem;
+}
+</style>
 

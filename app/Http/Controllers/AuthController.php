@@ -52,10 +52,14 @@ class AuthController extends Controller
             $request->session()->regenerate();
             if (Auth::user()->role == 1) {
                 //redirect route admin
-                return redirect('/admin');
+                return back()->with([
+                    'message' => 'Login success.',
+                ]);
             } else {
                 //redirect route dashboard
-                return redirect('/');
+                return back()->with([
+                    'message' => 'Login success.',
+                ]);
             }
             //redirect route dashboard
         }

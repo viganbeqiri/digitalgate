@@ -112,11 +112,12 @@
                                                                     <vue-feather v-if="file_selected.nda_file"
                                                                         type="check"></vue-feather>
                                                                 </label>
+                                                                <div v-if="errors.nda_file" class="alert alert-danger">
+                                                                    {{ errors.nda_file }}
+                                                                </div>
                                                             </div>
                                                         </div>
-                                                        <div v-if="errors.nda_file" class="alert alert-danger">
-                                                            {{ errors.nda_file }}
-                                                        </div>
+
                                                     </div>
                                                 </div>
 
@@ -415,8 +416,8 @@
                                 <div class="container mb-3">
                                     <div class="row">
                                         <div class="col-md-4 col-sm-6 col-12">
-                                            <div class="col-12 pb-5" v-for="order_item in order_items">
-                                                <div class="card mb-3 shadow shadow-lg">
+                                            <div class="col-12 pb-1" v-for="order_item in order_items">
+                                                <div class="card  shadow shadow-lg">
                                                     <div class="card-body p-5">
                                                         <div class="">
                                                             <p class="text-uppercase m-0">{{ order_item.name }}</p>
@@ -439,16 +440,14 @@
                                                         </div>
                                                     </div>
                                                 </div>
+
+                                            </div>
+                                            <div class="col-12 pb-5 mt-2">
                                                 <div class="card mb-1">
                                                     <div class="card-body d-flex justify-content-between p-3">
                                                         <span class="text-primary">VAT 18%</span>
                                                         <span class="text-primary"> {{
-                                                            new
-                                                                Intl.NumberFormat('en-US', {
-                                                                    style: 'currency',
-                                                                    currency: 'MKD',
-                                                                    maximumSignificantDigits: 3
-                                                                }).format(vat,)
+                                                            numberFormatting(active_order.tax)
                                                         }} </span>
                                                     </div>
                                                 </div>
@@ -456,12 +455,7 @@
                                                     <div class="card-body d-flex justify-content-between p-3">
                                                         <span class="text-primary">Total</span>
                                                         <span class="text-primary"> {{
-                                                            new
-                                                                Intl.NumberFormat('en-US', {
-                                                                    style: 'currency',
-                                                                    currency: 'MKD',
-                                                                    maximumSignificantDigits: 3
-                                                                }).format(total_price,)
+                                                            numberFormatting(active_order.total_price)
                                                         }} </span>
                                                     </div>
                                                 </div>
@@ -646,13 +640,7 @@
                                         <div class="d-flex justify-content-between">
                                             <div class="price">
                                                 <h3 class="text-primary fw-light">
-                                                    {{ new
-                                                        Intl.NumberFormat('en-US', {
-                                                            style: 'currency',
-                                                            currency: 'MKD',
-                                                            maximumSignificantDigits: 3
-                                                        }).format(active_order.total_price,)
-                                                    }}
+                                                    {{ numberFormatting(active_order.total_price) }}
                                                 </h3>
                                             </div>
                                             <div class="greeting text-ash">
@@ -686,6 +674,8 @@ import 'vue3-form-wizard/dist/style.css'
 import { reactive } from "vue";
 import feather from 'feather-icons'
 import axios from 'axios';
+import { toast } from 'vue3-toastify';
+import 'vue3-toastify/dist/index.css';
 
 export default {
     layout: FrontLayout,
@@ -694,7 +684,11 @@ export default {
         FormWizard,
         TabContent
     },
+    props: {
+        user: Object,
+        auth: Object
 
+    },
     data() {
         return {
             order_items: [],
@@ -943,6 +937,10 @@ export default {
         }
     },
     mounted() {
+        console.log(this.auth)
+        if (!this.auth.user) {
+            router.get('/sign-in')
+        }
         this.order_items = JSON.parse(localStorage.getItem('order_items'));
         if (!this.order_items) {
             const originRoute = usePage().url.replace('/order', '')
@@ -956,11 +954,11 @@ export default {
         const step = order_steps.find(item => item.step === 2);
         const first_item = order_items[0];
         step.additional_info = order_items;
-        step.name = first_item.service.title;
-        console.log(order_steps)
+        step.name = first_item.product_type;
 
         const active_order = localStorage.getItem('active_order');
         if (active_order) {
+
             this.active_order = JSON.parse(active_order)
             this.current_step = this.active_order.current_step
             order_steps.find(item => item.step === this.current_step).current = true
@@ -978,6 +976,8 @@ export default {
             this.total_price = parseFloat(sub_total) + parseFloat(this.vat)
             console.log(this.total_price)
         }
+        console.log(this.active_order)
+
     },
     filters: {
         formatCardNumber(value) {
@@ -1001,19 +1001,19 @@ export default {
             formData.append('nda_file', this.submitNDAForm.nda_file);
             formData.append('license_file', this.submitNDAForm.license_file);
             formData.append('order_items', JSON.stringify(this.order_items));
-
-            axios.post('/order/nda', formData).then(res => {
-                console.log(res)
-                if (res.data.status === 'success') {
-                    const order = res.data.order
+            router.post('/order/nda', formData, {
+                forceFormData: true,
+                preserveScroll: false,
+                onSuccess: () => {
                     this.updateStep(this.current_step)
+                    this.active_order = this.$page.props.flash.order
+                    const order = this.active_order
                     this.current_step = order.current_step
-                    this.saveCartToLocalStorage(res.data.order, 'active_order')
-                    this.active_order = res.data.order
+                    this.saveCartToLocalStorage(order, 'active_order')
+                    toast(this.$page.props.flash.messages);
+                    console.log(this.$page.props)
                 }
             })
-
-            console.log(formData)
         },
         handleFileChange(name) {
             console.log(name)
@@ -1041,7 +1041,7 @@ export default {
             formData.append('business_location', orderDetailData.business_location);
             formData.append('total_employees', orderDetailData.total_employees);
             formData.append('preferred_domain', orderDetailData.preferred_domain);
-            formData.append('emails', JSON.stringify(this.filteredJson(orderDetailData.emails)));
+            formData.append('emails', JSON.stringify(orderDetailData.emails));
             formData.append('business_logo_preferred', orderDetailData.business_logo_preferred);
             formData.append('business_logo', orderDetailData.business_logo);
             formData.append('design_look_preferred', orderDetailData.design_look_preferred);
@@ -1049,46 +1049,36 @@ export default {
             formData.append('pages', JSON.stringify(orderDetailData.pages));
             formData.append('content_file', orderDetailData.content_file);
             formData.append('order_id', this.active_order.id);
-
-            axios.post('/order/details', formData).then(res => {
-                console.log(res)
-                if (res.data.status === 'success') {
-                    const order = res.data.order
+            router.post('/order/details', formData, {
+                forceFormData: true,
+                preserveScroll: false,
+                onSuccess: () => {
                     this.updateStep(this.current_step)
+                    this.active_order = this.$page.props.flash.order
+                    const order = this.active_order
                     this.current_step = order.current_step
                     this.saveCartToLocalStorage(order, 'active_order')
+                    toast(this.$page.props.flash.messages);
+                    console.log(this.$page.props)
                 }
-            }).catch(err => {
-
-                console.log(this.errors, Object)
-
-                const errors = err.response.data.errors
-                const error_keys = Object.keys(errors)
-                error_keys.forEach(item => {
-                    this.errors[item] = errors[item][0]
-                })
             })
-
         },
         storePaymentDetail() {
             this.errors = {}
             const paymentDetail = this.submitPaymentDetail;
             paymentDetail.order_id = this.active_order.id
-            axios.post('/order/payment', paymentDetail).then(res => {
-                console.log(res)
-                if (res.data.status === 'success') {
-                    const order = res.data.order
+            router.post('/order/payment', paymentDetail, {
+                forceFormData: true,
+                preserveScroll: false,
+                onSuccess: () => {
                     this.updateStep(this.current_step)
+                    this.active_order = this.$page.props.flash.order
+                    const order = this.active_order
                     this.current_step = order.current_step
                     this.saveCartToLocalStorage(order, 'active_order')
+                    toast(this.$page.props.flash.messages);
+                    console.log(this.$page.props)
                 }
-
-            }).catch(err => {
-                const errors = err.response.data.errors
-                const error_keys = Object.keys(errors)
-                error_keys.forEach(item => {
-                    this.errors[item] = errors[item][0]
-                })
             })
             console.log(this.submitPaymentDetail)
         },
@@ -1104,16 +1094,9 @@ export default {
         capitalize(string) {
             return string.split('_').map(item => item.charAt(0).toUpperCase() + item.slice(1)).join(' ')
         },
-        filteredJson(obj) {
-            const filteredJSON = JSON.stringify(obj, (key, value) => {
-                return (value === null || value === '') ? undefined : value;
-            });
 
-            // Convert string back to JSON object
-            return JSON.parse(filteredJSON);
-        },
-        updateValue(e) {
-            this.cardNumber = e.target.value.replace(/ /g, '');
+        numberFormatting(e) {
+            return 'MKD ' + Number(parseFloat(e).toFixed(2)).toLocaleString('en-US');
         }
     }
 }

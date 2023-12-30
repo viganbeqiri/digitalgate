@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Order;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Inertia\Inertia;
 
 class OrdersController extends Controller
 {
@@ -64,9 +65,8 @@ class OrdersController extends Controller
         $order->save();
 
         $order->orderItems()->createMany($orderItems);
-
-        return response()->json([
-            'status' => 'success',
+        return back()->with([
+            'messages' => 'NDA saved successfully',
             'order' => $order
         ]);
     }
@@ -112,9 +112,8 @@ class OrdersController extends Controller
 
         $order->current_step = 3;
         $order->save();
-
-        return response()->json([
-            'status' => 'success',
+        return back()->with([
+            'messages' => 'Details saved successfully',
             'order' => $order
         ]);
     }
@@ -156,9 +155,8 @@ class OrdersController extends Controller
 
         $order->current_step = 4;
         $order->save();
-
-        return response()->json([
-            'status' => 'success',
+        return back()->with([
+            'messages' => 'Payment saved successfully',
             'order' => $order
         ]);
     }

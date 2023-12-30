@@ -265,6 +265,7 @@ export default {
         }
     },
     mounted() {
+        console.log(this.auth)
         const currentRoute = route().current().split('.')
         const menuItems = this.menuItems.map(item => {
             const mainMenu = item.link.startsWith('#') ? item.link.split('#')[1] : item.link.split('.')[0]

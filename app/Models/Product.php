@@ -10,7 +10,7 @@ class Product extends Model
     use HasFactory;
 
     public $guarded = [];
-    public $appends = ['image_url', 'has_child_product', 'has_parent_product'];
+    public $appends = ['image_url', 'has_child_product', 'has_parent_product', 'product_type'];
 
     const OUTRIGHT = 1;
     const MONTHLY_SUBSCRIPTION = 2;
@@ -19,6 +19,13 @@ class Product extends Model
         self::OUTRIGHT => 'Outright',
         self::MONTHLY_SUBSCRIPTION => 'Monthly Subscription',
         self::QUOTE => 'Quote',
+    ];
+
+    const DEVELOPMENT = 1;
+    const DESIGN = 2;
+    const TYPE = [
+        self::DEVELOPMENT => 'Development Service',
+        self::DESIGN => 'Design Service',
     ];
 
     public function getAdditionalInfoAttribute($value)
@@ -59,5 +66,10 @@ class Product extends Model
     public function getParentSlugAttribute()
     {
         return $this->parentProduct ? $this->parentProduct->slug : null;
+    }
+
+    public function getProductTypeAttribute()
+    {
+        return self::TYPE[$this->type];
     }
 }

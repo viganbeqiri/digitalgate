@@ -36,6 +36,9 @@ import { ref, onMounted } from 'vue'
 
 export default {
     layout: FrontLayout,
+    props: {
+        auth: Object,
+    },
     setup() {
         const count = ref(0)
         return {
@@ -44,7 +47,7 @@ export default {
     },
     mounted() {
         theme.init()
-        console.log(this.count) // 0
+
     }
 
 }

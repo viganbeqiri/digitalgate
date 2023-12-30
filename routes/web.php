@@ -31,7 +31,7 @@ Route::prefix('services')->name('services.')->group(function () {
     }
 });
 
-Route::prefix('order')->name('order.')->group(function () {
+Route::prefix('order')->name('order.')->middleware('auth')->group(function () {
     Route::post('/nda', [App\Http\Controllers\OrdersController::class, 'storeNDA'])->name('storeNDA');
     Route::post('/details', [App\Http\Controllers\OrdersController::class, 'storeDetail'])->name('storeDetail');
     Route::post('/payment', [App\Http\Controllers\OrdersController::class, 'storePaymentDetail'])->name('storePaymentDetail');

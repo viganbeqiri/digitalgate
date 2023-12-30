@@ -88,6 +88,14 @@ export default {
             router.post('auth/login', {
                 email: loginForm.email,
                 password: loginForm.password,
+            }, {
+                onSuccess: () => {
+                    router.visit('/', {
+                        onSuccess: () => {
+                            location.reload();
+                        }
+                    });
+                }
             });
         }
         return {
