@@ -24,10 +24,12 @@ Route::get('/', function () {
 })->name('home');
 
 Route::prefix('services')->name('services.')->group(function () {
-    $pages = Category::where('slug', 'services')->with('pages')->firstOrFail();
-    foreach ($pages->pages as $page) {
-        Route::get($page->slug, [App\Http\Controllers\ServicesController::class, 'index'])->name($page->slug);
-        Route::get($page->slug . '/order', [App\Http\Controllers\ServicesController::class, 'order'])->name($page->slug . '.order');
+    $pages = Category::where('slug', 'services')->with('pages')->first();
+    if ($pages) {
+        foreach ($pages->pages as $page) {
+            Route::get($page->slug, [App\Http\Controllers\ServicesController::class, 'index'])->name($page->slug);
+            Route::get($page->slug . '/order', [App\Http\Controllers\ServicesController::class, 'order'])->name($page->slug . '.order');
+        }
     }
 });
 
@@ -40,14 +42,18 @@ Route::prefix('order')->name('order.')->middleware('auth')->group(function () {
 
 Route::prefix('outsourcing')->name('outsourcing.')->group(function () {
     Route::get('/', function () {
-        $page = Page::where('slug', 'outsourcing')->firstOrFail();
-        return Inertia::render('Outsourcing', [
-            'page' => $page
-        ]);
+        $page = Page::where('slug', 'outsourcing')->first();
+        if ($page) {
+            return Inertia::render('Outsourcing', [
+                'page' => $page
+            ]);
+        }
     })->name('index');
-    $pages = Category::where('slug', 'outsourcing')->with('pages.parent')->firstOrFail();
-    foreach ($pages->pages as $page) {
-        Route::get($page->slug, [App\Http\Controllers\OutsourcingController::class, 'index'])->name($page->slug);
+    $pages = Category::where('slug', 'outsourcing')->with('pages.parent')->first();
+    if ($pages) {
+        foreach ($pages->pages as $page) {
+            Route::get($page->slug, [App\Http\Controllers\OutsourcingController::class, 'index'])->name($page->slug);
+        }
     }
 });
 
