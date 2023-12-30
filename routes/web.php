@@ -24,12 +24,15 @@ Route::get('/', function () {
 })->name('home');
 
 Route::prefix('services')->name('services.')->group(function () {
-    $pages = Category::where('slug', 'services')->with('pages')->first();
-    if ($pages) {
-        foreach ($pages->pages as $page) {
-            Route::get($page->slug, [App\Http\Controllers\ServicesController::class, 'index'])->name($page->slug);
-            Route::get($page->slug . '/order', [App\Http\Controllers\ServicesController::class, 'order'])->name($page->slug . '.order');
+    try {
+        $pages = Category::where('slug', 'services')->with('pages')->first();
+        if ($pages) {
+            foreach ($pages->pages as $page) {
+                Route::get($page->slug, [App\Http\Controllers\ServicesController::class, 'index'])->name($page->slug);
+                Route::get($page->slug . '/order', [App\Http\Controllers\ServicesController::class, 'order'])->name($page->slug . '.order');
+            }
         }
+    } catch (\Exception $e) {
     }
 });
 
@@ -49,11 +52,14 @@ Route::prefix('outsourcing')->name('outsourcing.')->group(function () {
             ]);
         }
     })->name('index');
-    $pages = Category::where('slug', 'outsourcing')->with('pages.parent')->first();
-    if ($pages) {
-        foreach ($pages->pages as $page) {
-            Route::get($page->slug, [App\Http\Controllers\OutsourcingController::class, 'index'])->name($page->slug);
+    try {
+        $pages = Category::where('slug', 'outsourcing')->with('pages.parent')->first();
+        if ($pages) {
+            foreach ($pages->pages as $page) {
+                Route::get($page->slug, [App\Http\Controllers\OutsourcingController::class, 'index'])->name($page->slug);
+            }
         }
+    } catch (\Exception $e) {
     }
 });
 

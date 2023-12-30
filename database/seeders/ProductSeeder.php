@@ -36,6 +36,7 @@ class ProductSeeder extends Seeder
                 'parent_id' => null,
                 'highlighted' => 0,
                 'pricing_scheme' => 1,
+                'type' => 1
             ],
 
             [
@@ -57,6 +58,8 @@ class ProductSeeder extends Seeder
                 'parent_id' => null,
                 'highlighted' => 1,
                 'pricing_scheme' => 2,
+                'type' => 1
+
             ],
 
             [
@@ -77,6 +80,8 @@ class ProductSeeder extends Seeder
                 'parent_id' => null,
                 'highlighted' => 0,
                 'pricing_scheme' => 1,
+                'type' => 1
+
             ],
 
 
@@ -96,6 +101,8 @@ class ProductSeeder extends Seeder
                 'parent_id' => null,
                 'highlighted' => 0,
                 'pricing_scheme' => 1,
+                'type' => 1
+
             ],
             [
                 'category_id' => 'web-development',
@@ -116,7 +123,9 @@ class ProductSeeder extends Seeder
                 'price' => 14900,
                 'parent_id' => null,
                 'highlighted' => 1,
-                'pricing_scheme' => 1
+                'pricing_scheme' => 1,
+                'type' => 1
+
             ],
             [
                 'category_id' => 'web-development',
@@ -135,7 +144,9 @@ class ProductSeeder extends Seeder
                 'price' => 14900,
                 'parent_id' => null,
                 'highlighted' => 0,
-                'pricing_scheme' => 2
+                'pricing_scheme' => 2,
+                'type' => 1
+
             ],
 
             [
@@ -157,7 +168,9 @@ class ProductSeeder extends Seeder
                 'highlighted' => 1,
                 'pricing_scheme' => 1,
                 'note' => 'Ideal for bussiness focusing exclusively on the Android market, laveraging the platform\'s widespread reach',
-                'image' => 'assets/uploads/services/android.png'
+                'image' => 'assets/uploads/services/android.png',
+                'type' => 1
+
             ],
             [
                 'category_id' => 'mobile-app-development',
@@ -179,7 +192,9 @@ class ProductSeeder extends Seeder
                 'highlighted' => 1,
                 'pricing_scheme' => 1,
                 'note' => 'Tailored for business aiming to tap into the premium IOS user base with high-end features shopificated applications',
-                'image' => 'assets/uploads/services/ios.png'
+                'image' => 'assets/uploads/services/ios.png',
+                'type' => 1
+
             ],
             [
                 'category_id' => 'mobile-app-development',
@@ -203,7 +218,9 @@ class ProductSeeder extends Seeder
                 'highlighted' => 1,
                 'pricing_scheme' => 1,
                 'note' => null,
-                'image' => 'assets/uploads/services/rn.png'
+                'image' => 'assets/uploads/services/rn.png',
+                'type' => 1
+
             ],
 
             [
@@ -225,6 +242,8 @@ class ProductSeeder extends Seeder
                 'highlighted' => 1,
                 'pricing_scheme' => 1,
                 'note' => null,
+                'type' => 1
+
             ],
 
             [
@@ -249,7 +268,9 @@ class ProductSeeder extends Seeder
                 'highlighted' => 1,
                 'pricing_scheme' => 1,
                 'note' => null,
-                'image' => 'assets/uploads/services/rn.png'
+                'image' => 'assets/uploads/services/rn.png',
+                'type' => 1
+
             ],
 
             [
@@ -274,6 +295,8 @@ class ProductSeeder extends Seeder
                 'highlighted' => 1,
                 'pricing_scheme' => 1,
                 'note' => null,
+                'type' => 1
+
             ],
             [
                 'category_id' => 'cross-platform-development',
@@ -299,6 +322,8 @@ class ProductSeeder extends Seeder
                 'highlighted' => 1,
                 'pricing_scheme' => 1,
                 'note' => null,
+                'type' => 1
+
             ],
             [
                 'category_id' => 'design-service',
@@ -317,6 +342,7 @@ class ProductSeeder extends Seeder
                 'highlighted' => 0,
                 'pricing_scheme' => 1,
                 'note' => null,
+                'type' => 2
             ],
 
             [
@@ -336,6 +362,8 @@ class ProductSeeder extends Seeder
                 'highlighted' => 0,
                 'pricing_scheme' => 1,
                 'note' => null,
+                'type' => 2
+
             ],
 
             [
@@ -355,6 +383,8 @@ class ProductSeeder extends Seeder
                 'highlighted' => 0,
                 'pricing_scheme' => 1,
                 'note' => null,
+                'type' => 2
+
             ],
             [
                 'category_id' => 'design-service',
@@ -371,6 +401,8 @@ class ProductSeeder extends Seeder
                 'highlighted' => 1,
                 'pricing_scheme' => 1,
                 'note' => null,
+                'type' => 2
+
             ],
             [
                 'category_id' => 'design-service',
@@ -387,6 +419,8 @@ class ProductSeeder extends Seeder
                 'highlighted' => 1,
                 'pricing_scheme' => 1,
                 'note' => null,
+                'type' => 2
+
             ],
             [
                 'category_id' => 'design-service',
@@ -403,6 +437,8 @@ class ProductSeeder extends Seeder
                 'highlighted' => 1,
                 'pricing_scheme' => 1,
                 'note' => null,
+                'type' => 2
+
             ],
 
             [
@@ -420,6 +456,9 @@ class ProductSeeder extends Seeder
                 'highlighted' => 1,
                 'pricing_scheme' => 1,
                 'note' => null,
+                'type' => 2
+
+
             ],
             [
                 'category_id' => 'design-service',
@@ -436,6 +475,8 @@ class ProductSeeder extends Seeder
                 'highlighted' => 1,
                 'pricing_scheme' => 1,
                 'note' => null,
+                'type' => 2
+
             ],
             [
                 'category_id' => 'design-service',
@@ -452,6 +493,8 @@ class ProductSeeder extends Seeder
                 'highlighted' => 1,
                 'pricing_scheme' => 1,
                 'note' => null,
+                'type' => 2
+
             ],
             [
                 'category_id' => 'design-service',
@@ -468,6 +511,8 @@ class ProductSeeder extends Seeder
                 'highlighted' => 1,
                 'pricing_scheme' => 1,
                 'note' => null,
+                'type' => 2
+
             ],
             [
                 'category_id' => 'design-service',
@@ -484,6 +529,8 @@ class ProductSeeder extends Seeder
                 'highlighted' => 1,
                 'pricing_scheme' => 1,
                 'note' => null,
+                'type' => 2
+
             ],
             [
                 'category_id' => 'design-service',
@@ -500,6 +547,8 @@ class ProductSeeder extends Seeder
                 'highlighted' => 1,
                 'pricing_scheme' => 3,
                 'note' => null,
+                'type' => 2
+
             ],
             [
                 'category_id' => 'design-service',
@@ -516,6 +565,8 @@ class ProductSeeder extends Seeder
                 'highlighted' => 1,
                 'pricing_scheme' => 3,
                 'note' => null,
+                'type' => 2
+
             ],
 
 

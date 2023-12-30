@@ -30,8 +30,8 @@ class CategoriesSeed extends Seeder
                 'parent_id' => 'services',
             ],
             [
-                'title' => 'Cross-Platform App',
-                'slug' => 'cross-platform-app',
+                'title' => 'Cross-Platform Development',
+                'slug' => 'cross-platform-development',
                 'parent_id' => 'services',
             ],
             [
