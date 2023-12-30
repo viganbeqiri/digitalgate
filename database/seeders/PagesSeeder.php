@@ -88,18 +88,20 @@ class PagesSeeder extends Seeder
                 'slug' => 'it-outsourcing-service',
                 'category_id' => 'outsourcing',
                 'parent_id' => 'outsourcing',
+                'subtitle' => 'Outsource your projects to us, where efficiency meets expertise, driving your business forward with ease.',
+                'description' => 'Focus on the important stuff. Ease your software development journey with DigitalGate\'s outsourcing solutions. Wel manage everything from idea to launch, freeing you to concentrate on your main business operations.',
                 'has_slider' => 0,
-                'contents' => '[{"title":"test","description":"test","image":"https://placehold.co/400x400"},{"title":"test","description":"test","image":"https://placehold.co/400x400"},{"title":"test","description":"test","image":"https://placehold.co/400x400"}]',
-                'slider_contents' => '[{"media_url":"https://placehold.co/1080x720","title":"test","subtitle":"tessss","link":"https://facebook.com"},{"media_url":"https://placehold.co/1080x720","title":"test","subtitle":"tessss","link":"https://facebook.com"},{"media_url":"https://placehold.co/1080x720","title":"test","subtitle":"tessss","link":"https://facebook.com"},{"media_url":"https://placehold.co/1080x720","title":"test","subtitle":"tessss","link":"https://facebook.com"}]'
-
+                'contents' => '[{"title":"Custom Software Development","description":"Secure, end-to-end web and mobile apps.","image":"assets/uploads/outsourcing/backet.png"},{"title":"IT Infrastructure Management","description":"Having infrastructure problems? Or looking to upgrade your system","image":"assets/uploads/outsourcing/input-component.png"},{"title":"Network and Grid Management","description":"Easy setup of IT network and internet requirements. We analyze your needs and advise or implement solution.","image":"assets/uploads/outsourcing/wired.png"},{"title":"MVP Development","description":"Turn ideas into products. Concept to Design to MVP.","image":"assets/uploads/outsourcing/lamp.png"}]',
             ],
             [
                 'title' => 'Cybersecurity Service',
                 'slug' => 'cybersecurity-service',
                 'category_id' => 'outsourcing',
+                'subtitle' => 'Secure your digital assets with our cybersecurity services; essential| protection for peace of mind and business continuity.',
+                'description' => 'Secure your peace of mind. Let us handle your cybersecurity needs. We offer comprehensive protection and risk management, freeing you to focus on your core business.',
                 'has_slider' => 1,
-                'contents' => '[{"title":"test","description":"test","image":"https://placehold.co/400x400"},{"title":"test","description":"test","image":"https://placehold.co/400x400"},{"title":"test","description":"test","image":"https://placehold.co/400x400"}]',
-                'slider_contents' => '[{"media_url":"https://placehold.co/1080x720","title":"test","subtitle":"tessss","link":"https://facebook.com"},{"media_url":"https://placehold.co/1080x720","title":"test","subtitle":"tessss","link":"https://facebook.com"},{"media_url":"https://placehold.co/1080x720","title":"test","subtitle":"tessss","link":"https://facebook.com"},{"media_url":"https://placehold.co/1080x720","title":"test","subtitle":"tessss","link":"https://facebook.com"}]'
+                'contents' => '[{"title":"Risk Assessment and Compliance Management","description":"Identifying vulnerabilities within a network and systems, assessing risks, and ensuring compliance with relevant cybersecurity regulations and standards","image":null},{"title":"Threat Protection and Management","description":"Real-time monitoring, threat detection, and response to security incidents. It involves proactive measures to protect against malware, ransomware, phishing, and other cyber threats, ensuring the integrity and confidentiality of data.","image":null}]',
+                'slider_contents' => '[{"media_url":"assets/uploads/outsourcing/secure-plan.png"}]'
 
             ]
         ];

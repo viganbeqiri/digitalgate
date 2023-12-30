@@ -113,7 +113,8 @@
                                             us for price</span>
 
                                         <div class="order-btn">
-                                            <a @click="doOrder(child_product)" class="btn btn-primary rounded-pill">
+                                            <a @click="doOrder(child_product, product)"
+                                                class="btn btn-primary rounded-pill">
                                                 <span class="px-3">{{ child_product.pricing_scheme == '1' ? 'Order' :
                                                     'Request Quote' }}</span>
                                             </a>
@@ -141,6 +142,8 @@
 import FrontLayout from '../Shares/FrontLayout.vue';
 import { usePage, Head, Link, router } from '@inertiajs/vue3'
 import { ref, onMounted, onBeforeUnmount, watch } from 'vue';  // Import the watch function
+import { toast } from 'vue3-toastify';
+import 'vue3-toastify/dist/index.css';
 
 //local storage
 
@@ -176,7 +179,8 @@ export default {
 
     props: {
         user: Object,
-        data: Object
+        data: Object,
+        auth: Object
     },
     state: {
         cart: []
@@ -216,18 +220,36 @@ export default {
             } else {
             }
         },
-        doOrder(product) {
+        doOrder(product, parent = null) {
+            console.log(this.auth)
+            if (!this.auth.user) {
+                toast("You need to login first !", {
+                    onClose: () => router.get('/sign-in'),
+                });
+            }
+
+            product.service = this.page
             this.orderItem = [product]
+            if (parent) {
+                parent.service = this.page
+                this.orderItem.push(parent)
+            }
+
+            //get active order from local storage
+            const active_order = localStorage.getItem('active_order')
+            if (active_order) {
+                localStorage.removeItem('active_order')
+            }
             this.saveCartToLocalStorage()
             const currentRoute = usePage().url
             const orderUrl = currentRoute + '/order'
             router.visit(orderUrl)
         },
         saveCartToLocalStorage() {
-            if (localStorage.getItem('order_item')) {
-                localStorage.removeItem('order_item');
+            if (localStorage.getItem('order_items')) {
+                localStorage.removeItem('order_items');
             }
-            localStorage.setItem('order_item', JSON.stringify(this.orderItem));
+            localStorage.setItem('order_items', JSON.stringify(this.orderItem));
         }
 
     }

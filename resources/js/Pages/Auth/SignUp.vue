@@ -119,7 +119,8 @@ export default {
     inheritAttrs: false,
     props: {
         errors: Object,
-        registerForm: Object
+        registerForm: Object,
+        auth: Object
     },
     setup() {
         const registerForm = reactive({
@@ -138,8 +139,11 @@ export default {
                 password: registerForm.password,
                 password_confirmation: registerForm.password_confirmation
 
+            }, {
+                onError: errors => {
+                    console.log(errors)
+                }
             });
-
 
 
         }
@@ -148,6 +152,11 @@ export default {
             storeRegister
         }
     },
+    mounted() {
+        if (this.auth.user) {
+            router.get('/');
+        }
+    }
 }
 </script>
 

@@ -20,16 +20,43 @@
         </div>
         <div class="container py-4">
             <div class="d-flex justify-content-center mt-3 w-100">
-                <div class="row w-100 mb-5">
-                    <div class="col-md-4 col-lg-4 col-sm-6 col-12" v-for="content in contents">
+                <div class="row w-100 mb-5 d-flex justify-content-center">
+                    <div :class="contents.length === 3 ? 'col-4' : 'col-3'" v-for="content in contents"
+                        v-if="page.slug != 'cybersecurity-service'">
                         <div class="card">
                             <div class="card-body text-justify">
+                                <div class="icon mb-3" v-if="content.image">
+                                    <img :src="content.image" alt="" />
+                                </div>
                                 <p v-if="content.subtitle">{{ content.subtitle }}</p>
                                 <p class="text-primary ">{{ content.title }}</p>
                                 <p class="text-muted">{{ content.description }}</p>
                             </div>
                         </div>
                     </div>
+                    <div class="col-3 d-flex align-items-center" v-if="page.slug == 'cybersecurity-service'">
+                        <div class="image" v-for="slider in page.slider_contents">
+                            <img :src="slider.media_url" alt="" />
+                        </div>
+                    </div>
+                    <div class="col-9" v-if="page.slug == 'cybersecurity-service'">
+                        <div class="col-12 d-flex justify-content-center mb-3" v-for="content in page.contents">
+                            <div class="card">
+                                <div class="card-body text-justify d-flex justify-content-between">
+                                    <p v-if="content.subtitle">{{ content.subtitle }}</p>
+                                    <div class="col-4 align-items-center d-flex text-center">
+                                        <h3 class="text-primary fw-light">{{ content.title }}</h3>
+
+                                    </div>
+                                    <div class="col-8 text-end">
+                                        <p class="text-muted">{{ content.description }}</p>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
             </div>
             <div class="d-flex justify-content-end">

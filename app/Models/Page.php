@@ -22,6 +22,11 @@ class Page extends Model
         return $this->hasMany(Product::class);
     }
 
+    public function parent()
+    {
+        return $this->belongsTo(Page::class, 'parent_id');
+    }
+
     public function getNextPageAttribute()
     {
         $next = $this->category->pages()->where('id', '>', $this->id)->first();
@@ -52,7 +57,7 @@ class Page extends Model
                 'description' => $content->description,
                 'image' => $image,
                 'link' => $content->link ?? null,
-                'subtitle' => $content->subtitle ?? null,
+                'subtittle' => $content->subtitle ?? null,
             ];
         });
     }

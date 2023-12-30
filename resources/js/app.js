@@ -2,6 +2,10 @@ import "./bootstrap";
 
 import { createApp, h } from "vue";
 import { createInertiaApp } from "@inertiajs/vue3";
+/* import the fontawesome core */
+import VueFeather from 'vue-feather';
+
+
 
 createInertiaApp({
     resolve: (name) => {
@@ -11,6 +15,7 @@ createInertiaApp({
     setup({ el, App, props, plugin }) {
         createApp({ render: () => h(App, props) })
             .use(plugin)
+            .component(VueFeather.name, VueFeather)
             .mixin({ methods: { route } })
             .mount(el);
     },

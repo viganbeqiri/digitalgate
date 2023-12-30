@@ -96,6 +96,9 @@ export default {
         }
     },
     mounted() {
+        if (this.auth.user) {
+            router.get('/');
+        }
     }
 }
 </script>

@@ -1,6 +1,6 @@
 <template>
     <nav class="navbar fixed-top navbar-expand-lg center-nav navbar-light navbar-bg-light border-bottom border-secondary"
-        style="z-index: 9999999;">
+        style="z-index: 1031;">
         <div class="container flex-lg-row flex-nowrap align-items-center">
             <div class="navbar-brand w-50">
                 <a href="#">
@@ -59,14 +59,25 @@
                             <li class="nav-item"><a class="dropdown-item" href="#">English</a></li>
                         </ul>
                     </li>
-                    <li class="nav-item d-none d-md-block" v-if="!auth">
+                    <li class="nav-item d-none d-md-block" v-if="!auth.user">
                         <a href="/sign-up" class="btn btn-sm btn-primary rounded-pill pt-1 pb-1">Sign up</a>
                     </li>
 
-                    <li class="nav-item d-none d-md-block" v-if="auth">
-                        <a href="/sign-up" class="btn btn-sm btn-primary rounded-pill pt-1 pb-1">Logout</a>
+                    <li class="nav-item" v-if="auth.user">
+                        <a href="#" class="text-ash pt-1 pb-1">{{ auth.user.name }}</a>
                     </li>
 
+                    <li class="nav-item dropdown user-select " v-if="auth.user">
+                        <a class="nav-link dropdown-item dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                            <i class="uil uil-user-circle"></i>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li class="nav-item">
+                                <Link class="dropdown-item" :href="route('order.index')">Orders</Link>
+                            </li>
+                        </ul>
+                    </li>
                     <li class="nav-item d-lg-none">
                         <button class="hamburger offcanvas-nav-btn"><span></span></button>
                     </li>
@@ -263,8 +274,11 @@ export default {
             }
         })
         const currentMenu = menuItems.find(item => item.mainMenu === currentRoute[0])
-        this.showSubMenu(currentMenu.subMenu)
-        console.log(currentMenu)
+        try {
+            this.showSubMenu(currentMenu.subMenu)
+
+        } catch (error) {
+        }
     },
     methods: {
         showSubMenu(item) {

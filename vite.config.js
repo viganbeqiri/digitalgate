@@ -4,6 +4,9 @@ import vue from "@vitejs/plugin-vue";
 import { resolve } from "path";
 
 export default defineConfig({
+    define: {
+        'process.env': process.env
+    },
     plugins: [
         vue(),
         laravel({

@@ -31,6 +31,13 @@ Route::prefix('services')->name('services.')->group(function () {
     }
 });
 
+Route::prefix('order')->name('order.')->group(function () {
+    Route::post('/nda', [App\Http\Controllers\OrdersController::class, 'storeNDA'])->name('storeNDA');
+    Route::post('/details', [App\Http\Controllers\OrdersController::class, 'storeDetail'])->name('storeDetail');
+    Route::post('/payment', [App\Http\Controllers\OrdersController::class, 'storePaymentDetail'])->name('storePaymentDetail');
+    Route::get('/', [App\Http\Controllers\OrdersController::class, 'index'])->name('index');
+});
+
 Route::prefix('outsourcing')->name('outsourcing.')->group(function () {
     Route::get('/', function () {
         $page = Page::where('slug', 'outsourcing')->firstOrFail();
@@ -38,7 +45,7 @@ Route::prefix('outsourcing')->name('outsourcing.')->group(function () {
             'page' => $page
         ]);
     })->name('index');
-    $pages = Category::where('slug', 'outsourcing')->with('pages')->firstOrFail();
+    $pages = Category::where('slug', 'outsourcing')->with('pages.parent')->firstOrFail();
     foreach ($pages->pages as $page) {
         Route::get($page->slug, [App\Http\Controllers\OutsourcingController::class, 'index'])->name($page->slug);
     }
