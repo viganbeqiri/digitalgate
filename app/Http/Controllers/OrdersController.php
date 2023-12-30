@@ -22,13 +22,27 @@ class OrdersController extends Controller
             'nda_file' => 'required',
             'order_items' => 'required'
         ]);
+        $orderItems = collect(json_decode($request->order_items))->map(function ($item) {
+            return [
+                'product_id' => $item->id,
+                'price' => $item->price
+            ];
+        });
+        $subTotal = $orderItems->sum('price');
+        $vat_rate = (float) 0.18;
+        $vat = $subTotal * $vat_rate;
+        $totalPrice = $subTotal + $vat;
 
         $order = new Order;
         $order->order_no = Order::generateSerialNumber();
         $order->user_id = auth()->user()->id;
         $order->full_name = $request->full_name;
-        $order->current_step = 1;
+        $order->current_step = 2;
 
+
+        $order->tax = $vat;
+        $order->total_price = $totalPrice;
+        $order->subtotal = $subTotal;
         $order->save();
 
         // upload NDA file
@@ -47,22 +61,8 @@ class OrdersController extends Controller
             'license_file_url' => $request->license_file,
             'nda_file_url' => $request->nda_file,
         ]);
-        $orderItems = collect(json_decode($request->order_items))->map(function ($item) {
-            return [
-                'product_id' => $item->id,
-                'price' => $item->price
-            ];
-        });
-        $subTotal = $orderItems->sum('price');
-        $vat_rate = (float) 0.18;
-        $vat = $subTotal * $vat_rate;
-        $totalPrice = $subTotal + $vat;
-        $order->current_step = 2;
 
-        $order->tax = $vat;
-        $order->total_price = $totalPrice;
-        $order->subtotal = $subTotal;
-        $order->save();
+
 
         $order->orderItems()->createMany($orderItems);
         return back()->with([
