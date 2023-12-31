@@ -1,0 +1,29 @@
+# Digital gate
+
+### system requirement
+
+-   php8.2
+-   nodejs 21
+-   mysql
+
+### installation guide
+
+```bash
+# install the project
+composer install && npm install
+
+# run migrate
+php artisan migrate
+
+# run db seeder
+php artisan db:seed --class=CategoriesSeed
+php artisan db:seed --class=PagesSeeder
+php artisan db:seed --class=ProductSeeder
+
+# build frontend
+
+npm run dev
+# open new terminal
+php artisan serve
+
+```
