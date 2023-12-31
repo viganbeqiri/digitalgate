@@ -287,7 +287,7 @@
 
                                                 </div>
                                             </div>
-                                            <div class="row mb-4">
+                                            <div class="row mb-4" v-if="service_type === 'Design Service'">
                                                 <div class="col-6">
                                                     <div class="row">
                                                         <div class="col-6"
