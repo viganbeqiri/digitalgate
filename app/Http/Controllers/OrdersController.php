@@ -89,29 +89,46 @@ class OrdersController extends Controller
 
         $order = Order::find($request->order_id);
         $business_logo_name = null;
+        $company_profile_url = null;
+        $content_zip_url = null;
 
         if ($request->hasFile('business_logo')) {
             $business_logo_name = time() . '.' . $request->business_logo->extension();
             $request->file('business_logo')->storeAs('orders/document', $business_logo_name);
         }
+
+        if ($request->hasFile('company_profile')) {
+            $company_profile_url = time() . '.' . $request->company_profile->extension();
+            $request->file('company_profile')->storeAs('orders/document', $company_profile_url);
+        }
+
+        if ($request->hasFile('content_file')) {
+            $content_zip_url = time() . '.' . $request->content_file->extension();
+            $request->file('content_file')->storeAs('orders/document', $content_zip_url);
+        }
+
+
         $order->orderDetail()->updateOrCreate([
             'order_id' => $order->id
         ], [
             'business_name' => $request->business_name,
             'business_type' => $request->business_type,
             'business_location' => $request->business_location,
-            'business_logo_url' => 'orders/document' . $business_logo_name,
+            'business_logo_url' => 'orders/document/' . $business_logo_name,
             'business_logo_preferred' => $request->business_logo_preferred,
             'total_employees' => $request->total_employees,
             'preferred_domain' => $request->preferred_domain,
             'business_emails' => $request->emails,
             'design_look_preferred' => $request->design_look_preferred,
             'design_look' => $request->design_look,
-            'content_zip_url' => $request->content_file
+            'content_zip_url' => 'orders/document/' . $content_zip_url,
+            'company_profile_url' => 'orders/document/' . $company_profile_url,
+            'content_platform' => $request->content_platform
         ]);
 
         $order->current_step = 3;
         $order->save();
+        // return $order->orderDetail;
         return back()->with([
             'messages' => 'Details saved successfully',
             'order' => $order

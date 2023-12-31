@@ -259,13 +259,15 @@
                                                 </div>
 
                                             </div>
+
                                             <div class="row mb-4">
                                                 <div class="col-6">
                                                     <div class="form-floating">
                                                         <input id="preferred_domain" name="preferred_domain"
                                                             v-model="submitOrderDetail.preferred_domain" type="text"
                                                             class="form-control" placeholder="Business Location"><label
-                                                            for="first_name">Preferred Domain*</label>
+                                                            for="first_name">{{ service_type === 'Development Service' ?
+                                                                'Preferred Domain' : 'Website' }}</label>
                                                         <div v-if="errors.preferred_domain" class="alert alert-danger">
                                                             {{ errors.preferred_domain }}
                                                         </div>
@@ -285,13 +287,35 @@
 
                                                 </div>
                                             </div>
+                                            <div class="row mb-4">
+                                                <div class="col-6">
+                                                    <div class="row">
+                                                        <div class="col-6"
+                                                            v-for="(social_media_platform, index) in social_media_platforms">
+                                                            <div class="pages_checkbox">
+                                                                <div
+                                                                    class="border border-ash-soft rounded p-2 d-flex justify-content-between">
+                                                                    <span class="fs-14">{{
+                                                                        social_media_platform.value
+                                                                    }}</span>
+                                                                    <input class="form-check-input" type="checkbox"
+                                                                        v-model="submitOrderDetail.content_platform[index]['value']"
+                                                                        :value="social_media_platform.value">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+
                                             <h3 class="text-primary fw-light">Design Detail</h3>
                                             <div class="row mb-4">
                                                 <div class="col-4">
                                                     <div class="form-group">
                                                         <input type="file" name="business_logo" id="business_logo"
                                                             class="input-file"
-                                                            @change="handleFileChange('business_logo', $event)" multiple
+                                                            @change="handleFileChange('business_logo', $event)"
                                                             ref="business_logo">
                                                         <label for="business_logo" class="btn js-labelFile w-100"
                                                             :class="!file_selected.business_logo ? 'btn-outline-ash' : 'btn-outline-primary'">
@@ -305,12 +329,14 @@
                                                     </div>
 
                                                 </div>
-                                                <div class="col-8">
+
+                                                <div class="col-8" v-if="service_type === 'Development Service'">
                                                     <div class="form-floating">
                                                         <input id="business_name" name="business_name"
                                                             v-model="submitOrderDetail.business_logo_preferred" type="text"
                                                             class="form-control" placeholder="Business Name"><label
-                                                            for="first_name">Enter prefered color or fonts and/or font
+                                                            for="first_name">Enter
+                                                            prefered color or fonts and/or font
                                                             type(if any)</label>
                                                         <div v-if="errors.business_logo_preferred"
                                                             class="alert alert-danger">
@@ -319,8 +345,28 @@
                                                     </div>
 
                                                 </div>
+
+                                                <div class="col-8" v-if="service_type === 'Design Service'">
+                                                    <div class="form-group">
+                                                        <input type="file" name="company_profile" id="company_profile"
+                                                            class="input-file"
+                                                            @change="handleFileChange('company_profile', $event)"
+                                                            ref="company_profile">
+                                                        <label for="company_profile" class="btn js-labelFile w-100"
+                                                            :class="!file_selected.business_logo ? 'btn-outline-ash' : 'btn-outline-primary'">
+                                                            <span class="js-fileName mx-1">Submit Company Profile</span>
+                                                            <vue-feather v-if="!file_selected.company_profile"
+                                                                type="upload-cloud"></vue-feather>
+                                                            <vue-feather v-if="file_selected.company_profile"
+                                                                type="check"></vue-feather>
+
+                                                        </label>
+                                                    </div>
+
+                                                </div>
+
                                             </div>
-                                            <div class="row mb-4">
+                                            <div class="row mb-4" v-if="service_type === 'Development Service'">
                                                 <div class="col-4">
                                                     <div class="form-select-wrapper mb-4">
                                                         <select class="form-select" aria-label="Default select example"
@@ -342,7 +388,8 @@
                                                         <input id="business_name" name="business_name"
                                                             v-model="submitOrderDetail.design_look_preferred" type="text"
                                                             class="form-control" placeholder="Business Name"><label
-                                                            for="first_name">Enter prefered color or fonts and/or font
+                                                            for="first_name">Enter
+                                                            prefered color or fonts and/or font
                                                             type(if any)</label>
                                                         <div v-if="errors.design_look_preferred" class="alert alert-danger">
                                                             {{ errors.business_logo_preferred }}
@@ -350,55 +397,59 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <h3 class="text-primary fw-light">Functional and Content Requirements</h3>
-                                            <div class="row mb-4">
-                                                <div class="col-4">
-                                                    <div class="col">
-                                                        <div class="border border-ash-soft rounded p-3">
-                                                            <div
-                                                                class="pages-card align-items-center d-flex align-content-between w-100">
-                                                                <span>Pages</span>
-                                                                <vue-feather type="arrow-right"></vue-feather>
+                                            <div class="" v-if="service_type === 'Development Service'">
+
+                                                <h3 class="text-primary fw-light">Functional and Content Requirements</h3>
+                                                <div class="row mb-4">
+                                                    <div class="col-4">
+                                                        <div class="col">
+                                                            <div class="border border-ash-soft rounded p-3">
+                                                                <div
+                                                                    class="pages-card align-items-center d-flex align-content-between w-100">
+                                                                    <span>Pages</span>
+                                                                    <vue-feather type="arrow-right"></vue-feather>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col mt-3">
+                                                            <div class="form-group">
+                                                                <input type="file" name="content_file" id="content_file"
+                                                                    class="input-file"
+                                                                    @change="handleFileChange('content_file', $event)"
+                                                                    multiple ref="content_file">
+                                                                <label for="content_file" class="btn js-labelFile w-100"
+                                                                    :class="!file_selected.content_file ? 'btn-outline-ash' : 'btn-outline-primary'">
+                                                                    <span class="js-fileName mx-1">Upload Content</span>
+                                                                    <vue-feather v-if="!file_selected.content_file"
+                                                                        type="upload-cloud"></vue-feather>
+                                                                    <vue-feather v-if="file_selected.content_file"
+                                                                        type="check"></vue-feather>
+
+                                                                </label>
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <div class="col mt-3">
-                                                        <div class="form-group">
-                                                            <input type="file" name="content_file" id="content_file"
-                                                                class="input-file"
-                                                                @change="handleFileChange('content_file', $event)" multiple
-                                                                ref="content_file">
-                                                            <label for="content_file" class="btn js-labelFile w-100"
-                                                                :class="!file_selected.content_file ? 'btn-outline-ash' : 'btn-outline-primary'">
-                                                                <span class="js-fileName mx-1">Upload Content</span>
-                                                                <vue-feather v-if="!file_selected.content_file"
-                                                                    type="upload-cloud"></vue-feather>
-                                                                <vue-feather v-if="file_selected.content_file"
-                                                                    type="check"></vue-feather>
-
-                                                            </label>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-8">
-                                                    <div class="row">
-                                                        <div class="col-4"
-                                                            v-for="(development_requirement, index) in development_requirements">
-                                                            <div class="pages_checkbox">
-                                                                <div
-                                                                    class="border border-ash-soft rounded p-2 d-flex justify-content-between">
-                                                                    <span class="fs-14">{{
-                                                                        development_requirement.value
-                                                                    }}</span>
-                                                                    <input class="form-check-input" type="checkbox"
-                                                                        v-model="submitOrderDetail.pages[index]['value']"
-                                                                        :value="development_requirement.value">
+                                                    <div class="col-8">
+                                                        <div class="row">
+                                                            <div class="col-4"
+                                                                v-for="(development_requirement, index) in development_requirements">
+                                                                <div class="pages_checkbox">
+                                                                    <div
+                                                                        class="border border-ash-soft rounded p-2 d-flex justify-content-between">
+                                                                        <span class="fs-14">{{
+                                                                            development_requirement.value
+                                                                        }}</span>
+                                                                        <input class="form-check-input" type="checkbox"
+                                                                            v-model="submitOrderDetail.pages[index]['value']"
+                                                                            :value="development_requirement.value">
+                                                                    </div>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
+
                                             <div class="d-flex justify-content-end">
                                                 <button type="submit" class="btn btn-primary">Submit</button>
 
@@ -758,7 +809,8 @@ export default {
                 business_logo: false,
                 license_file: false,
                 nda_file: false,
-                content_file: false
+                content_file: false,
+                company_profile: false
             },
             development_requirements: [
                 {
@@ -824,11 +876,30 @@ export default {
                 }
 
             ],
+            social_media_platforms: [
+                {
+                    key: 'instagram',
+                    value: 'Instagram'
+                },
+                {
+                    key: 'facebook',
+                    value: 'Facebook'
+                },
+                {
+                    key: 'x',
+                    value: 'X'
+                },
+                {
+                    key: 'linkedin',
+                    value: 'LinkedIn'
+                }
+            ],
             errors: {},
             vat_rate: 18,
             vat: 0,
             sub_total: 0,
             total_price: 0,
+            service_type: '',
         }
     },
     setup() {
@@ -851,6 +922,7 @@ export default {
             business_logo_preferred: '',
             design_look: '',
             design_look_preferred: '',
+            company_profile: '',
             pages: [
                 {
                     key: 'homepage',
@@ -914,6 +986,24 @@ export default {
                     value: false
                 }
             ],
+            content_platform: [
+                {
+                    key: 'instagram',
+                    value: false
+                },
+                {
+                    key: 'facebook',
+                    value: false
+                },
+                {
+                    key: 'x',
+                    value: false
+                },
+                {
+                    key: 'linkedin',
+                    value: false
+                }
+            ],
             content_file: null,
         })
 
@@ -955,6 +1045,7 @@ export default {
         const first_item = order_items[0];
         step.additional_info = order_items;
         step.name = first_item.product_type;
+        this.service_type = first_item.product_type
 
         const active_order = localStorage.getItem('active_order');
         if (active_order) {
@@ -1049,6 +1140,9 @@ export default {
             formData.append('pages', JSON.stringify(orderDetailData.pages));
             formData.append('content_file', orderDetailData.content_file);
             formData.append('order_id', this.active_order.id);
+            formData.append('company_profile', orderDetailData.company_profile);
+            formData.append('content_platform', JSON.stringify(orderDetailData.content_platform));
+
             router.post('/order/details', formData, {
                 forceFormData: true,
                 preserveScroll: false,
