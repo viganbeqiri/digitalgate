@@ -108,6 +108,13 @@ class PagesSeeder extends Seeder
                 'contents' => '[{"title":"Risk Assessment and Compliance Management","description":"Identifying vulnerabilities within a network and systems, assessing risks, and ensuring compliance with relevant cybersecurity regulations and standards","image":null},{"title":"Threat Protection and Management","description":"Real-time monitoring, threat detection, and response to security incidents. It involves proactive measures to protect against malware, ransomware, phishing, and other cyber threats, ensuring the integrity and confidentiality of data.","image":null}]',
                 'slider_contents' => '[{"media_url":"assets/uploads/outsourcing/secure-plan.png"}]'
 
+            ],
+            [
+                'title' => 'Incubation',
+                'slug' => 'incubation',
+                'category_id' => null,
+                'contents' => '[{"title":"Mentorship and Networking Program","description":"Learn from the ones who walked your path before. Leverage from our international networking platform","media_url":"assets/uploads/incubation/networking.png"},{"title":"Infrastructure Support","description":"Provide startups with access to cutting-edge technological resources and support. This could include software development tools, cloud services, and technical expertise to help them develop, test, and deploy","media_url":"assets/uploads/incubation/infrastructure.png"},{"title":"Funding Support","description":"Funding Support and Equity-Based Collaboration. At DigitalGate, were committed to fueling the growth of startups through direct funding support. Recognizing the challenges of securing capital, we offer al unique proposition where startups receive the necessary funding without upfront costs. Instead, we engage in an equity-based collaboration, where we obtain a proportional stake in the startup.","media_url":"assets/uploads/incubation/funding.png"}]'
+
             ]
         ];
 
@@ -117,6 +124,9 @@ class PagesSeeder extends Seeder
             $category = Category::where('slug', $content['category_id'])->first();
             unset($content['category_id']);
             if (empty($category)) {
+                $this->command->info('Category ' . $content['slug'] . ' not found');
+                $this->command->info('Create pages without category');
+                Page::updateOrCreate(['slug' => $content['slug']], $content);
                 continue;
             }
             if (!empty($content['parent_id'])) {
