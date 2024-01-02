@@ -70,7 +70,10 @@ Route::get('/portofolio', function () {
 
 Route::prefix('incubator')->name('incubator.')->group(function () {
     Route::get('/why-us', function () {
-        return Inertia::render('Services', []);
+        $page = Page::where('slug', 'incubation')->first();
+        return Inertia::render('Incubation/WhyUs', [
+            'page' => $page
+        ]);
     })->name('why-us');
 
     Route::get('/cohort', function () {

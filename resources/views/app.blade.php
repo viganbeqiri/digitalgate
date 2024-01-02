@@ -10,6 +10,11 @@
     <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/colors/sky.css') }}">
     <link rel="preload" href="{{ asset('assets/css/fonts/space.css') }}" as="style" onload="this.rel='stylesheet'">
+    {{-- <link rel='stylesheet' href='https://unpkg.com/swiper@6.8.4/swiper-bundle.min.css'> --}}
+    {{-- <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/css/bootstrap-reboot.min.css'> --}}
+    {{-- <link rel="stylesheet" href="./style.css"> --}}
+
+
     @routes
     @vite(['resources/js/app.js', 'resources/assets/scss/style.scss'])
     @inertiaHead
@@ -30,6 +35,11 @@
     <script src="{{ asset('assets/js/plugins.js') }}"></script>
 
     <script src="{{ asset('assets/js/theme.js') }}"></script>
+    <link rel='stylesheet' href='https://unpkg.com/swiper@6.8.4/swiper-bundle.min.css'>
+
+    {{-- <script src='https://unpkg.com/swiper@6.8.4/swiper-bundle.min.js'></script> --}}
+    {{-- <script src="./script.js"></script> --}}
+
 
 </body>
 

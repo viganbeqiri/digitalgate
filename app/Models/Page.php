@@ -29,6 +29,9 @@ class Page extends Model
 
     public function getNextPageAttribute()
     {
+        if (empty($this->category_id)) {
+            return null;
+        }
         $next = $this->category->pages()->where('id', '>', $this->id)->first();
         if ($next) {
             return 'services.' . $next->slug;
@@ -38,6 +41,9 @@ class Page extends Model
 
     public function getPreviousPageAttribute()
     {
+        if (empty($this->category_id)) {
+            return null;
+        }
         $prev = $this->category->pages()->where('id', '<', $this->id)->orderBy('id', 'desc')->first();
         if ($prev) {
             return 'services.' . $prev->slug;
