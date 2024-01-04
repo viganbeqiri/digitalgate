@@ -37,6 +37,8 @@ Route::prefix('services')->name('services.')->group(function () {
 });
 
 Route::prefix('order')->name('order.')->middleware('auth')->group(function () {
+    Route::post('/pickdeck', [App\Http\Controllers\OrdersController::class, 'storePickDeck'])->name('storePickDeck');
+    Route::post('/cohort', [App\Http\Controllers\OrdersController::class, 'storeCohort'])->name('storeCohort');
     Route::post('/nda', [App\Http\Controllers\OrdersController::class, 'storeNDA'])->name('storeNDA');
     Route::post('/details', [App\Http\Controllers\OrdersController::class, 'storeDetail'])->name('storeDetail');
     Route::post('/payment', [App\Http\Controllers\OrdersController::class, 'storePaymentDetail'])->name('storePaymentDetail');
@@ -75,13 +77,15 @@ Route::prefix('incubator')->name('incubator.')->group(function () {
             'page' => $page
         ]);
     })->name('why-us');
+    Route::get('/incubation', [App\Http\Controllers\ServicesController::class, 'order'])->name('incubation');
+
 
     Route::get('/cohort', function () {
-        return Inertia::render('Services', []);
+        return Inertia::render('Incubation/Cohort', []);
     })->name('cohort');
-    Route::get('/incubation', function () {
-        return Inertia::render('Services', []);
-    })->name('incubation');
+    // Route::get('/incubation', function () {
+    //     return Inertia::render('order', []);
+    // })->name('incubation');
 
     Route::get('/acceleration', function () {
         return Inertia::render('Services', []);
@@ -102,4 +106,4 @@ Route::get('sign-up', function () {
 
 Route::get('sign-in', function () {
     return Inertia::render('Auth/SignIn', []);
-})->name('sign-in');
+})->name('login');

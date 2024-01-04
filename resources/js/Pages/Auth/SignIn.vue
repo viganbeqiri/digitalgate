@@ -69,7 +69,8 @@
 import frontLayout from "../../Shares/FrontLayout.vue";
 import { ref, onMounted, reactive } from 'vue'
 import { router } from '@inertiajs/vue3'
-
+import { toast } from 'vue3-toastify';
+import 'vue3-toastify/dist/index.css';
 
 export default {
     layout: frontLayout,
@@ -90,6 +91,8 @@ export default {
                 password: loginForm.password,
             }, {
                 onSuccess: () => {
+                    toast.success('Login Successful');
+                    localStorage.clear();
                     router.visit('/', {
                         onSuccess: () => {
                             location.reload();

@@ -10,12 +10,14 @@
                         </div>
                         <div class="d-flex justify-content-center justify-content-lg-start mt-5" data-cues="slideInDown"
                             data-group="page-title-buttons" data-delay="900">
-                            <span><a href="#" class="btn btn-sm btn-primary rounded-pill me-2">Portofolio</a></span>
-                            <span><a href="#" class="btn btn-sm btn-outline-primary rounded-pill">Start a Project</a></span>
+                            <span><a href="/portofolio"
+                                    class="btn btn-sm btn-primary rounded-pill me-2">Portofolio</a></span>
+                            <span><a href="/incubator/cohort" class="btn btn-sm btn-outline-primary rounded-pill">Start a
+                                    Project</a></span>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-4 offset-md-8 d-flex justify-content-end align-items-end">
+                <div class="col-md-4 offset-md-8 d-flex justify-content-end align-items-center">
                     <div class="swiper-navigation d-flex justify-content-between">
                         <Link class="slider__prev">
                         <img src="@/img/back.png" alt="back" />

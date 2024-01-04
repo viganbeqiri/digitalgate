@@ -12,6 +12,9 @@ class Order extends Model
 {
     use HasFactory;
 
+    public $guarded = [];
+    public $appends = ['order_type'];
+
     public function orderDocument(): HasOne
     {
         return $this->hasOne(OrderDocument::class);
@@ -49,5 +52,20 @@ class Order extends Model
     public function orderPayment(): HasOne
     {
         return $this->hasOne(OrderPayment::class);
+    }
+
+    public function orderIncubationDetail()
+    {
+        return $this->hasOne(OrderIncubationDetail::class);
+    }
+
+    public function orderIncubationDeck()
+    {
+        return $this->hasOne(OrderIncubationDeck::class);
+    }
+
+    public function getOrderTypeAttribute()
+    {
+        return $this->orderIncubationDetail ? 'incubation' : 'development';
     }
 }

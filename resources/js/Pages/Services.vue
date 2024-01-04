@@ -312,7 +312,7 @@ export default {
             if (!parent) {
                 parent = product.parent_product
             }
-            console.log(this.auth)
+            console.log(product)
             if (!this.auth.user) {
                 toast("You need to login first !", {
                     onClose: () => router.get('/sign-in'),

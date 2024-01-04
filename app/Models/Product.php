@@ -23,9 +23,11 @@ class Product extends Model
 
     const DEVELOPMENT = 1;
     const DESIGN = 2;
+    const INCUBATION = 3;
     const TYPE = [
         self::DEVELOPMENT => 'Development Service',
         self::DESIGN => 'Design Service',
+        self::INCUBATION => 'Pick Deck',
     ];
 
     public function getAdditionalInfoAttribute($value)

@@ -63,6 +63,11 @@ class CategoriesSeed extends Seeder
                 'title' => 'Cybersecurity Service',
                 'slug' => 'cybersecurity-service',
                 'parent_id' => 'outsourcing',
+            ],
+            [
+                'title' => 'Incubator',
+                'slug' => 'incubator',
+                'parent_id' => null,
             ]
         ];
 

@@ -152,13 +152,11 @@
                                         </div>
                                     </form>
                                 </div>
-
-
                             </div>
                         </div>
                         <!--/.tab-pane -->
                         <div class="tab-pane fade" :class="current_step === 2 ? 'show active' : ''" id="tab1-2">
-                            <div class="row container">
+                            <div class="row container" v-if="active_order.order_type !== 'incubation'">
                                 <div class="col-md-4 col-sm-6 col-12">
                                     <div class="col-12 pb-5" v-for="order_item in order_items">
                                         <div
@@ -460,6 +458,171 @@
                                     </form>
                                 </div>
                             </div>
+                            <div class="row container" v-else>
+                                <div class="row">
+                                    <div class="col-md-4 col-sm-6 col-12">
+                                        <div class="pricing card text-center ">
+                                            <div class="card-body mx-1 mr-1">
+                                                <div class="prices text-dark text-start">
+                                                    <div class="price price-show">
+                                                        <span class="fs-18 text-primary">Pick Deck</span>
+                                                    </div>
+                                                </div>
+                                                <div class="guidelines text-start mt-2">
+                                                    <label>Guidelines</label><br>
+                                                    <a href="#" class="text-primary">download template</a>
+                                                </div>
+                                                <div class="attachment text-start mt-2">
+                                                    <label>Attachment</label><br>
+                                                    <a href="#" class="text-primary">budget.xlsx</a><br>
+                                                    <a href="#" class="text-primary">presentation.xlsx</a>
+                                                </div>
+                                            </div><!--/.card-body -->
+                                        </div>
+                                    </div>
+                                    <div class="col-md-8 col-sm-6 col-12 mb-5">
+                                        <form @submit.prevent="storePickDeck">
+                                            <div class="card-body">
+                                                <div class="row mb-4">
+                                                    <div class="col-6">
+                                                        <div class="form-floating">
+                                                            <input id="startup_name" name="startup_name"
+                                                                v-model="submitPickDeckDetail.startup_name" type="text"
+                                                                class="form-control" placeholder="Startup Name"><label
+                                                                for="startup_name">Startup Name</label>
+                                                            <div v-if="errors.startup_name" class="alert alert-danger">
+                                                                {{ errors.startup_name }}
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                                <div class="row mb-4">
+                                                    <div class="col-6">
+                                                        <div class="form-select-wrapper mb-4">
+                                                            <select class="form-select" aria-label="Default select example"
+                                                                v-model="submitPickDeckDetail.request_type">
+                                                                <option value="" selected disabled>Request type</option>
+                                                                <option value="1">Mentorship and networking</option>
+                                                                <option value="2">Infrastructure Support</option>
+                                                                <option value="3">Funding Support</option>
+                                                            </select>
+                                                            <div v-if="errors.request_type" class="alert alert-danger">
+                                                                {{ errors.request_type }}
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-6">
+                                                        <div class="form-select-wrapper mb-4">
+                                                            <div class="form-floating">
+                                                                <div class="form-group">
+                                                                    <input type="file" name="file"
+                                                                        id="application_budget_file" class="input-file"
+                                                                        @change="handleFileChange('application_budget_file', $event)"
+                                                                        ref="application_budget_file">
+                                                                    <label for="application_budget_file"
+                                                                        class="btn js-labelFile w-100"
+                                                                        :class="!file_selected.application_budget_file ? 'btn-outline-ash' : 'btn-outline-primary'">
+                                                                        <span class="js-fileName mx-2">Application
+                                                                            Budget</span>
+                                                                        <vue-feather
+                                                                            v-if="!file_selected.application_budget_file"
+                                                                            type="upload-cloud"></vue-feather>
+                                                                        <vue-feather
+                                                                            v-if="file_selected.application_budget_file"
+                                                                            type="check"></vue-feather>
+                                                                    </label>
+                                                                    <div v-if="errors.application_budget_file"
+                                                                        class="alert alert-danger">
+                                                                        {{ errors.application_budget_file }}
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row mb-4">
+                                                    <div class="col-6">
+                                                        <div class="form-select-wrapper mb-4">
+                                                            <select class="form-select" aria-label="Default select example"
+                                                                v-model="submitPickDeckDetail.has_business_license">
+                                                                <option value="" disabled selected>Do you have business
+                                                                    license?
+                                                                </option>
+                                                                <option value="1">Yes</option>
+                                                                <option value="0">No</option>
+                                                            </select>
+                                                            <div v-if="errors.has_business_license"
+                                                                class="alert alert-danger">
+                                                                {{ errors.has_business_license }}
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-6">
+                                                        <div class="form-select-wrapper mb-4">
+                                                            <div class="form-floating">
+                                                                <div class="form-group">
+                                                                    <input type="file" name="file" id="presentation_file"
+                                                                        class="input-file"
+                                                                        @change="handleFileChange('presentation_file', $event)"
+                                                                        ref="presentation_file">
+                                                                    <label for="presentation_file"
+                                                                        class="btn js-labelFile w-100"
+                                                                        :class="!file_selected.presentation_file ? 'btn-outline-ash' : 'btn-outline-primary'">
+                                                                        <span class="js-fileName mx-2">Upload
+                                                                            Presentation</span>
+                                                                        <vue-feather v-if="!file_selected.presentation_file"
+                                                                            type="upload-cloud"></vue-feather>
+                                                                        <vue-feather v-if="file_selected.presentation_file"
+                                                                            type="check"></vue-feather>
+                                                                    </label>
+                                                                    <div v-if="errors.presentation_file"
+                                                                        class="alert alert-danger">
+                                                                        {{ errors.presentation_file }}
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+
+
+                                                </div>
+                                                <div class="row mb-4">
+                                                    <div class="col">
+                                                    </div>
+                                                    <div class="col"
+                                                        v-if="submitPickDeckDetail.has_business_license === '1'">
+                                                        <div class="form-floating">
+                                                            <div class="form-group">
+                                                                <input type="file" name="business_license_file"
+                                                                    id="business_license_file" class="input-file"
+                                                                    @change="handleFileChange('business_license_file', $event)"
+                                                                    ref="business_license_file">
+                                                                <label for="business_license_file"
+                                                                    class="btn js-labelFile w-100"
+                                                                    :class="!file_selected.business_license_file ? 'btn-outline-ash' : 'btn-outline-primary'">
+                                                                    <span class="js-fileName mx-2">Business License</span>
+                                                                    <vue-feather v-if="!file_selected.business_license_file"
+                                                                        type="upload-cloud"></vue-feather>
+                                                                    <vue-feather v-if="file_selected.business_license_file"
+                                                                        type="check"></vue-feather>
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                        <div v-if="errors.business_license_file" class="alert alert-danger">
+                                                            {{ errors.business_license_file }}
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                                <button type="submit" class="btn btn-primary">Go To Application</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                         <!--/.tab-pane -->
                         <div class="tab-pane fade" :class="current_step === 3 ? 'show active' : ''" id="tab1-3">
@@ -472,7 +635,7 @@
                                                     <div class="card-body p-5">
                                                         <div class="">
                                                             <p class="text-uppercase m-0">{{ order_item.name }}</p>
-                                                            <p class="text-primary m-0">{{ order_item.service.title }}</p>
+                                                            <p class="text-primary m-0">{{ order_item.service?.title }}</p>
                                                         </div>
                                                         <div class="prices text-dark">
                                                             <div class="price price-show"><span class="fs-32 text-primary">
@@ -737,7 +900,8 @@ export default {
     },
     props: {
         user: Object,
-        auth: Object
+        auth: Object,
+        errors: Object
 
     },
     data() {
@@ -810,7 +974,11 @@ export default {
                 license_file: false,
                 nda_file: false,
                 content_file: false,
-                company_profile: false
+                company_profile: false,
+                application_budget_file: false,
+                presentation_file: false,
+                business_license_file: false
+
             },
             development_requirements: [
                 {
@@ -894,12 +1062,12 @@ export default {
                     value: 'LinkedIn'
                 }
             ],
-            errors: {},
             vat_rate: 18,
             vat: 0,
             sub_total: 0,
             total_price: 0,
             service_type: '',
+            order_type: '',
         }
     },
     setup() {
@@ -1020,10 +1188,20 @@ export default {
             card_cvv: '',
         })
 
+        const submitPickDeckDetail = useForm({
+            startup_name: '',
+            request_type: '',
+            application_budget_file: '',
+            has_business_license: '',
+            presentation_file: '',
+            business_license_file: '',
+        })
+
         return {
             submitNDAForm,
             submitOrderDetail,
-            submitPaymentDetail
+            submitPaymentDetail,
+            submitPickDeckDetail
         }
     },
     mounted() {
@@ -1031,23 +1209,28 @@ export default {
         if (!this.auth.user) {
             router.get('/sign-in')
         }
-        this.order_items = JSON.parse(localStorage.getItem('order_items'));
+        const order_steps = this.order_step;
+        // this.order_items = JSON.parse(localStorage.getItem('order_items')) || this.$props.flash.order_items;
+        // return false
+
+        const step = order_steps.find(item => item.step === 2);
+
+        let active_order = localStorage.getItem('active_order');
+        let order_items = JSON.parse(localStorage.getItem('order_items'))
+
+        console.log(this.order_items)
         if (!this.order_items) {
             const originRoute = usePage().url.replace('/order', '')
             router.get(originRoute, {}, {
                 preserveScroll: true
             })
         }
-        console.log(this.current_step)
-        const order_items = this.order_items;
-        const order_steps = this.order_step;
-        const step = order_steps.find(item => item.step === 2);
-        const first_item = order_items[0];
-        step.additional_info = order_items;
-        step.name = first_item.product_type;
-        this.service_type = first_item.product_type
 
-        const active_order = localStorage.getItem('active_order');
+        this.order_items = order_items
+
+        console.log(this.current_step)
+
+
         if (active_order) {
 
             this.active_order = JSON.parse(active_order)
@@ -1057,6 +1240,18 @@ export default {
                 item.completed = true
             })
         }
+        const first_item = order_items[0];
+        step.additional_info = order_items;
+        step.name = first_item.product_type;
+        this.service_type = first_item.product_type
+        if (active_order && active_order.order_type === 'normal') {
+
+        } else if (active_order && active_order.order_type === 'incubation') {
+            step.name = 'Pick Deck'
+            this.service_type = active_order.order_type
+        }
+
+
         if (this.current_step === 3) {
             let sub_total = 0;
             const price = this.order_items.map(item => {
@@ -1067,6 +1262,9 @@ export default {
             this.total_price = parseFloat(sub_total) + parseFloat(this.vat)
             console.log(this.total_price)
         }
+
+
+
         console.log(this.active_order)
 
     },
@@ -1107,7 +1305,13 @@ export default {
             })
         },
         handleFileChange(name) {
-            console.log(name)
+            const order_steps = this.order_step;
+            // this.order_items = JSON.parse(localStorage.getItem('order_items')) || this.$props.flash.order_items;
+            // return false
+
+            const step = order_steps.find(item => item.step === 2);
+
+            console.log(this.current_step)
             // console.log(event.target.files[0])
             const fileInput = this.$refs[name];
             if (this.current_step === 1) {
@@ -1117,6 +1321,10 @@ export default {
             if (this.current_step === 2) {
                 this.submitOrderDetail[name] = fileInput.files[0];
             }
+
+            if (step.name === 'Pick Deck') {
+                this.submitPickDeckDetail[name] = fileInput.files[0];
+            }
             this.file_selected[name] = true
         },
         updateStep(step) {
@@ -1124,7 +1332,6 @@ export default {
             this.current_step = 2
         },
         storeOrderDetail() {
-            this.errors = {}
             const formData = new FormData();
             const orderDetailData = this.submitOrderDetail;
             formData.append('business_name', orderDetailData.business_name);
@@ -1158,7 +1365,6 @@ export default {
             })
         },
         storePaymentDetail() {
-            this.errors = {}
             const paymentDetail = this.submitPaymentDetail;
             paymentDetail.order_id = this.active_order.id
             router.post('/order/payment', paymentDetail, {
@@ -1175,6 +1381,38 @@ export default {
                 }
             })
             console.log(this.submitPaymentDetail)
+        },
+        storePickDeck() {
+            // console.log(this.submitPickDeckDetail)
+            // return false;
+            // startup_name: '',
+            // request_type: '',
+            // application_budget_file: '',
+            // has_business_license: '',
+            // presentation_file: '',
+            // business_license_file: '',
+            const formData = new FormData();
+            formData.append('startup_name', this.submitPickDeckDetail.startup_name);
+            formData.append('request_type', this.submitPickDeckDetail.request_type);
+            formData.append('application_budget_file', this.submitPickDeckDetail.application_budget_file);
+            formData.append('has_business_license', this.submitPickDeckDetail.has_business_license);
+            formData.append('presentation_file', this.submitPickDeckDetail.presentation_file);
+            formData.append('business_license_file', this.submitPickDeckDetail.business_license_file);
+            formData.append('order_id', this.active_order.id);
+            router.post('/order/pickdeck', formData, {
+                forceFormData: true,
+                preserveScroll: false,
+                onSuccess: () => {
+                    this.updateStep(this.current_step)
+                    this.active_order = this.$page.props.flash.order
+                    const order = this.active_order
+                    this.current_step = order.current_step
+                    this.saveCartToLocalStorage(order, 'active_order')
+                    toast(this.$page.props.flash.messages);
+                    console.log(this.$page.props)
+                }
+            })
+
         },
         maskingNumber(number) {
             return number
