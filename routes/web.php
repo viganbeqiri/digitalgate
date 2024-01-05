@@ -1,8 +1,10 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Models\AboutUs;
 use App\Models\Category;
 use App\Models\Page;
+use App\Models\Team;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -68,6 +70,20 @@ Route::prefix('outsourcing')->name('outsourcing.')->group(function () {
 Route::get('/portofolio', function () {
     return Inertia::render('Portofolio', []);
 })->name('portofolio');
+Route::get('/team', function () {
+    $teams = Team::all();
+    return Inertia::render('Team', [
+        'teams' => $teams
+    ]);
+})->name('team');
+
+Route::get('/about-us', function () {
+    $about = AboutUs::first();
+    return Inertia::render('About', [
+        'about' => $about
+    ]);
+})->name('about-us');
+
 
 
 Route::prefix('incubator')->name('incubator.')->group(function () {
