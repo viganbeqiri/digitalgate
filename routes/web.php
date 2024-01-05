@@ -83,6 +83,10 @@ Route::get('/about-us', function () {
         'about' => $about
     ]);
 })->name('about-us');
+Route::get('/contact-us', function () {
+    return Inertia::render('Contact', []);
+})->name('contact-us');
+
 
 
 

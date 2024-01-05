@@ -113,8 +113,12 @@
     <!-- /section -->
 </template>
 <script>
+import { faThermometer } from "@fortawesome/free-solid-svg-icons";
 import FrontLayout from "../Shares/FrontLayout.vue";
 export default {
     layout: FrontLayout,
+    mounted() {
+        theme.init();
+    }
 }
 </script>

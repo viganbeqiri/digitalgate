@@ -13,6 +13,9 @@ class OrdersController extends Controller
     public function index()
     {
         $orders = Order::where('user_id', auth()->user()->id)->get();
+        return Inertia::render('MyOrder', [
+            'orders' => $orders
+        ]);
     }
     public function storeNDA(Request $request)
     {
