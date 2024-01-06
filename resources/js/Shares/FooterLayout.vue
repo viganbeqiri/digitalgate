@@ -45,7 +45,10 @@
                                 <Link :href="route('team')">Team</Link>
                             </li>
                             <li><a href="#">GDRP</a></li>
-                            <li><a href="#">Contact</a></li>
+                            <li>
+                                <Link :href="route('contact-us')">Contact</Link>
+
+                            </li>
                         </ul>
                     </div>
                     <!-- /.widget -->
