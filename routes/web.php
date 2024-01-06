@@ -4,6 +4,7 @@ use App\Http\Controllers\AuthController;
 use App\Models\AboutUs;
 use App\Models\Category;
 use App\Models\Page;
+use App\Models\Portofolio;
 use App\Models\Team;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -68,7 +69,10 @@ Route::prefix('outsourcing')->name('outsourcing.')->group(function () {
 });
 
 Route::get('/portofolio', function () {
-    return Inertia::render('Portofolio', []);
+    $portofolios = Portofolio::all();
+    return Inertia::render('Portofolio', [
+        'portofolios' => $portofolios
+    ]);
 })->name('portofolio');
 Route::get('/team', function () {
     $teams = Team::all();
