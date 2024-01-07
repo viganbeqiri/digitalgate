@@ -1,6 +1,11 @@
 <?php
 
+use App\Http\Controllers\Admin\CategoriesController;
+use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\PagesController;
+use App\Http\Controllers\Admin\UsersController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\DynamicFormsStorageController;
 use App\Models\AboutUs;
 use App\Models\Category;
 use App\Models\Page;
@@ -131,3 +136,37 @@ Route::get('sign-up', function () {
 Route::get('sign-in', function () {
     return Inertia::render('Auth/SignIn', []);
 })->name('login');
+Route::prefix('panel')->name('admin.')->middleware('auth.admin')->group(function () {
+    Route::get('/', [DashboardController::class, 'index'])->name('index');
+
+    Route::prefix('users')->name('users.')->group(function () {
+        Route::get('/', [UsersController::class, 'index'])->name('index');
+    });
+
+    Route::prefix('categories')->name('categories.')->group(function () {
+        Route::get('/', [CategoriesController::class, 'index'])->name('index');
+        Route::get('/add-edit/{slug?}', [CategoriesController::class, 'createEdit'])->name('createEdit');
+        Route::post('/store', [CategoriesController::class, 'store'])->name('store');
+    });
+
+    Route::prefix('pages')->name('pages.')->group(function () {
+        Route::get('/', [PagesController::class, 'index'])->name('index');
+        Route::get('/add-edit/{slug?}', [PagesController::class, 'createEdit'])->name('createEdit');
+    });
+});
+Route::prefix('dynamic-forms')->name('dynamic-forms.')->group(function () {
+    // Dummy route so we can use the route() helper to give formiojs the base path for this group
+    Route::get('/')->name('index');
+
+    Route::post('storage/s3', [DynamicFormsStorageController::class, 'storeS3'])
+        ->withoutMiddleware([\App\Http\Middleware\VerifyCsrfToken::class]);
+
+    Route::get('storage/s3', [DynamicFormsStorageController::class, 'showS3'])->name('S3-file-download');
+    Route::get('storage/s3/{fileKey}', [DynamicFormsStorageController::class, 'showS3'])->name('S3-file-redirect');
+
+    Route::post('storage/url', [DynamicFormsStorageController::class, 'storeURL'])
+        ->withoutMiddleware([\App\Http\Middleware\VerifyCsrfToken::class]);
+
+    Route::get('storage/url', [DynamicFormsStorageController::class, 'showURL'])->name('url-file-download');
+    Route::delete('storage/url', [DynamicFormsStorageController::class, 'deleteURL']);
+});
