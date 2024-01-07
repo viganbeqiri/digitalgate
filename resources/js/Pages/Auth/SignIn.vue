@@ -68,7 +68,7 @@
 <script>
 import frontLayout from "../../Shares/FrontLayout.vue";
 import { ref, onMounted, reactive } from 'vue'
-import { router } from '@inertiajs/vue3'
+import { router, useForm } from '@inertiajs/vue3'
 import { toast } from 'vue3-toastify';
 import 'vue3-toastify/dist/index.css';
 
@@ -80,12 +80,19 @@ export default {
         loginForm: Object,
         auth: Object
     },
+
     setup() {
-        const loginForm = reactive({
+        const loginForm = useForm({
             email: '',
             password: '',
         });
-        const storeLogin = () => {
+        return {
+            loginForm,
+        }
+    },
+    methods: {
+        storeLogin() {
+            const { loginForm } = this
             router.post('auth/login', {
                 email: loginForm.email,
                 password: loginForm.password,
@@ -93,20 +100,29 @@ export default {
                 onSuccess: () => {
                     toast.success('Login Successful');
                     localStorage.clear();
-                    router.visit('/', {
-                        onSuccess: () => {
-                            location.reload();
-                        }
-                    });
+                    console.log(this.$page.props)
+                    const user = this.$page.props.flash.user
+                    if (user.role === 1) {
+                        router.get('/panel');
+                    } else {
+                        router.visit('/', {
+                            onSuccess: () => {
+                                location.reload();
+                            }
+                        });
+                    }
+
+                    // router.visit('/', {
+                    //     onSuccess: () => {
+                    //         location.reload();
+                    //     }
+                    // });
                 }
             });
         }
-        return {
-            loginForm,
-            storeLogin
-        }
     },
     mounted() {
+        console.log(this.$page.props)
         if (this.auth.user) {
             router.get('/');
         }

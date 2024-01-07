@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\CategoriesController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\PagesController;
+use App\Http\Controllers\Admin\PortofolioController;
 use App\Http\Controllers\Admin\ProductsController;
 use App\Http\Controllers\Admin\TeamsController;
 use App\Http\Controllers\Admin\UsersController;
@@ -164,6 +165,11 @@ Route::prefix('panel')->name('admin.')->middleware('auth.admin')->group(function
     Route::prefix('teams')->name('teams.')->group(function () {
         Route::get('/', [TeamsController::class, 'index'])->name('index');
         Route::get('/add-edit/{slug?}', [TeamsController::class, 'createEdit'])->name('createEdit');
+    });
+
+    Route::prefix('portofolios')->name('portofolios.')->group(function () {
+        Route::get('/', [PortofolioController::class, 'index'])->name('index');
+        Route::get('/add-edit/{slug?}', [PortofolioController::class, 'createEdit'])->name('createEdit');
     });
 });
 Route::prefix('dynamic-forms')->name('dynamic-forms.')->group(function () {
