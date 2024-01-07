@@ -22,7 +22,7 @@
     </div>
 @endsection
 @section('scripts')
-    <script src="{{ asset('/') }}admin/assets/libs/datatables.net/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
     <script src="{{ asset('/') }}admin/assets/libs/datatables.net-bs5/js/dataTables.bootstrap5.min.js"></script>
     <script src="{{ asset('/') }}admin/assets/libs/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
     <script src="{{ asset('/') }}admin/assets/libs/datatables.net-responsive-bs5/js/responsive.bootstrap5.min.js">
