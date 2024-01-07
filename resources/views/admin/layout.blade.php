@@ -106,14 +106,14 @@
                     <li class="menu-title">Apps</li>
 
                     <li class="menu-item">
-                        <a href="apps-calendar.html" class="menu-link">
+                        <a href="{{ route('admin.categories.index') }}" class="menu-link">
                             <span class="menu-icon"><i data-feather="calendar"></i></span>
                             <span class="menu-text"> Categories </span>
                         </a>
                     </li>
 
                     <li class="menu-item">
-                        <a href="apps-chat.html" class="menu-link">
+                        <a href="{{ route('admin.pages.index') }}" class="menu-link">
                             <span class="menu-icon"><i data-feather="message-square"></i></span>
                             <span class="menu-text"> Pages </span>
                         </a>
