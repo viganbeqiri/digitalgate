@@ -20,6 +20,7 @@ class DatabaseSeeder extends Seeder
             AboutUsSeeder::class,
             TeamSeeder::class,
             PortofolioSeeder::class,
+            AdminSeeder::class
         ]);
         // \App\Models\User::factory(10)->create();
 
