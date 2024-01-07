@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\CategoriesController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\PagesController;
 use App\Http\Controllers\Admin\ProductsController;
+use App\Http\Controllers\Admin\TeamsController;
 use App\Http\Controllers\Admin\UsersController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DynamicFormsStorageController;
@@ -158,6 +159,11 @@ Route::prefix('panel')->name('admin.')->middleware('auth.admin')->group(function
     Route::prefix('products')->name('products.')->group(function () {
         Route::get('/', [ProductsController::class, 'index'])->name('index');
         Route::get('/add-edit/{slug?}', [ProductsController::class, 'createEdit'])->name('createEdit');
+    });
+
+    Route::prefix('teams')->name('teams.')->group(function () {
+        Route::get('/', [TeamsController::class, 'index'])->name('index');
+        Route::get('/add-edit/{slug?}', [TeamsController::class, 'createEdit'])->name('createEdit');
     });
 });
 Route::prefix('dynamic-forms')->name('dynamic-forms.')->group(function () {

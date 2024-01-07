@@ -120,19 +120,19 @@
                     </li>
 
                     <li class="menu-item">
-                        <a href="apps-chat.html" class="menu-link">
+                        <a href="{{ route('admin.products.index') }}" class="menu-link">
                             <span class="menu-icon"><i data-feather="message-square"></i></span>
                             <span class="menu-text"> Products </span>
                         </a>
                     </li>
                     <li class="menu-item">
-                        <a href="apps-chat.html" class="menu-link">
+                        <a href="{{ route('admin.teams.index') }}" class="menu-link">
                             <span class="menu-icon"><i data-feather="message-square"></i></span>
                             <span class="menu-text"> Team </span>
                         </a>
                     </li>
                     <li class="menu-item">
-                        <a href="apps-chat.html" class="menu-link">
+                        <a href="{{ route('admin.users.index') }}" class="menu-link">
                             <span class="menu-icon"><i data-feather="user"></i></span>
                             <span class="menu-text"> Users </span>
                         </a>
