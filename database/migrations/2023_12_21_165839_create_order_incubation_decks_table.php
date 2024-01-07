@@ -17,8 +17,8 @@ return new class extends Migration
             $table->string('startup_name');
             $table->tinyInteger('request_type')->default(0)->comment('0 => mentorship & networking, 1 => infrastructure support, 2 => funding support');
             $table->text('budget_url');
-            $table->boolean('has_bussiness_license')->default(0);
-            $table->text('bussiness_license_url')->nullable();
+            $table->boolean('has_business_license')->default(0);
+            $table->text('business_license_url')->nullable();
             $table->text('presentation_url')->nullable();
             $table->timestamps();
         });

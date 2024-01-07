@@ -1,8 +1,19 @@
 <?php
 
+use App\Http\Controllers\Admin\CategoriesController;
+use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\PagesController;
+use App\Http\Controllers\Admin\PortofolioController;
+use App\Http\Controllers\Admin\ProductsController;
+use App\Http\Controllers\Admin\TeamsController;
+use App\Http\Controllers\Admin\UsersController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\DynamicFormsStorageController;
+use App\Models\AboutUs;
 use App\Models\Category;
 use App\Models\Page;
+use App\Models\Portofolio;
+use App\Models\Team;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -37,6 +48,8 @@ Route::prefix('services')->name('services.')->group(function () {
 });
 
 Route::prefix('order')->name('order.')->middleware('auth')->group(function () {
+    Route::post('/pickdeck', [App\Http\Controllers\OrdersController::class, 'storePickDeck'])->name('storePickDeck');
+    Route::post('/cohort', [App\Http\Controllers\OrdersController::class, 'storeCohort'])->name('storeCohort');
     Route::post('/nda', [App\Http\Controllers\OrdersController::class, 'storeNDA'])->name('storeNDA');
     Route::post('/details', [App\Http\Controllers\OrdersController::class, 'storeDetail'])->name('storeDetail');
     Route::post('/payment', [App\Http\Controllers\OrdersController::class, 'storePaymentDetail'])->name('storePaymentDetail');
@@ -64,21 +77,47 @@ Route::prefix('outsourcing')->name('outsourcing.')->group(function () {
 });
 
 Route::get('/portofolio', function () {
-    return Inertia::render('Portofolio', []);
+    $portofolios = Portofolio::all();
+    return Inertia::render('Portofolio', [
+        'portofolios' => $portofolios
+    ]);
 })->name('portofolio');
+Route::get('/team', function () {
+    $teams = Team::all();
+    return Inertia::render('Team', [
+        'teams' => $teams
+    ]);
+})->name('team');
+
+Route::get('/about-us', function () {
+    $about = AboutUs::first();
+    return Inertia::render('About', [
+        'about' => $about
+    ]);
+})->name('about-us');
+Route::get('/contact-us', function () {
+    return Inertia::render('Contact', []);
+})->name('contact-us');
+
+
 
 
 Route::prefix('incubator')->name('incubator.')->group(function () {
     Route::get('/why-us', function () {
-        return Inertia::render('Services', []);
+        $page = Page::where('slug', 'incubation')->first();
+        return Inertia::render('Incubation/WhyUs', [
+            'page' => $page
+        ]);
     })->name('why-us');
+    Route::get('/incubation', [App\Http\Controllers\ServicesController::class, 'order'])->name('incubation');
+
 
     Route::get('/cohort', function () {
-        return Inertia::render('Services', []);
+        return Inertia::render('Incubation/Cohort', []);
     })->name('cohort');
-    Route::get('/incubation', function () {
-        return Inertia::render('Services', []);
-    })->name('incubation');
+    // Route::get('/incubation', function () {
+    //     return Inertia::render('order', []);
+    // })->name('incubation');
 
     Route::get('/acceleration', function () {
         return Inertia::render('Services', []);
@@ -99,4 +138,53 @@ Route::get('sign-up', function () {
 
 Route::get('sign-in', function () {
     return Inertia::render('Auth/SignIn', []);
-})->name('sign-in');
+})->name('login');
+Route::prefix('panel')->name('admin.')->middleware('auth.admin')->group(function () {
+    Route::get('/', [DashboardController::class, 'index'])->name('index');
+
+    Route::prefix('users')->name('users.')->group(function () {
+        Route::get('/', [UsersController::class, 'index'])->name('index');
+    });
+
+    Route::prefix('categories')->name('categories.')->group(function () {
+        Route::get('/', [CategoriesController::class, 'index'])->name('index');
+        Route::get('/add-edit/{slug?}', [CategoriesController::class, 'createEdit'])->name('createEdit');
+        Route::post('/store', [CategoriesController::class, 'store'])->name('store');
+    });
+
+    Route::prefix('pages')->name('pages.')->group(function () {
+        Route::get('/', [PagesController::class, 'index'])->name('index');
+        Route::get('/add-edit/{slug?}', [PagesController::class, 'createEdit'])->name('createEdit');
+    });
+
+    Route::prefix('products')->name('products.')->group(function () {
+        Route::get('/', [ProductsController::class, 'index'])->name('index');
+        Route::get('/add-edit/{slug?}', [ProductsController::class, 'createEdit'])->name('createEdit');
+    });
+
+    Route::prefix('teams')->name('teams.')->group(function () {
+        Route::get('/', [TeamsController::class, 'index'])->name('index');
+        Route::get('/add-edit/{slug?}', [TeamsController::class, 'createEdit'])->name('createEdit');
+    });
+
+    Route::prefix('portofolios')->name('portofolios.')->group(function () {
+        Route::get('/', [PortofolioController::class, 'index'])->name('index');
+        Route::get('/add-edit/{slug?}', [PortofolioController::class, 'createEdit'])->name('createEdit');
+    });
+});
+Route::prefix('dynamic-forms')->name('dynamic-forms.')->group(function () {
+    // Dummy route so we can use the route() helper to give formiojs the base path for this group
+    Route::get('/')->name('index');
+
+    Route::post('storage/s3', [DynamicFormsStorageController::class, 'storeS3'])
+        ->withoutMiddleware([\App\Http\Middleware\VerifyCsrfToken::class]);
+
+    Route::get('storage/s3', [DynamicFormsStorageController::class, 'showS3'])->name('S3-file-download');
+    Route::get('storage/s3/{fileKey}', [DynamicFormsStorageController::class, 'showS3'])->name('S3-file-redirect');
+
+    Route::post('storage/url', [DynamicFormsStorageController::class, 'storeURL'])
+        ->withoutMiddleware([\App\Http\Middleware\VerifyCsrfToken::class]);
+
+    Route::get('storage/url', [DynamicFormsStorageController::class, 'showURL'])->name('url-file-download');
+    Route::delete('storage/url', [DynamicFormsStorageController::class, 'deleteURL']);
+});

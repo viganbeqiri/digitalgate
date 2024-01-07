@@ -566,8 +566,26 @@ class ProductSeeder extends Seeder
                 'pricing_scheme' => 3,
                 'note' => null,
                 'type' => 2
-
             ],
+
+            [
+                'category_id' => 'incubator',
+                'page_id' => 'incubation',
+                'name' => 'Incubation chohort',
+                'slug' => 'incubation-chohort',
+                'subtitle' => 'Incubation',
+                'mandatory' => false,
+                'description' => null,
+                'additional_info' => null,
+                'status' => 1,
+                'price' => 999,
+                'parent_id' => null,
+                'highlighted' => 1,
+                'pricing_scheme' => 1,
+                'note' => null,
+                'type' => 3
+            ],
+
 
 
         ];

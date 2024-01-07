@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Inertia\Inertia;
 
 class AuthController extends Controller
 {
@@ -51,14 +52,16 @@ class AuthController extends Controller
             //regenerate session
             $request->session()->regenerate();
             if (Auth::user()->role == 1) {
+                return Inertia::location(url('panel'));
+
                 //redirect route admin
                 return back()->with([
-                    'message' => 'Login success.',
+                    'user' => Auth::user(),
                 ]);
             } else {
                 //redirect route dashboard
                 return back()->with([
-                    'message' => 'Login success.',
+                    'user' => Auth::user(),
                 ]);
             }
             //redirect route dashboard

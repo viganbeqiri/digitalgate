@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Order;
+use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
@@ -11,6 +12,10 @@ class OrdersController extends Controller
 {
     public function index()
     {
+        $orders = Order::where('user_id', auth()->user()->id)->get();
+        return Inertia::render('MyOrder', [
+            'orders' => $orders
+        ]);
     }
     public function storeNDA(Request $request)
     {
@@ -174,6 +179,144 @@ class OrdersController extends Controller
         $order->save();
         return back()->with([
             'messages' => 'Payment saved successfully',
+            'order' => $order
+        ]);
+    }
+
+    public function storeCohort(Request $request)
+    {
+        // dd($request->all());
+        $request->validate([
+            'founder_name' => 'required',
+            'co_founder_name' => 'required',
+            'founder_resume' => 'required',
+            'co_founder_resume' => 'required',
+            'idea_age' => 'required',
+            'done_analysis' => 'required',
+            'market_analysis_file' => 'required',
+            'market_strategy' => 'required',
+            'exit_strategy' => 'required',
+            'org_chart_stage_holder_status' => 'required',
+            'org_chart_file' => 'required'
+        ]);
+
+        $product = Product::query()->where('slug', 'incubation-chohort')->first();
+        if (!$product) {
+            return redirect()->back()->with(['error' => 'Product not found']);
+        }
+
+        $order = new Order;
+        $order->order_no = Order::generateSerialNumber();
+        $order->user_id = auth()->user()->id;
+        $order->full_name = $request->founder_name;
+        $order->current_step = 2;
+        $order->subtotal = $product->price;
+
+        $processingFeeRate = 19;
+        $processingFee = ($processingFeeRate / 100) * $order->price;
+        $order->tax = $processingFee;
+        $order->total_price = $product->price + $processingFee;
+        $order->save();
+
+        if ($request->hasFile('founder_resume')) {
+            $founder_resume = time() . '.' . $request->founder_resume->extension();
+            $request->file('founder_resume')->storeAs('orders/document', $founder_resume);
+        }
+        if ($request->hasFile('co_founder_resume')) {
+            $co_founder_resume = time() . '.' . $request->co_founder_resume->extension();
+            $request->file('co_founder_resume')->storeAs('orders/document', $co_founder_resume);
+        }
+
+        if ($request->hasFile('org_chart_file')) {
+            $org_chart_file = time() . '.' . $request->org_chart_file->extension();
+            $request->file('org_chart_file')->storeAs('orders/document', $org_chart_file);
+        }
+
+
+        $order->orderIncubationDetail()->updateOrCreate([
+            'order_id' => $order->id
+        ], [
+            'founder_name' => $request->founder_name,
+            'co_founder_name' => $request->co_founder_name,
+            'founder_portofolio_url' => $founder_resume,
+            'co_founder_portofolio_url' => $co_founder_resume,
+            'idea_age' => $request->idea_age,
+            'market_analyst' => $request->done_analysis,
+            'market_analyst_url' => $request->market_analysis_file,
+            'market_strategy' => $request->market_strategy,
+            'exit_strategy' => $request->market_strategy,
+            'org_chart' => $request->org_chart_stage_holder_status,
+            'org_chart_url' => $org_chart_file
+        ]);
+
+        $order->orderItems()->updateOrCreate([
+            'order_id' => $order->id,
+            'product_id' => $product->id
+        ], [
+            'price' => $product->price
+        ]);
+        return redirect()->back()->with([
+            'messages' => 'Order created successfully',
+            'order' => [
+                'active' => $order,
+                'items' => [$product]
+            ],
+
+        ]);
+    }
+
+    public function storePickDeck(Request $request)
+    {
+        // dd($request->all());
+        // return $request->all();
+        $request->validate([
+            'startup_name' => 'required',
+            'request_type' => 'required',
+            'application_budget_file' => 'required',
+            'has_business_license' => 'required',
+            'presentation_file' => 'required',
+            'business_license_file' => 'required_if:has_business_license,1',
+            'order_id' => 'required'
+        ]);
+
+        $order = Order::find($request->order_id);
+        $application_budget_file = null;
+        $presentation_file = null;
+        $business_license_file = null;
+
+        if ($request->hasFile('application_budget_file')) {
+            $application_budget_file = time() . '.' . $request->application_budget_file->extension();
+            $request->file('application_budget_file')->storeAs('orders/document', $application_budget_file);
+        }
+
+        if ($request->hasFile('presentation_file')) {
+            $presentation_file = time() . '.' . $request->presentation_file->extension();
+            $request->file('presentation_file')->storeAs('orders/document', $presentation_file);
+        }
+
+        if ($request->hasFile('business_license_file')) {
+            $business_license_file = time() . '.' . $request->presentation_file->extension();
+            $request->file('business_license_file')->storeAs('orders/document', $business_license_file);
+        }
+
+
+
+        $order->orderIncubationDeck()->updateOrCreate([
+            'order_id' => $order->id
+        ], [
+            'startup_name' => $request->startup_name,
+            'request_type' => $request->request_type,
+            'has_business_license' => $request->has_business_license,
+            'budget_url' => $application_budget_file,
+            'presentation_url' => $presentation_file,
+            'business_license_url' => $business_license_file
+        ]);
+
+        $order->current_step = 3;
+        $order->save();
+
+        return redirect()->back()->with([
+            'messages' => 'Order created successfully',
             'order' => $order
         ]);
     }

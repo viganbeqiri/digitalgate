@@ -42,4 +42,11 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    const USER = 0;
+    const ADMIN = 1;
+    const ROLES = [
+        self::USER => 'User',
+        self::ADMIN => 'Admin',
+    ];
 }

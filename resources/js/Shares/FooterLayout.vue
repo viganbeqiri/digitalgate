@@ -38,10 +38,17 @@
                     <div class="widget">
                         <h4 class="widget-title text-ash mb-3">Company</h4>
                         <ul class="list-unstyled  mb-0">
-                            <li><a href="#">About</a></li>
-                            <li><a href="#">Team</a></li>
+                            <li>
+                                <Link :href="route('about-us')">About</Link>
+                            </li>
+                            <li>
+                                <Link :href="route('team')">Team</Link>
+                            </li>
                             <li><a href="#">GDRP</a></li>
-                            <li><a href="#">Contact</a></li>
+                            <li>
+                                <Link :href="route('contact-us')">Contact</Link>
+
+                            </li>
                         </ul>
                     </div>
                     <!-- /.widget -->
@@ -72,8 +79,12 @@
     </footer>
 </template>
 <script>
-export default {
+import { Link, usePage } from '@inertiajs/vue3'
 
+export default {
+    components: {
+        Link
+    }
 }
 </script>
 
