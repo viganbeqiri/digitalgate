@@ -16,9 +16,7 @@ composer install && npm install
 php artisan migrate
 
 # run db seeder
-php artisan db:seed --class=CategoriesSeed
-php artisan db:seed --class=PagesSeeder
-php artisan db:seed --class=ProductSeeder
+php artisan db:seed
 
 # build frontend
 
@@ -27,3 +25,8 @@ npm run dev
 php artisan serve
 
 ```
+
+#### admin account
+
+-   email : admin@digital-gate.com
+-   password : admin
