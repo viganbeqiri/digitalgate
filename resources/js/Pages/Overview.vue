@@ -1,13 +1,13 @@
 <template>
     <section class="wrapper bg-gradient-primary">
         <div class="container-fluid  pb-8 text-center">
-            <div class="row gx-lg-8 gx-xl-12 gy-10 align-items-center" data-cues="fadeIn" data-interval="-200">
+            <div class="row gx-lg-8 gx-xl-12 gy-10 align-items-start pt-5" data-cues="fadeIn" data-interval="-200">
                 <div class="col-md-10 offset-md-1 offset-lg-1 col-lg-5 text-center text-lg-start">
                     <h2 class="display-3 mb-5 mx-md-n5 mx-lg-0 text-uppercase" style="color: var(--bs-primary);">Create Your
                         brand
                     </h2>
 
-                    <h1 class="display-4 mb-5 mx-md-n5 mx-lg-0 text-uppercase"
+                    <h1 class="display-4 mb-5 mx-md-n5 mx-lg-0 text-uppercase "
                         style="font-size: 80px;color: var(--bs-primary)">Awarness
                     </h1>
 
@@ -28,6 +28,22 @@
         </div>
         <!-- /.container -->
     </section>
+    <section class="wrapper bg-light">
+        <div class="container py-14 py-md-16 text-center">
+            <div class="row">
+                <div class="col-md-9 col-lg-7 col-xl-7 mx-auto text-center">
+                    <h2 class="display-4 mb-3 text-primary">Get More Sales Now</h2>
+                    <p class="lead fs-lg mb-6 px-xl-10 px-xxl-15">We are trusted by over 5000+ clients. Join them by using
+                        our services and grow your business.</p>
+                    <a href="#" class="btn btn-primary rounded">Join Us</a>
+                </div>
+                <!-- /column -->
+            </div>
+            <!-- /.row -->
+        </div>
+        <!-- /.container -->
+    </section>
+    <!-- /section -->
 </template>
 <script>
 import FrontLayout from '../Shares/FrontLayout.vue';

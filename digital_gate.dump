@@ -1,0 +1,585 @@
+-- MySQL dump 10.13  Distrib 8.0.16, for osx10.12 (x86_64)
+--
+-- Host: localhost    Database: digital_gate
+-- ------------------------------------------------------
+-- Server version	8.1.0
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+ SET NAMES utf8mb4 ;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+--
+-- Table structure for table `categories`
+--
+
+DROP TABLE IF EXISTS `categories`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+ SET character_set_client = utf8mb4 ;
+CREATE TABLE `categories` (
+  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
+  `title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `subtitle` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `slug` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `description` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `image` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `status` tinyint(1) NOT NULL DEFAULT '1',
+  `parent_id` bigint unsigned DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `categories_slug_unique` (`slug`),
+  KEY `categories_parent_id_foreign` (`parent_id`),
+  CONSTRAINT `categories_parent_id_foreign` FOREIGN KEY (`parent_id`) REFERENCES `categories` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `categories`
+--
+
+LOCK TABLES `categories` WRITE;
+/*!40000 ALTER TABLE `categories` DISABLE KEYS */;
+INSERT INTO `categories` VALUES (1,'Services',NULL,'services',NULL,NULL,1,NULL,'2023-12-21 10:36:01','2023-12-21 10:36:01'),(3,'Web Development',NULL,'web-development',NULL,NULL,1,1,'2023-12-21 10:36:01','2023-12-21 10:36:01'),(4,'Cross-Platform App',NULL,'cross-platform-development',NULL,NULL,1,1,'2023-12-21 10:36:01','2023-12-21 10:36:01'),(5,'Mobile App Development',NULL,'mobile-app-development',NULL,NULL,1,1,'2023-12-21 10:36:01','2023-12-21 10:36:01'),(6,'Design Service',NULL,'design-service',NULL,NULL,1,1,'2023-12-21 10:36:01','2023-12-21 10:36:01'),(7,'Outsourcing',NULL,'outsourcing',NULL,NULL,1,NULL,'2023-12-21 10:36:01','2023-12-21 10:36:01'),(8,'Team as Service',NULL,'team-as-a-service',NULL,NULL,1,7,'2023-12-21 10:36:01','2023-12-21 10:36:01'),(9,'IT Outsourcing Service',NULL,'it-outsourcing-service',NULL,NULL,1,7,'2023-12-21 10:36:01','2023-12-21 10:36:01'),(10,'Cybersecurity Service',NULL,'cybersecurity-service',NULL,NULL,1,7,'2023-12-21 10:36:01','2023-12-21 10:36:01'),(11,'Desktop App Development',NULL,'desktop-app-development',NULL,NULL,1,1,'2023-12-23 18:59:30','2023-12-23 18:59:30'),(12,'Cross-Platform App',NULL,'cross-platform-app',NULL,NULL,1,1,'2023-12-23 18:59:30','2023-12-23 18:59:30');
+/*!40000 ALTER TABLE `categories` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `failed_jobs`
+--
+
+DROP TABLE IF EXISTS `failed_jobs`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+ SET character_set_client = utf8mb4 ;
+CREATE TABLE `failed_jobs` (
+  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
+  `uuid` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `connection` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `queue` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `payload` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `exception` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `failed_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `failed_jobs_uuid_unique` (`uuid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `failed_jobs`
+--
+
+LOCK TABLES `failed_jobs` WRITE;
+/*!40000 ALTER TABLE `failed_jobs` DISABLE KEYS */;
+/*!40000 ALTER TABLE `failed_jobs` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `migrations`
+--
+
+DROP TABLE IF EXISTS `migrations`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+ SET character_set_client = utf8mb4 ;
+CREATE TABLE `migrations` (
+  `id` int unsigned NOT NULL AUTO_INCREMENT,
+  `migration` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `batch` int NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=34 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `migrations`
+--
+
+LOCK TABLES `migrations` WRITE;
+/*!40000 ALTER TABLE `migrations` DISABLE KEYS */;
+INSERT INTO `migrations` VALUES (1,'2014_10_12_000000_create_users_table',1),(2,'2014_10_12_100000_create_password_reset_tokens_table',1),(3,'2019_08_19_000000_create_failed_jobs_table',1),(4,'2019_12_14_000001_create_personal_access_tokens_table',1),(5,'2023_12_17_135040_create_categories_table',1),(6,'2023_12_21_133822_create_pages_table',1),(7,'2023_12_21_160728_create_products_table',1),(8,'2023_12_21_161114_create_orders_table',1),(9,'2023_12_21_161408_create_order_items_table',1),(10,'2023_12_21_161521_create_order_documents_table',1),(11,'2023_12_21_162421_create_order_details_table',1),(12,'2023_12_21_164148_create_portofolios_table',1),(13,'2023_12_21_165113_create_order_incubation_details_table',1),(14,'2023_12_21_165839_create_order_incubation_decks_table',1),(23,'2023_12_22_151056_add_page_id_to_products_table',2),(24,'2023_12_24_023542_add_last_name_to_users_table',3),(25,'2023_12_24_063518_set_price_to_products_table',4),(28,'2023_12_28_075213_add_request_type_to_orders_table',5),(29,'2023_12_28_143625_add_request_type_to_order_documents_table',5),(31,'2023_12_29_150416_create_order_payments_table',6),(32,'2023_12_30_022622_add_subtitle_to_portofolios_table',7),(33,'2023_12_30_054836_add_type_to_products_table',8);
+/*!40000 ALTER TABLE `migrations` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `order_details`
+--
+
+DROP TABLE IF EXISTS `order_details`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+ SET character_set_client = utf8mb4 ;
+CREATE TABLE `order_details` (
+  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
+  `order_id` bigint unsigned NOT NULL,
+  `business_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `business_type` tinyint NOT NULL DEFAULT '0',
+  `business_location` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `total_employees` int NOT NULL,
+  `business_emails` text COLLATE utf8mb4_unicode_ci,
+  `company_profile_url` text COLLATE utf8mb4_unicode_ci,
+  `business_logo_url` text COLLATE utf8mb4_unicode_ci,
+  `preferences` text COLLATE utf8mb4_unicode_ci COMMENT 'json {domain, color, font, looks}',
+  `pages` text COLLATE utf8mb4_unicode_ci COMMENT 'array [homepage, contact, products, about_us, gallery, services, blog, faq, team, portofolio, careers, privacy_policy, terms_and_conditions, login_register, event_calendar]',
+  `content_zip_url` text COLLATE utf8mb4_unicode_ci,
+  `content_platform` text COLLATE utf8mb4_unicode_ci COMMENT 'array [instagram, facebook,x, linkedin]',
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `business_logo_preferred` text COLLATE utf8mb4_unicode_ci COMMENT 'array [instagram, facebook,x, linkedin]',
+  `preferred_domain` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `design_look_preferred` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `design_look` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `order_details_order_id_foreign` (`order_id`),
+  CONSTRAINT `order_details_order_id_foreign` FOREIGN KEY (`order_id`) REFERENCES `orders` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `order_details`
+--
+
+LOCK TABLES `order_details` WRITE;
+/*!40000 ALTER TABLE `order_details` DISABLE KEYS */;
+INSERT INTO `order_details` VALUES (1,35,'asd',1,'asd',123,'[null,\"asdasd\"]',NULL,'orders/document1703862214.png',NULL,NULL,'/private/var/tmp/php5SlzWu',NULL,'2023-12-29 07:37:28','2023-12-29 08:03:34','asd','adsasd','asds','1'),(2,35,'b',1,'asd',10,'[null,\"rahmad@domain.com\",\"asd\"]',NULL,'orders/document1703861407.png',NULL,NULL,'null',NULL,'2023-12-29 07:50:07','2023-12-29 07:50:07',NULL,'domain.com',NULL,NULL),(3,35,'b',1,'asd',10,'[null,\"rahmad@domain.com\",\"asd\"]',NULL,'orders/document1703861429.png',NULL,NULL,'/private/var/tmp/phpVPv1g7',NULL,'2023-12-29 07:50:29','2023-12-29 07:50:29','blue','domain.com','blue',NULL),(4,36,'res',1,'123',123,'[null,\"12\"]',NULL,'orders/document1703897904.png',NULL,NULL,'/private/var/tmp/phpAOI0cW',NULL,'2023-12-29 17:58:24','2023-12-29 17:58:24','re','12','re','1'),(5,38,'asdas',2,'asd',12,'[null,\"sdad\"]',NULL,'orders/document1703917322.psd',NULL,NULL,'/private/var/tmp/phpxQLf8f',NULL,'2023-12-29 23:22:02','2023-12-29 23:22:02','asd','asd','asd','1'),(6,43,'ewew',1,'rw',12,'[null,\"asd@gma.c\"]',NULL,'orders/document1703920375.png',NULL,NULL,'/private/var/tmp/phpfhoMjy',NULL,'2023-12-30 00:12:55','2023-12-30 00:12:55','asd','wqwq.c','2awd','1'),(7,44,'umarta dev',1,'umarta',123,'[null,\"umarta@umarta.dev\"]',NULL,'orders/document1703921615.png',NULL,NULL,'/private/var/tmp/phphg015o',NULL,'2023-12-30 00:33:35','2023-12-30 00:33:35','red','umart','red','2'),(8,45,'asd',2,'123',123,'[null,\"123\"]',NULL,'orders/document1703924619.png',NULL,'[{\"key\":\"homepage\",\"value\":true},{\"key\":\"contact\",\"value\":false},{\"key\":\"products\",\"value\":false},{\"key\":\"about_us\",\"value\":true},{\"key\":\"gallery\",\"value\":false},{\"key\":\"services\",\"value\":false},{\"key\":\"blog\",\"value\":false},{\"key\":\"faq\",\"value\":false},{\"key\":\"team\",\"value\":false},{\"key\":\"portfolio\",\"value\":false},{\"key\":\"careers\",\"value\":false},{\"key\":\"privacy_policy\",\"value\":false},{\"key\":\"t_c\",\"value\":false},{\"key\":\"login_register\",\"value\":false},{\"key\":\"events_calendar\",\"value\":false}]','/private/var/tmp/phpwnu7qw',NULL,'2023-12-30 01:23:39','2023-12-30 01:23:39','123','123','123','1'),(9,47,'rahmad',2,'padang',123,'[null,\"email@domain.com\"]',NULL,'orders/document1703925150.png',NULL,'[{\"key\":\"homepage\",\"value\":true},{\"key\":\"contact\",\"value\":false},{\"key\":\"products\",\"value\":false},{\"key\":\"about_us\",\"value\":true},{\"key\":\"gallery\",\"value\":false},{\"key\":\"services\",\"value\":false},{\"key\":\"blog\",\"value\":false},{\"key\":\"faq\",\"value\":false},{\"key\":\"team\",\"value\":false},{\"key\":\"portfolio\",\"value\":false},{\"key\":\"careers\",\"value\":false},{\"key\":\"privacy_policy\",\"value\":false},{\"key\":\"t_c\",\"value\":false},{\"key\":\"login_register\",\"value\":false},{\"key\":\"events_calendar\",\"value\":false}]','/private/var/tmp/phpYzNPVf',NULL,'2023-12-30 01:32:30','2023-12-30 01:32:30','red','domain.com','red','1'),(10,51,'ras',1,'asd',12,'[null,\"asd\"]',NULL,'orders/document1703950687.png',NULL,NULL,'/private/var/tmp/php0IQCN6',NULL,'2023-12-30 08:38:07','2023-12-30 08:38:07','asd','asd','asd','1');
+/*!40000 ALTER TABLE `order_details` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `order_documents`
+--
+
+DROP TABLE IF EXISTS `order_documents`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+ SET character_set_client = utf8mb4 ;
+CREATE TABLE `order_documents` (
+  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
+  `order_id` bigint unsigned NOT NULL,
+  `nda_file_url` text COLLATE utf8mb4_unicode_ci,
+  `license_file_url` text COLLATE utf8mb4_unicode_ci,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `request_type` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `order_documents_order_id_foreign` (`order_id`),
+  CONSTRAINT `order_documents_order_id_foreign` FOREIGN KEY (`order_id`) REFERENCES `orders` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=45 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `order_documents`
+--
+
+LOCK TABLES `order_documents` WRITE;
+/*!40000 ALTER TABLE `order_documents` DISABLE KEYS */;
+INSERT INTO `order_documents` VALUES (1,8,'/private/var/tmp/php3h48pU',NULL,'2023-12-28 07:36:59','2023-12-28 07:36:59','1'),(2,9,'/private/var/tmp/phpcyZH6e',NULL,'2023-12-28 07:37:09','2023-12-28 07:37:09','1'),(3,10,'/private/var/tmp/php4qm8Qm',NULL,'2023-12-28 07:38:10','2023-12-28 07:38:10','1'),(4,11,'/private/var/tmp/php34o6Jp',NULL,'2023-12-28 07:39:39','2023-12-28 07:39:39','1'),(5,12,'/private/var/tmp/phpTGbSId',NULL,'2023-12-28 07:40:06','2023-12-28 07:40:06','1'),(6,13,'/private/var/tmp/phpNj770Y',NULL,'2023-12-28 07:40:48','2023-12-28 07:40:48','1'),(7,14,'/private/var/tmp/phpto1nqB',NULL,'2023-12-28 07:43:42','2023-12-28 07:43:42','1'),(8,15,'/private/var/tmp/phpaoqbKH',NULL,'2023-12-28 07:46:56','2023-12-28 07:46:56','1'),(9,16,'/private/var/tmp/phpaOC6eg',NULL,'2023-12-28 07:47:39','2023-12-28 07:47:39','1'),(10,17,'/private/var/tmp/phpu71UF8',NULL,'2023-12-28 08:00:38','2023-12-28 08:00:38','1'),(11,18,'/private/var/tmp/phpFpZdnr',NULL,'2023-12-28 08:01:26','2023-12-28 08:01:26','1'),(12,19,'/private/var/tmp/php1bRYir',NULL,'2023-12-28 08:08:38','2023-12-28 08:08:38','1'),(13,20,'/private/var/tmp/phpBDllBm',NULL,'2023-12-28 08:10:14','2023-12-28 08:10:14','1'),(14,21,'/private/var/tmp/phpsrcS5m',NULL,'2023-12-28 08:11:23','2023-12-28 08:11:23','1'),(15,22,'undefined',NULL,'2023-12-28 08:16:12','2023-12-28 08:16:12','1'),(16,23,'undefined',NULL,'2023-12-28 08:20:04','2023-12-28 08:20:04','1'),(17,24,'undefined',NULL,'2023-12-28 08:26:23','2023-12-28 08:26:23','1'),(18,25,'undefined',NULL,'2023-12-28 08:36:18','2023-12-28 08:36:18','1'),(19,26,'undefined',NULL,'2023-12-28 08:54:29','2023-12-28 08:54:29','1'),(20,27,'/private/var/tmp/php0ueSjO',NULL,'2023-12-28 20:29:32','2023-12-28 20:29:32','1'),(21,28,'/private/var/tmp/php68vfTy','/private/var/tmp/phpsk6Fn0','2023-12-29 01:11:04','2023-12-29 01:11:04','1'),(22,29,'/private/var/tmp/phpW6dLRf',NULL,'2023-12-29 04:38:19','2023-12-29 04:38:19','1'),(23,30,'/private/var/tmp/phpqbhnZB',NULL,'2023-12-29 04:39:16','2023-12-29 04:39:16','1'),(24,31,'/private/var/tmp/phpHxuC4I',NULL,'2023-12-29 04:40:24','2023-12-29 04:40:24','2'),(25,32,'/private/var/tmp/phpMtPlBL',NULL,'2023-12-29 04:41:55','2023-12-29 04:41:55','2'),(26,33,'/private/var/tmp/phpGdzzkr',NULL,'2023-12-29 04:44:30','2023-12-29 04:44:30','2'),(27,34,'/private/var/tmp/phpHbqPGd',NULL,'2023-12-29 04:44:55','2023-12-29 04:44:55','2'),(28,35,'/private/var/tmp/phpYf5f7l',NULL,'2023-12-29 07:13:44','2023-12-29 07:13:44','1'),(29,36,'/private/var/tmp/phpPi37B9',NULL,'2023-12-29 17:55:23','2023-12-29 17:55:23','2'),(30,37,'/private/var/tmp/phpHyXon4',NULL,'2023-12-29 23:01:20','2023-12-29 23:01:20','1'),(31,38,'/private/var/tmp/php0nZvTv',NULL,'2023-12-29 23:01:45','2023-12-29 23:01:45','1'),(32,39,'/private/var/tmp/phpOr2jil',NULL,'2023-12-29 23:40:48','2023-12-29 23:40:48','1'),(33,40,'/private/var/tmp/php2jg5gE',NULL,'2023-12-29 23:41:34','2023-12-29 23:41:34','1'),(34,41,'/private/var/tmp/phpVkReVg',NULL,'2023-12-29 23:56:28','2023-12-29 23:56:28','1'),(35,42,'/private/var/tmp/phpsRrt2m',NULL,'2023-12-30 00:00:33','2023-12-30 00:00:33','1'),(36,43,'1703920182.png',NULL,'2023-12-30 00:09:42','2023-12-30 00:09:42','2'),(37,44,'orders/document1703921572.png','orders/document','2023-12-30 00:32:52','2023-12-30 00:32:52','1'),(38,45,'orders/document1703924424.png','orders/document','2023-12-30 01:20:24','2023-12-30 01:20:24','1'),(39,46,'orders/document1703924773.png','orders/document','2023-12-30 01:26:13','2023-12-30 01:26:13','1'),(40,47,'orders/document1703925030.png','orders/document','2023-12-30 01:30:30','2023-12-30 01:30:30','1'),(41,48,'orders/document1703925466.png','orders/document','2023-12-30 01:37:46','2023-12-30 01:37:46','2'),(42,49,'/private/var/tmp/phprMifEE',NULL,'2023-12-30 08:29:34','2023-12-30 08:29:34','1'),(43,50,'/private/var/tmp/phpVrDxLb',NULL,'2023-12-30 08:32:49','2023-12-30 08:32:49','1'),(44,51,'/private/var/tmp/phpmipzhw',NULL,'2023-12-30 08:37:33','2023-12-30 08:37:33','2');
+/*!40000 ALTER TABLE `order_documents` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `order_incubation_decks`
+--
+
+DROP TABLE IF EXISTS `order_incubation_decks`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+ SET character_set_client = utf8mb4 ;
+CREATE TABLE `order_incubation_decks` (
+  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
+  `order_id` bigint unsigned NOT NULL,
+  `startup_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `request_type` tinyint NOT NULL DEFAULT '0' COMMENT '0 => mentorship & networking, 1 => infrastructure support, 2 => funding support',
+  `budget_url` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `has_bussiness_license` tinyint(1) NOT NULL DEFAULT '0',
+  `bussiness_license_url` text COLLATE utf8mb4_unicode_ci,
+  `presentation_url` text COLLATE utf8mb4_unicode_ci,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `order_incubation_decks_order_id_foreign` (`order_id`),
+  CONSTRAINT `order_incubation_decks_order_id_foreign` FOREIGN KEY (`order_id`) REFERENCES `orders` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `order_incubation_decks`
+--
+
+LOCK TABLES `order_incubation_decks` WRITE;
+/*!40000 ALTER TABLE `order_incubation_decks` DISABLE KEYS */;
+/*!40000 ALTER TABLE `order_incubation_decks` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `order_incubation_details`
+--
+
+DROP TABLE IF EXISTS `order_incubation_details`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+ SET character_set_client = utf8mb4 ;
+CREATE TABLE `order_incubation_details` (
+  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
+  `order_id` bigint unsigned NOT NULL,
+  `founder_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `co_founder_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `founder_portofolio_url` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `co_founder_portofolio_url` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `idea_age` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `market_analyst` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `market_analyst_url` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `market_strategy` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `exit_strategy` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `org_chart` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `org_chart_url` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `order_incubation_details_order_id_foreign` (`order_id`),
+  CONSTRAINT `order_incubation_details_order_id_foreign` FOREIGN KEY (`order_id`) REFERENCES `orders` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `order_incubation_details`
+--
+
+LOCK TABLES `order_incubation_details` WRITE;
+/*!40000 ALTER TABLE `order_incubation_details` DISABLE KEYS */;
+/*!40000 ALTER TABLE `order_incubation_details` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `order_items`
+--
+
+DROP TABLE IF EXISTS `order_items`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+ SET character_set_client = utf8mb4 ;
+CREATE TABLE `order_items` (
+  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
+  `order_id` bigint unsigned NOT NULL,
+  `product_id` bigint unsigned NOT NULL,
+  `price` decimal(10,2) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `order_items_order_id_foreign` (`order_id`),
+  KEY `order_items_product_id_foreign` (`product_id`),
+  CONSTRAINT `order_items_order_id_foreign` FOREIGN KEY (`order_id`) REFERENCES `orders` (`id`) ON DELETE CASCADE,
+  CONSTRAINT `order_items_product_id_foreign` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `order_items`
+--
+
+LOCK TABLES `order_items` WRITE;
+/*!40000 ALTER TABLE `order_items` DISABLE KEYS */;
+INSERT INTO `order_items` VALUES (1,34,9,14900.00,'2023-12-29 04:44:55','2023-12-29 04:44:55'),(2,35,9,14900.00,'2023-12-29 07:13:44','2023-12-29 07:13:44'),(3,36,17,199900.00,'2023-12-29 17:55:23','2023-12-29 17:55:23'),(4,37,17,199900.00,'2023-12-29 23:01:20','2023-12-29 23:01:20'),(5,38,24,15000.00,'2023-12-29 23:01:45','2023-12-29 23:01:45'),(6,38,20,9999.00,'2023-12-29 23:01:45','2023-12-29 23:01:45'),(7,39,23,15000.00,'2023-12-29 23:40:48','2023-12-29 23:40:48'),(8,39,20,9999.00,'2023-12-29 23:40:48','2023-12-29 23:40:48'),(9,40,23,15000.00,'2023-12-29 23:41:34','2023-12-29 23:41:34'),(10,40,20,9999.00,'2023-12-29 23:41:34','2023-12-29 23:41:34'),(11,41,23,15000.00,'2023-12-29 23:56:28','2023-12-29 23:56:28'),(12,41,20,9999.00,'2023-12-29 23:56:28','2023-12-29 23:56:28'),(13,42,23,15000.00,'2023-12-30 00:00:33','2023-12-30 00:00:33'),(14,42,20,9999.00,'2023-12-30 00:00:33','2023-12-30 00:00:33'),(15,43,9,14900.00,'2023-12-30 00:09:42','2023-12-30 00:09:42'),(16,44,15,60000.00,'2023-12-30 00:32:52','2023-12-30 00:32:52'),(17,44,14,99000.00,'2023-12-30 00:32:52','2023-12-30 00:32:52'),(18,47,9,14900.00,'2023-12-30 01:30:30','2023-12-30 01:30:30'),(19,48,25,15000.00,'2023-12-30 01:37:46','2023-12-30 01:37:46'),(20,48,20,9999.00,'2023-12-30 01:37:46','2023-12-30 01:37:46'),(21,49,17,199900.00,'2023-12-30 08:29:34','2023-12-30 08:29:34'),(22,50,17,199900.00,'2023-12-30 08:32:49','2023-12-30 08:32:49'),(23,51,18,3490.00,'2023-12-30 08:37:33','2023-12-30 08:37:33');
+/*!40000 ALTER TABLE `order_items` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `order_payments`
+--
+
+DROP TABLE IF EXISTS `order_payments`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+ SET character_set_client = utf8mb4 ;
+CREATE TABLE `order_payments` (
+  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
+  `order_id` bigint unsigned NOT NULL,
+  `first_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `last_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `country` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `address` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `city` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `zip_code` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `card_number` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `card_holder_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `card_expiration` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `card_cvv` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `order_payments_order_id_foreign` (`order_id`),
+  CONSTRAINT `order_payments_order_id_foreign` FOREIGN KEY (`order_id`) REFERENCES `orders` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `order_payments`
+--
+
+LOCK TABLES `order_payments` WRITE;
+/*!40000 ALTER TABLE `order_payments` DISABLE KEYS */;
+INSERT INTO `order_payments` VALUES (1,35,'rahmad','umarta','indonesia','padang','padang','12341','1234123123123','rahmad umarta','2023-12','123','2023-12-29 16:47:49','2023-12-29 16:47:49'),(2,36,'asdsa','ds','dsd','1212','ds','123','1231213','12312','2023-12','123','2023-12-29 17:58:56','2023-12-29 17:58:56'),(3,43,'asd','asd','ds','asd','ds','dsa','1234','123412','2023-12','123','2023-12-30 00:29:17','2023-12-30 00:29:17'),(4,44,'asd','asd','asd','asd','asd','asd','123124123123','12asdasd','2023-12','123','2023-12-30 01:04:56','2023-12-30 01:04:56'),(5,47,'rahmad','umarta','indonesia','jakarta','jakarta','202321','1231211212121','rahmad umarta','2023-12','123','2023-12-30 01:33:42','2023-12-30 01:33:42'),(6,51,'1233','123','123','123','123','12','123213','123123','2023-12','123','2023-12-30 08:38:26','2023-12-30 08:38:26');
+/*!40000 ALTER TABLE `order_payments` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `orders`
+--
+
+DROP TABLE IF EXISTS `orders`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+ SET character_set_client = utf8mb4 ;
+CREATE TABLE `orders` (
+  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
+  `user_id` bigint unsigned NOT NULL,
+  `order_no` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `status` tinyint NOT NULL DEFAULT '0' COMMENT '0 = draft, 1 = pending, 2 = processing, 3 = completed',
+  `payment_status` tinyint NOT NULL DEFAULT '0' COMMENT '0 = pending, 1 = paid',
+  `current_step` tinyint NOT NULL DEFAULT '0',
+  `order_type` tinyint NOT NULL DEFAULT '0' COMMENT '0 = service, 1 = incubation',
+  `service_type` tinyint DEFAULT '0' COMMENT '0 = development, 1 = design',
+  `tax` decimal(10,2) DEFAULT NULL,
+  `subtotal` decimal(10,2) DEFAULT NULL,
+  `discount` decimal(10,2) DEFAULT NULL,
+  `total_price` decimal(10,2) DEFAULT NULL,
+  `voucher_code` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `country` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `city` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `zip_code` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `address` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `full_name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `orders_user_id_foreign` (`user_id`),
+  CONSTRAINT `orders_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=52 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `orders`
+--
+
+LOCK TABLES `orders` WRITE;
+/*!40000 ALTER TABLE `orders` DISABLE KEYS */;
+INSERT INTO `orders` VALUES (1,3,'INV/20231227/CNLN',0,0,1,0,0,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'2023-12-27 08:46:29','2023-12-27 08:46:29',NULL),(2,3,'INV/20231227/AB4H',0,0,1,0,0,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'2023-12-27 08:47:51','2023-12-27 08:47:51',NULL),(3,3,'INV/20231228/Q64O',0,0,1,0,0,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'2023-12-28 00:50:05','2023-12-28 00:50:05',NULL),(4,3,'INV/20231228/JH7F',0,0,1,0,0,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'2023-12-28 00:51:14','2023-12-28 00:51:14',NULL),(5,3,'INV/20231228/XA0U',0,0,1,0,0,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'2023-12-28 00:51:51','2023-12-28 00:51:51',NULL),(6,3,'INV/20231228/CRX7',0,0,1,0,0,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'2023-12-28 02:10:24','2023-12-28 02:10:24',NULL),(7,3,'INV/20231228/B6ZO',0,0,1,0,0,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'2023-12-28 07:35:25','2023-12-28 07:35:25',NULL),(8,3,'INV/20231228/ILDB',0,0,1,0,0,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'2023-12-28 07:36:59','2023-12-28 07:36:59','rahmad umarta'),(9,3,'INV/20231228/WPGM',0,0,1,0,0,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'2023-12-28 07:37:09','2023-12-28 07:37:09','rahmad umarta'),(10,3,'INV/20231228/3JZE',0,0,1,0,0,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'2023-12-28 07:38:10','2023-12-28 07:38:10','rahmad umarta'),(11,3,'INV/20231228/VAEW',0,0,1,0,0,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'2023-12-28 07:39:39','2023-12-28 07:39:39','rahmad umarta'),(12,3,'INV/20231228/XOEE',0,0,2,0,0,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'2023-12-28 07:40:06','2023-12-28 07:40:06','rahmad umarta'),(13,3,'INV/20231228/JZ4X',0,0,2,0,0,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'2023-12-28 07:40:48','2023-12-28 07:40:48','rahmad umarta'),(14,3,'INV/20231228/DXA4',0,0,2,0,0,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'2023-12-28 07:43:42','2023-12-28 07:43:42','rahmad'),(15,3,'INV/20231228/EHJZ',0,0,2,0,0,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'2023-12-28 07:46:56','2023-12-28 07:46:56','ad'),(16,3,'INV/20231228/UQB1',0,0,2,0,0,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'2023-12-28 07:47:39','2023-12-28 07:47:39','asd'),(17,3,'INV/20231228/OKSR',0,0,2,0,0,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'2023-12-28 08:00:38','2023-12-28 08:00:38','rag'),(18,3,'INV/20231228/DPQI',0,0,2,0,0,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'2023-12-28 08:01:26','2023-12-28 08:01:26','rag'),(19,3,'INV/20231228/Y8GJ',0,0,2,0,0,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'2023-12-28 08:08:38','2023-12-28 08:08:38','rahmad'),(20,3,'INV/20231228/J9BP',0,0,2,0,0,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'2023-12-28 08:10:14','2023-12-28 08:10:14','asd'),(21,3,'INV/20231228/LGKR',0,0,2,0,0,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'2023-12-28 08:11:23','2023-12-28 08:11:23','adasd'),(22,3,'INV/20231228/CYBR',0,0,2,0,0,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'2023-12-28 08:16:12','2023-12-28 08:16:12','rahmad'),(23,3,'INV/20231228/UAM4',0,0,2,0,0,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'2023-12-28 08:20:04','2023-12-28 08:20:04','rahmad'),(24,3,'INV/20231228/XTGT',0,0,2,0,0,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'2023-12-28 08:26:23','2023-12-28 08:26:23','rahmad umarta'),(25,3,'INV/20231228/KHK6',0,0,2,0,0,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'2023-12-28 08:36:18','2023-12-28 08:36:18','ras'),(26,3,'INV/20231228/ZGBW',0,0,2,0,0,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'2023-12-28 08:54:29','2023-12-28 08:54:29','rahmad'),(27,3,'INV/20231229/OPHI',0,0,2,0,0,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'2023-12-28 20:29:32','2023-12-28 20:29:32','rahmad umarta'),(28,3,'INV/20231229/6CRY',0,0,2,0,0,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'2023-12-29 01:11:03','2023-12-29 01:11:04','rahmad umarta'),(29,3,'INV/20231229/VM6P',0,0,2,0,0,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'2023-12-29 04:38:19','2023-12-29 04:38:19','rahmad imarta'),(30,3,'INV/20231229/87ER',0,0,2,0,0,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'2023-12-29 04:39:16','2023-12-29 04:39:16','rahmad'),(31,3,'INV/20231229/OGNW',0,0,2,0,0,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'2023-12-29 04:40:24','2023-12-29 04:40:24','asd'),(32,3,'INV/20231229/5XCD',0,0,2,0,0,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'2023-12-29 04:41:55','2023-12-29 04:41:55','asd'),(33,3,'INV/20231229/YOJ7',0,0,2,0,0,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'2023-12-29 04:44:30','2023-12-29 04:44:30','asd'),(34,3,'INV/20231229/A3U4',0,0,2,0,0,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'2023-12-29 04:44:55','2023-12-29 04:44:55','asd'),(35,3,'INV/20231229/W1N7',0,0,4,0,0,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'2023-12-29 07:13:44','2023-12-29 16:48:29','asd'),(36,3,'INV/20231230/TVS5',0,0,4,0,0,35982.00,199900.00,NULL,235882.00,NULL,NULL,NULL,NULL,NULL,'2023-12-29 17:55:23','2023-12-29 17:58:56','test'),(37,3,'INV/20231230/ITGQ',0,0,2,0,0,35982.00,199900.00,NULL,235882.00,NULL,NULL,NULL,NULL,NULL,'2023-12-29 23:01:20','2023-12-29 23:01:20','test'),(38,3,'INV/20231230/TGXH',0,0,2,0,0,4499.82,24999.00,NULL,29498.82,NULL,NULL,NULL,NULL,NULL,'2023-12-29 23:01:45','2023-12-29 23:22:02','design'),(39,3,'INV/20231230/U7LJ',0,0,2,0,0,4499.82,24999.00,NULL,29498.82,NULL,NULL,NULL,NULL,NULL,'2023-12-29 23:40:48','2023-12-29 23:40:48','res'),(40,3,'INV/20231230/U4G8',0,0,2,0,0,4499.82,24999.00,NULL,29498.82,NULL,NULL,NULL,NULL,NULL,'2023-12-29 23:41:34','2023-12-29 23:41:34','res'),(41,3,'INV/20231230/D0XQ',0,0,2,0,0,4499.82,24999.00,NULL,29498.82,NULL,NULL,NULL,NULL,NULL,'2023-12-29 23:56:28','2023-12-29 23:56:28','asd'),(42,3,'INV/20231230/YOSZ',0,0,2,0,0,4499.82,24999.00,NULL,29498.82,NULL,NULL,NULL,NULL,NULL,'2023-12-30 00:00:33','2023-12-30 00:00:33','as'),(43,3,'INV/20231230/YWAL',0,0,4,0,0,2682.00,14900.00,NULL,17582.00,NULL,NULL,NULL,NULL,NULL,'2023-12-30 00:09:42','2023-12-30 00:29:17','asd'),(44,3,'INV/20231230/ZJ7J',0,0,4,0,0,28620.00,159000.00,NULL,187620.00,NULL,NULL,NULL,NULL,NULL,'2023-12-30 00:32:52','2023-12-30 01:04:56','rahmad'),(45,3,'INV/20231230/XXI0',0,0,3,0,0,0.00,0.00,NULL,0.00,NULL,NULL,NULL,NULL,NULL,'2023-12-30 01:20:24','2023-12-30 01:23:39','res'),(46,3,'INV/20231230/6BHO',0,0,2,0,0,0.00,0.00,NULL,0.00,NULL,NULL,NULL,NULL,NULL,'2023-12-30 01:26:13','2023-12-30 01:26:13','wew'),(47,3,'INV/20231230/0JUF',0,0,4,0,0,2682.00,14900.00,NULL,17582.00,NULL,NULL,NULL,NULL,NULL,'2023-12-30 01:30:30','2023-12-30 01:33:42','rahmad'),(48,3,'INV/20231230/NKEM',0,0,2,0,0,4499.82,24999.00,NULL,29498.82,NULL,NULL,NULL,NULL,NULL,'2023-12-30 01:37:46','2023-12-30 01:37:46','des'),(49,3,'INV/20231230/UQB6',0,0,2,0,0,35982.00,199900.00,NULL,235882.00,NULL,NULL,NULL,NULL,NULL,'2023-12-30 08:29:34','2023-12-30 08:29:34','rahmad'),(50,3,'INV/20231230/KOEO',0,0,2,0,0,35982.00,199900.00,NULL,235882.00,NULL,NULL,NULL,NULL,NULL,'2023-12-30 08:32:49','2023-12-30 08:32:49','rahmad'),(51,3,'INV/20231230/Z9LL',0,0,4,0,0,628.20,3490.00,NULL,4118.20,NULL,NULL,NULL,NULL,NULL,'2023-12-30 08:37:33','2023-12-30 08:38:26','rahmad');
+/*!40000 ALTER TABLE `orders` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `pages`
+--
+
+DROP TABLE IF EXISTS `pages`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+ SET character_set_client = utf8mb4 ;
+CREATE TABLE `pages` (
+  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
+  `title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `subtitle` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `category_id` bigint unsigned NOT NULL,
+  `slug` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `description` text COLLATE utf8mb4_unicode_ci,
+  `contents` text COLLATE utf8mb4_unicode_ci COMMENT 'json [{title, description, link?, image?}]',
+  `has_slider` tinyint(1) NOT NULL DEFAULT '0',
+  `slider_contents` text COLLATE utf8mb4_unicode_ci COMMENT 'json [{title, subtitle, link?, image?}]',
+  `parent_id` bigint unsigned DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `pages_category_id_foreign` (`category_id`),
+  KEY `pages_parent_id_foreign` (`parent_id`),
+  CONSTRAINT `pages_category_id_foreign` FOREIGN KEY (`category_id`) REFERENCES `categories` (`id`) ON DELETE CASCADE,
+  CONSTRAINT `pages_parent_id_foreign` FOREIGN KEY (`parent_id`) REFERENCES `pages` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `pages`
+--
+
+LOCK TABLES `pages` WRITE;
+/*!40000 ALTER TABLE `pages` DISABLE KEYS */;
+INSERT INTO `pages` VALUES (2,'Desktop App Development','Desktop App Development pricing schedule',1,'desktop-app-development','Craft robust, versatile apps that excel both online and offline, ensuring reliable performance and continuous productivity,regardless of internet connectivity.','[{\"title\":\"Enhanced Performance and Reliability\",\"description\":\"Experience superior performance with our desktop app development. Designed for stability and speed, our apps ensure your business operations run smoothly, with or without internet connectivity.\",\"image\":\"assets/uploads/services/icon/grid.png\"},{\"title\":\"Offline Accessibility\",\"description\":\"Stay productive, even offline. Our desktop apps provide uninterrupted access to essential features, allowing your team to work efficiently in any environment, ensuring continuous business operation and data access\",\"image\":\"assets/uploads/services/icon/screencast.png\"},{\"title\":\"Robust Security\",\"description\":\"Secure your sensitive data with enhanced security features inherent in desktop applications. Our tailored security protocols safeguard your information from online vulnerabilities, offering peace of mind and protecting your business assets.\",\"image\":\"assets/uploads/services/icon/pairing.png\"}]',1,'[{\"media_url\":\"assets/uploads/services/icon/grid.png\",\"title\":\"test\",\"subtitle\":\"tessss\",\"link\":\"https://facebook.com\"},{\"media_url\":\"https://placehold.co/1080x720\",\"title\":\"test\",\"subtitle\":\"tessss\",\"link\":\"https://facebook.com\"},{\"media_url\":\"https://placehold.co/1080x720\",\"title\":\"test\",\"subtitle\":\"tessss\",\"link\":\"https://facebook.com\"},{\"media_url\":\"https://placehold.co/1080x720\",\"title\":\"test\",\"subtitle\":\"tessss\",\"link\":\"https://facebook.com\"}]',NULL,'2023-12-22 08:05:58','2023-12-29 20:33:23'),(3,'Web Development','web development pricing schedule',1,'web-development','Take the first step and elevate your online presence with our web development - intuitive, powerful, and responsive designs that engage users and drive business growth.','[{\"title\":\"Enhanced Visibility and Reach\",\"description\":\"Discover the power of global presence. Our website develooment ensures vour business is visible and accessible to a worldwide audience, 24/7, expanding your reach and customer base\",\"image\":\"assets/uploads/services/icon/eye.png\"},{\"title\":\"Credibility and Professionalism\",\"description\":\"Establish trust and professionalism with a sleek, custom-designed website. It\'s not just a site; it\'s the digital face of your company. showcasing your brand and building credibility among potential customers.\",\"image\":\"assets/uploads/services/icon/screencast.png\"},{\"title\":\"Move Forward\",\"description\":\"Stay Ahead in the Digital Race. Embrace innovation and avoid being left behind.\",\"image\":\"assets/uploads/services/icon/pairing.png\"}]',1,'[{\"media_url\":\"https://placehold.co/1080x720\",\"title\":\"test\",\"subtitle\":\"tessss\",\"link\":\"https://facebook.com\"},{\"media_url\":\"https://placehold.co/1080x720\",\"title\":\"test\",\"subtitle\":\"tessss\",\"link\":\"https://facebook.com\"},{\"media_url\":\"https://placehold.co/1080x720\",\"title\":\"test\",\"subtitle\":\"tessss\",\"link\":\"https://facebook.com\"},{\"media_url\":\"https://placehold.co/1080x720\",\"title\":\"test\",\"subtitle\":\"tessss\",\"link\":\"https://facebook.com\"}]',NULL,'2023-12-22 08:05:58','2023-12-29 20:51:22'),(4,'Cross-Platform App','Ready to lunch something big? we can help you with that',1,'cross-platform-development','Home is behind, the world ahead and you are one step away from it','[{\"title\":\"Access from any device\",\"description\":\"Experience freedom with our platform accesible from any device, anytime, anywhere, No apps, no hassle, just instant access at your fingertips\",\"image\":\"assets/uploads/services/icon/grid.png\"},{\"title\":\"Consistent User Experience\",\"description\":\"Our user-centric design ensures a familie where you periese\",\"image\":\"https://placehold.co/400x400\"},{\"title\":\"Fast Deployment\",\"description\":\"Rapid deployment, instant results.Your new platform ensures swift, streamlined launches, getting you up and running faster than ever before.\",\"image\":\"https://placehold.co/400x400\"}]',1,'[{\"media_url\":\"https://placehold.co/1080x720\",\"title\":\"test\",\"subtitle\":\"tessss\",\"link\":\"https://facebook.com\"},{\"media_url\":\"https://placehold.co/1080x720\",\"title\":\"test\",\"subtitle\":\"tessss\",\"link\":\"https://facebook.com\"},{\"media_url\":\"https://placehold.co/1080x720\",\"title\":\"test\",\"subtitle\":\"tessss\",\"link\":\"https://facebook.com\"},{\"media_url\":\"https://placehold.co/1080x720\",\"title\":\"test\",\"subtitle\":\"tessss\",\"link\":\"https://facebook.com\"}]',NULL,'2023-12-22 08:05:58','2023-12-29 21:07:33'),(5,'Mobile App Development','Lets get your app up and running, No more execuse',1,'mobile-app-development','Transform your ideas into reality with cutting-edge mobile app development - sleek, efficient, and tailored to your unique needs.','[{\"title\":\"Easy access\",\"description\":\"Experience the convenience of immediate, user-friendly access to your services. Our mobile apps ensure that your business is just a tap away for your customers\",\"image\":\"assets/uploads/services/icon/grid.png\"},{\"title\":\"Always Connected\",\"description\":\"Stay engaged with your customers 24/7. Our mobile apps provide constant connectivity, ensuring your business remains active and accessible anytime, anywhere.\",\"image\":\"assets/uploads/services/icon/screencast.png\"},{\"title\":\"Seamless Integration\",\"description\":\"Your will have the same data across different devices. Enjoy a cohesive experience, whether on mobile, tablet, or desktop - your data is synchronized and consistent everywhere\",\"image\":\"assets/uploads/services/icon/pairing.png\"}]',1,'[{\"media_url\":\"https://placehold.co/1080x720\",\"title\":\"test\",\"subtitle\":\"tessss\",\"link\":\"https://facebook.com\"},{\"media_url\":\"https://placehold.co/1080x720\",\"title\":\"test\",\"subtitle\":\"tessss\",\"link\":\"https://facebook.com\"},{\"media_url\":\"https://placehold.co/1080x720\",\"title\":\"test\",\"subtitle\":\"tessss\",\"link\":\"https://facebook.com\"},{\"media_url\":\"https://placehold.co/1080x720\",\"title\":\"test\",\"subtitle\":\"tessss\",\"link\":\"https://facebook.com\"}]',NULL,'2023-12-22 08:05:58','2023-12-29 21:14:42'),(6,'Design Service','Creating life',1,'design-service','Lets give your dream some color','[{\"title\":\"Brand Design and Identity\",\"description\":\"Craft a lasting impression with DigitalGate\'s Brand Design and Identity|serices - where creatry meets strater to define and elevate your unique brand story\",\"image\":\"assets/uploads/services/icon/stamp.png\"},{\"title\":\"UX/UI Design\",\"description\":\"You like it when the flow of the app melts like butter.. right? Let us carve your digital interfaces with passion.\",\"image\":\"assets/uploads/services/icon/id.png\"},{\"title\":\"Social Media and Marketing\",\"description\":\"Engage and captivate with DigitalGate\'s Social Media and Marketing - where compelling content meets strategic outreach, turning your audience into a community of brand advocates\",\"image\":\"assets/uploads/services/icon/instagram.png\"}]',1,'[{\"media_url\":\"https://placehold.co/1080x720\",\"title\":\"test\",\"subtitle\":\"tessss\",\"link\":\"https://facebook.com\"},{\"media_url\":\"https://placehold.co/1080x720\",\"title\":\"test\",\"subtitle\":\"tessss\",\"link\":\"https://facebook.com\"},{\"media_url\":\"https://placehold.co/1080x720\",\"title\":\"test\",\"subtitle\":\"tessss\",\"link\":\"https://facebook.com\"},{\"media_url\":\"https://placehold.co/1080x720\",\"title\":\"test\",\"subtitle\":\"tessss\",\"link\":\"https://facebook.com\"}]',NULL,'2023-12-22 08:05:58','2023-12-29 21:19:46'),(7,'Team as a Service','IT Out-staffing. Expand your Team, not your overhead: Outsource with us for top talent, optimized costs, and unparalleled flexibility.',7,'team-as-a-service',NULL,'[{\"title\":\"More staff - zero liabilities. Hassle-free resource allocation\",\"subtitle\":\"An ability to manage the whole development process\",\"description\":\"Earlier this week, at the expansive Computer History Museum in Mountain View, Calif., Y Combinator introduced an exhaustive..\"},{\"title\":\"Keep your current structure Hire on-demand\",\"subtitle\":\"A quick and straightforward hiring procedure and easy onboarding\",\"description\":\"It\'s no secret that much of the legal industry is build on reusable content. Most law firms have their own customized set of standard...\"},{\"title\":\"Access to a broad range of IT experts\",\"subtitle\":\"Flexibility to scale your resources up or down depending on changing circumstances\",\"description\":\"Cost-effectiveness and no pitfalls: the total budget is discussed and calculated beforehand\"}]',0,'[{\"media_url\":\"https://placehold.co/1080x720\",\"title\":\"test\",\"subtitle\":\"tessss\",\"link\":\"https://facebook.com\"},{\"media_url\":\"https://placehold.co/1080x720\",\"title\":\"test\",\"subtitle\":\"tessss\",\"link\":\"https://facebook.com\"},{\"media_url\":\"https://placehold.co/1080x720\",\"title\":\"test\",\"subtitle\":\"tessss\",\"link\":\"https://facebook.com\"},{\"media_url\":\"https://placehold.co/1080x720\",\"title\":\"test\",\"subtitle\":\"tessss\",\"link\":\"https://facebook.com\"}]',13,'2023-12-22 08:05:58','2023-12-24 07:18:48'),(8,'IT Outsourcing Service','Outsource your projects to us, where efficiency meets expertise, driving your business forward with ease.',7,'it-outsourcing-service','Focus on the important stuff. Ease your software development journey with DigitalGate\'s outsourcing solutions. Wel manage everything from idea to launch, freeing you to concentrate on your main business operations.','[{\"title\":\"Custom Software Development\",\"description\":\"Secure, end-to-end web and mobile apps.\",\"image\":\"assets/uploads/outsourcing/backet.png\"},{\"title\":\"IT Infrastructure Management\",\"description\":\"Having infrastructure problems? Or looking to upgrade your system\",\"image\":\"assets/uploads/outsourcing/input-component.png\"},{\"title\":\"Network and Grid Management\",\"description\":\"Easy setup of IT network and internet requirements. We analyze your needs and advise or implement solution.\",\"image\":\"assets/uploads/outsourcing/wired.png\"},{\"title\":\"MVP Development\",\"description\":\"Turn ideas into products. Concept to Design to MVP.\",\"image\":\"assets/uploads/outsourcing/lamp.png\"}]',0,'[{\"media_url\":\"https://placehold.co/1080x720\",\"title\":\"test\",\"subtitle\":\"tessss\",\"link\":\"https://facebook.com\"},{\"media_url\":\"https://placehold.co/1080x720\",\"title\":\"test\",\"subtitle\":\"tessss\",\"link\":\"https://facebook.com\"},{\"media_url\":\"https://placehold.co/1080x720\",\"title\":\"test\",\"subtitle\":\"tessss\",\"link\":\"https://facebook.com\"},{\"media_url\":\"https://placehold.co/1080x720\",\"title\":\"test\",\"subtitle\":\"tessss\",\"link\":\"https://facebook.com\"}]',13,'2023-12-22 08:05:58','2023-12-29 18:17:33'),(9,'Cybersecurity Service','Secure your digital assets with our cybersecurity services; essential| protection for peace of mind and business continuity.',7,'cybersecurity-service','Secure your peace of mind. Let us handle your cybersecurity needs. We offer comprehensive protection and risk management, freeing you to focus on your core business.','[{\"title\":\"Risk Assessment and Compliance Management\",\"description\":\"Identifying vulnerabilities within a network and systems, assessing risks, and ensuring compliance with relevant cybersecurity regulations and standards\",\"image\":null},{\"title\":\"Threat Protection and Management\",\"description\":\"Real-time monitoring, threat detection, and response to security incidents. It involves proactive measures to protect against malware, ransomware, phishing, and other cyber threats, ensuring the integrity and confidentiality of data.\",\"image\":null}]',1,'[{\"media_url\":\"assets/uploads/outsourcing/secure-plan.png\"}]',13,'2023-12-22 08:05:58','2023-12-29 18:17:33'),(13,'Outsourcing',NULL,7,'outsourcing',NULL,'[{\"title\":\"Team as a Service\",\"description\":\"IT Out-staffing. Expand your Team, not your overhead: Outsource with us for top talent, optimized costs, and unparalleled flexibility.\",\"image\":\"assets/uploads/outsourcing/group.png\",\"link\":\"outsourcing.team-as-a-service\"},{\"title\":\"IT Outsourcing Services\",\"description\":\"Outsource your projects to us, where efficiency meets expertise, driving your business forward with ease.\",\"image\":\"assets/uploads/outsourcing/adhoc.png\",\"link\":\"outsourcing.it-outsourcing-service\"},{\"title\":\"Cybersecurity Services\",\"description\":\"Secure your digital assets with our cybersecurity services; essential| protection for peace of mind and business continuity.\",\"image\":\"assets/uploads/outsourcing/secure.png\",\"link\":\"outsourcing.cybersecurity-service\"}]',1,'[{\"media_url\":\"assets/uploads/outsourcing/circle.png\",\"title\":\"test\",\"subtitle\":\"tessss\",\"link\":\"https://facebook.com\"}]',NULL,'2023-12-24 07:17:33','2023-12-24 07:24:38');
+/*!40000 ALTER TABLE `pages` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `password_reset_tokens`
+--
+
+DROP TABLE IF EXISTS `password_reset_tokens`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+ SET character_set_client = utf8mb4 ;
+CREATE TABLE `password_reset_tokens` (
+  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `token` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`email`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `password_reset_tokens`
+--
+
+LOCK TABLES `password_reset_tokens` WRITE;
+/*!40000 ALTER TABLE `password_reset_tokens` DISABLE KEYS */;
+/*!40000 ALTER TABLE `password_reset_tokens` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `personal_access_tokens`
+--
+
+DROP TABLE IF EXISTS `personal_access_tokens`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+ SET character_set_client = utf8mb4 ;
+CREATE TABLE `personal_access_tokens` (
+  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
+  `tokenable_type` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `tokenable_id` bigint unsigned NOT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `token` varchar(64) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `abilities` text COLLATE utf8mb4_unicode_ci,
+  `last_used_at` timestamp NULL DEFAULT NULL,
+  `expires_at` timestamp NULL DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `personal_access_tokens_token_unique` (`token`),
+  KEY `personal_access_tokens_tokenable_type_tokenable_id_index` (`tokenable_type`,`tokenable_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `personal_access_tokens`
+--
+
+LOCK TABLES `personal_access_tokens` WRITE;
+/*!40000 ALTER TABLE `personal_access_tokens` DISABLE KEYS */;
+/*!40000 ALTER TABLE `personal_access_tokens` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `portofolios`
+--
+
+DROP TABLE IF EXISTS `portofolios`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+ SET character_set_client = utf8mb4 ;
+CREATE TABLE `portofolios` (
+  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
+  `title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `slug` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `description` text COLLATE utf8mb4_unicode_ci,
+  `contents` text COLLATE utf8mb4_unicode_ci,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `subtitle` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `cover_image` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `portofolios`
+--
+
+LOCK TABLES `portofolios` WRITE;
+/*!40000 ALTER TABLE `portofolios` DISABLE KEYS */;
+/*!40000 ALTER TABLE `portofolios` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `products`
+--
+
+DROP TABLE IF EXISTS `products`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+ SET character_set_client = utf8mb4 ;
+CREATE TABLE `products` (
+  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
+  `category_id` bigint unsigned NOT NULL,
+  `page_id` bigint unsigned DEFAULT NULL,
+  `slug` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `subtitle` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `mandatory` tinyint(1) NOT NULL DEFAULT '0',
+  `description` text COLLATE utf8mb4_unicode_ci,
+  `additional_info` text COLLATE utf8mb4_unicode_ci,
+  `status` tinyint(1) NOT NULL DEFAULT '1',
+  `price` decimal(10,2) DEFAULT NULL,
+  `parent_id` bigint unsigned DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `highlighted` tinyint(1) NOT NULL DEFAULT '0',
+  `pricing_scheme` tinyint NOT NULL DEFAULT '1' COMMENT '1 => outright, 2 => monthly subscription',
+  `image` text COLLATE utf8mb4_unicode_ci,
+  `note` text COLLATE utf8mb4_unicode_ci,
+  `type` tinyint DEFAULT NULL COMMENT '1: development, 2: design',
+  PRIMARY KEY (`id`),
+  KEY `products_category_id_foreign` (`category_id`),
+  KEY `products_parent_id_foreign` (`parent_id`),
+  KEY `products_page_id_foreign` (`page_id`),
+  CONSTRAINT `products_category_id_foreign` FOREIGN KEY (`category_id`) REFERENCES `categories` (`id`) ON DELETE CASCADE,
+  CONSTRAINT `products_page_id_foreign` FOREIGN KEY (`page_id`) REFERENCES `pages` (`id`) ON DELETE CASCADE,
+  CONSTRAINT `products_parent_id_foreign` FOREIGN KEY (`parent_id`) REFERENCES `products` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `products`
+--
+
+LOCK TABLES `products` WRITE;
+/*!40000 ALTER TABLE `products` DISABLE KEYS */;
+INSERT INTO `products` VALUES (8,3,3,'web-development-basic-plan','Basic Plan','starter website package',0,NULL,'[\"Wordpress Installation\",\"10GB Bandwidth\",\"1 Domain, 1 Email *\"]',1,5900.00,NULL,'2023-12-23 07:52:33','2023-12-29 22:51:32',0,1,NULL,NULL,1),(9,3,3,'web-development-premium-plan','premium plan','Ideal for small business or individual just starting out',0,NULL,'[\"Custom design + user friendly CMS\",\"Up to 15 pages\",\"enchanced SEO features\",\"Unlimited bandwidth\",\"1 domain, 5 Email *\"]',1,14900.00,NULL,'2023-12-23 07:52:33','2023-12-29 22:51:32',1,1,NULL,NULL,1),(10,3,3,'web-development-business-plan','Business plan','Advanced features such as e-comerce integragion, custom graphic, and interactive elements',0,NULL,'[\"Unlimited\",\"10 GB Bandwidth\",\"1 domain, 100 Email *\"]',1,14900.00,NULL,'2023-12-23 07:52:33','2023-12-29 22:51:32',0,2,NULL,NULL,1),(11,5,5,'mobile-app-development-adasi-plan','Adasi Plan','(Android Development)',0,NULL,'[\"Using Android native technologies such as Kotlin and Java\",\"Custom Android UI\\/UX design\",\"Google API Integration\"]',1,200000.00,NULL,'2023-12-23 07:52:33','2023-12-29 22:51:32',1,1,'assets/uploads/services/android.png','Ideal for bussiness focusing exclusively on the Android market, laveraging the platform\'s widespread reach',1),(12,5,5,'mobile-app-development-epi-plan','Epi Plan','(IOS Development)',0,NULL,'[\"Swift and Objective-C for IOS development\",\"Integration with Apple\'s Ecosystem including SiriKit, HealtKit, and more\",\"Advanced IOS-Spesific functionalities\",\"Security feature such as face-id and fingerprint integration seamless integration\"]',1,249000.00,NULL,'2023-12-23 07:52:33','2023-12-29 22:51:32',1,1,'assets/uploads/services/ios.png','Tailored for business aiming to tap into the premium IOS user base with high-end features shopificated applications',1),(13,5,5,'mobile-app-development-halcon-plan','Halcon Plan','(Unified code, deployed on both IOS adnd Android)',0,NULL,'[\"Built on Reach native, allowing for simulatenous deployment on both Android and IOS platforms with single codebase\",\"Native-like peformance, and cost effective development process\",\"Hot Reloading\",\"Large Comunity and Ecosystem\",\"Access to native APIs\",\"Customizable UI\\/UX\"]',1,449000.00,NULL,'2023-12-23 07:52:33','2023-12-29 22:51:32',1,1,'assets/uploads/services/rn.png',NULL,1),(14,4,4,'cross-platform-development-discovery-phase','Discovery Phase*','In-depth analyst of your idea and writing the business statement, canvasing the plan and allocation the resource',1,NULL,'[\"30 days\",\"3 members\",\"Pre kick-off and Kick-off meeting\"]',1,99000.00,NULL,'2023-12-23 08:49:45','2023-12-29 22:51:32',1,1,NULL,NULL,1),(15,4,4,'cross-platform-development-edge-plan','Edge Plan','Idea for small business or individual just starting out',0,NULL,'[\"Essensial cross-platform app functionalities suitable for startup or small business\",\"UI\\/UX design, standart app feature like user login, profile management, and basic analyst\",\"Basic support and maintenance for 1 Year guaranted uptime\",\"Up to 15 pages, Enchanced SEO features\",\"unlimited bandwidth\",\"1 Domain, 10 email accounts\"]',1,60000.00,14,'2023-12-23 08:49:45','2023-12-29 22:51:32',1,1,NULL,NULL,1),(16,4,4,'cross-platform-development-earth-plan','Earth Plan','Advanced features such as e-commerce integration, custom gprahics, and interactive elements',0,NULL,'[\"Advanced Ul\\/UX design\",\"E-commerce integration\",\"Push notifications\",\"Custom API integration\",\"Compatible across multiple platforms, including IOS, Android\",\"It\'s geared towards established businesses or those needing a more complex app\",\"Extended Support and Ongoing Updates for 1 Year - Dedicated Hot Desk.\",\"Dedicated workspace. Unlimited email accounts.\"]',1,149000.00,14,'2023-12-23 08:49:45','2023-12-29 22:51:32',1,1,NULL,NULL,1),(17,11,2,'desktop-app-development-visual-studio-dotnet-framework','Visual Studio (.NET Framework)','Starting form',0,NULL,'[\"User Authentication and Authorization\",\"Data Encryption and Security Measures\",\"Resource and Project Management Features\",\"Automated Workflows and Task Management\",\"Offline Function and Syncing\"]',1,199900.00,NULL,'2023-12-23 19:00:35','2023-12-29 22:51:32',0,1,NULL,NULL,1),(18,11,2,'desktop-app-development-enchanced-security-addon','Enchanced Security Add-on','Applicable for both Windows and Macos selection',0,NULL,'[\"Cloud-based Data Storage and Backup\",\"Multilingual Support\",\"Two-Factor Authentication\",\"Multi-modal backup system\"]',1,3490.00,NULL,'2023-12-23 19:00:35','2023-12-29 22:51:32',1,2,NULL,NULL,1),(19,11,2,'desktop-app-development-xcode-swift','Xcode (Swift)','Advanced features such as e-commerce integration, custom graphics and interactive elements',0,NULL,'[\"Unlimited\",\"10GB Bandwidth\",\"1 Domain, 1 Email *\"]',1,199900.00,NULL,'2023-12-23 19:00:35','2023-12-29 22:51:32',0,1,NULL,NULL,1),(20,6,6,'design-service-brand-design-and-identity','Brand Design and Identity','Design framework',1,NULL,'[\"5 Days | 1 designer | 1 Kick-off meeting\"]',1,9999.00,NULL,'2023-12-23 23:34:50','2023-12-29 22:51:32',0,1,NULL,NULL,2),(21,6,6,'design-service-ui-ux-design','UI/UX Design','Concept wireframe',1,NULL,'[\"15 Days | 1 designer | 2 Kick-off meeting\"]',1,30000.00,NULL,'2023-12-23 23:34:50','2023-12-29 22:51:32',0,1,NULL,NULL,2),(22,6,6,'design-service-social-media-and-marketing','Social Media and Marketing','Brand Exposure alphabet',1,NULL,'[\"15 Days | 1 designer | 2 Kick-off meeting\"]',1,30000.00,NULL,'2023-12-23 23:34:50','2023-12-29 22:51:32',0,1,NULL,NULL,2),(23,6,6,'design-service-basic-logo-and-branding-package','Basic Logo and Branding Package','Logo design, color scheme, and basic brand guidelines',0,NULL,'null',1,15000.00,20,'2023-12-23 23:34:50','2023-12-29 22:51:32',1,1,NULL,NULL,2),(24,6,6,'design-service-corporate-identity-package','Corporate Identity Package','Builds on the basic package by adding business card design, letterhead, and email signature design.',0,NULL,'null',1,15000.00,20,'2023-12-23 23:34:50','2023-12-29 22:51:32',1,1,NULL,NULL,2),(25,6,6,'design-service-comprehensive-branding-solution','Comprehensive Branding Solution','Expands further to include brochure design, packaging design, and a detailed brand guideline document.',0,NULL,'null',1,15000.00,20,'2023-12-23 23:34:50','2023-12-29 22:51:32',1,1,NULL,NULL,2),(26,6,6,'design-service-website-design','Website Design','Tailored website UI/UX design, ensuring the site is not only visually engaging but also user-friendly and optimized for various devices.',0,NULL,'null',1,15000.00,21,'2023-12-23 23:34:50','2023-12-29 22:51:32',1,1,NULL,NULL,2),(27,6,6,'design-service-mobile-app-design','Mobile App Design','Focused on creating user-friendly and visually appealing mobile app Interfaces, ensuring a seamiess user experience.',0,NULL,'null',1,55000.00,21,'2023-12-23 23:34:50','2023-12-29 22:51:32',1,1,NULL,NULL,2),(28,6,6,'design-service-brand-awarness-package','Brand Awarness Package','Recreate social media accounts with rebranded company uniform to boost brand visibility',0,NULL,'null',1,9000.00,22,'2023-12-23 23:34:50','2023-12-29 22:51:32',1,1,NULL,NULL,2),(29,6,6,'design-service-engagement-booster-package','Engagement Booster Package','Includes everything in the first package, plus creation and management of 5 posts per week on at least 3 platforms.',0,NULL,'null',1,55000.00,22,'2023-12-23 23:34:50','2023-12-29 22:51:32',1,1,NULL,NULL,2),(30,6,6,'design-service-full-scale-digital-marketing-solution','Full-Scale Digital Marketing Solution','Combines all the above, adding targeted ad campaigns and analytics reporting for one month.',0,NULL,'null',1,105000.00,22,'2023-12-23 23:34:50','2023-12-29 22:51:32',1,1,NULL,NULL,2),(31,6,6,'design-service-video-advertisement-package','Video Advertisement Package','Produce 2 professional-grade promotional videos.',0,NULL,'null',1,NULL,22,'2023-12-23 23:35:52','2023-12-29 22:51:32',1,3,NULL,NULL,2),(32,6,6,'design-service-influencer-collaboration-strategy','Influencer Collaboration Strategy','Develop a plan for collaborating with influencers to expand reach and impact.',0,NULL,'null',1,NULL,22,'2023-12-23 23:35:52','2023-12-29 22:51:32',1,3,NULL,NULL,2);
+/*!40000 ALTER TABLE `products` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `users`
+--
+
+DROP TABLE IF EXISTS `users`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+ SET character_set_client = utf8mb4 ;
+CREATE TABLE `users` (
+  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email_verified_at` timestamp NULL DEFAULT NULL,
+  `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `last_name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `first_name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `role` tinyint NOT NULL DEFAULT '0' COMMENT '0: user, 1: admin',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `users_email_unique` (`email`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `users`
+--
+
+LOCK TABLES `users` WRITE;
+/*!40000 ALTER TABLE `users` DISABLE KEYS */;
+INSERT INTO `users` VALUES (1,'rahmad','rahmad@gamil.com',NULL,'$2y$12$peDNW/KAcxeOgAvgZBrG3.XiI9GBnIU6mP1JC3RY1ZjVyoeadn3U.',NULL,NULL,'2023-12-22 19:45:23',NULL,NULL,0),(2,'re re','re',NULL,'$2y$12$2GCBrL.TAa4VlDXKcAixku8VjzUtAZCLZQ.NrXxkVnhhybZmau5MC',NULL,'2023-12-23 19:56:26','2023-12-23 19:56:26',NULL,NULL,0),(3,'rahmad umarta','rahmad@umarta.com',NULL,'$2y$12$0/XovZaBox0UxowskMUzIeLyFOlq4YdEQC/DXskkYijWBsogt5ewa',NULL,'2023-12-23 19:56:48','2023-12-23 19:56:48',NULL,NULL,0);
+/*!40000 ALTER TABLE `users` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Dumping routines for database 'digital_gate'
+--
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2024-01-29 17:59:22
