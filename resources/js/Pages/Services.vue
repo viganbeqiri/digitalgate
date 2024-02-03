@@ -2,9 +2,9 @@
     <section class="wrapper bg-light container pt-10">
         <div class="d-flex justify-content-between align-items-center pb-3">
             <div class="col-1">
-                <Link :class="page.previous_page ? '' : 'disabled'"
+                <Link :class="page.previous_page ? '' : 'disabled'" class="btn btn-outline-primary btn-circle"
                     :href="page.previous_page ? route(page.previous_page) : ''">
-                <img src="@/img/back.png" alt="back" />
+                <vue-feather type="arrow-left"></vue-feather>
                 </Link>
             </div>
             <div class="col-10">
@@ -17,7 +17,8 @@
                             </div>
                         </div>
                         <div class="cta-button align-items-end d-flex">
-                            <Link href="#" class="btn btn-primary">Get Quote</Link>
+                            <button @click="handleClick" class="btn btn-primary">Get Quote</button>
+
                         </div>
                     </div>
                     <div class="mt-0 d-flex justify-content-between col-9">
@@ -41,7 +42,7 @@
                             </div>
                         </div>
                         <div class="cta-button align-items-end d-flex">
-                            <Link href="#" class="btn btn-primary">Get Quote</Link>
+                            <button @click="handleClick" class="btn btn-primary">Get Quote</button>
                         </div>
                     </div>
                     <div class="mt-0 d-flex justify-content-between col-9 container mt-5"
@@ -76,7 +77,7 @@
                                     {{ page.description }}
                                 </div>
                                 <div class="cta-button align-items-end d-flex mt-5">
-                                    <Link href="#" class="btn btn-primary">Get Quote</Link>
+                                    <button @click="handleClick" class="btn btn-primary">Get Quote</button>
                                 </div>
                             </div>
                         </div>
@@ -93,7 +94,7 @@
                                     {{ page.description }}
                                 </div>
                                 <div class="cta-button align-items-end d-flex mt-5">
-                                    <Link href="#" class="btn btn-primary">Get Quote</Link>
+                                    <button @click="handleClick" class="btn btn-primary">Get Quote</button>
                                 </div>
                             </div>
                         </div>
@@ -102,8 +103,10 @@
 
             </div>
             <div class="col-1">
-                <Link :class="page.next_page ? '' : 'disabled'" :href="page.next_page ? route(page.next_page) : ''">
-                <img src="@/img/next.png" alt="next" />
+                <Link :class="page.next_page ? '' : 'disabled'" :href="page.next_page ? route(page.next_page) : ''"
+                    class="btn btn-primary btn-circle">
+                <vue-feather type="arrow-right"></vue-feather>
+
                 </Link>
             </div>
         </div>
@@ -125,7 +128,7 @@
                 </div>
             </div>
 
-            <div class="row mt-5 pt-5">
+            <div class="row mt-5 pt-5 " ref="pageContent">
                 <div class="col-lg-10 col-xl-9 col-xxl-8 mx-auto text-center">
                     <h3 class="display-4 text-primary text-uppercase">{{ page.title }}</h3>
                     <h2 class="fs-15 text-muted mb-3">{{ page.subtitle }}</h2>
@@ -342,6 +345,9 @@ export default {
                 localStorage.removeItem('order_items');
             }
             localStorage.setItem('order_items', JSON.stringify(this.orderItem));
+        },
+        handleClick() {
+            this.$refs.pageContent.scrollIntoView({ behavior: 'smooth' });
         }
 
     }

@@ -8,13 +8,14 @@
                     </h2>
 
                     <h1 class="display-4 mb-5 mx-md-n5 mx-lg-0 text-uppercase "
-                        style="font-size: 80px;color: var(--bs-primary)">Awarness
+                        style="font-size: 68px;color: var(--bs-primary)">Awarness
                     </h1>
 
 
                     <p class="lead fs-lg mb-7">Out with the old, in with the new, in few simple step.</p>
-                    <span><a class="btn btn-primary me-2">Get Started</a></span>
-                    <span><a class="btn btn-outline-primary me-2">Try now</a></span>
+                    <span>
+                        <Link class="btn btn-primary me-2" :href="route('incubator.why-us')">Get Started</Link>
+                    </span>
                 </div>
                 <div class="col-lg-6">
                     <figure><img class="w-auto" data-cue="fadeIn" src="@/img/illustrations/b1.png"
@@ -49,9 +50,13 @@
 import FrontLayout from '../Shares/FrontLayout.vue';
 import { ref, onMounted } from 'vue'
 
+import { Link, usePage } from '@inertiajs/vue3'
 
 export default {
     layout: FrontLayout,
+    components: {
+        Link
+    },
     props: {
         auth: Object,
     },

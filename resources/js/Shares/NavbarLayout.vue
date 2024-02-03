@@ -3,10 +3,10 @@
         style="z-index: 1031;">
         <div class="container flex-lg-row flex-nowrap align-items-center">
             <div class="navbar-brand w-50">
-                <a href="#">
-                    <img src="@/img/digital-gate-logo.png" srcset="@/img/digital-gate-logo.png 2x" alt="logo"
-                        style="height: 1rem" />
-                </a>
+                <Link :href="route('home')">
+                <img src="@/img/digital-gate-logo.png" srcset="@/img/digital-gate-logo.png 2x" alt="logo"
+                    style="height: 1rem" />
+                </Link>
             </div>
             <div class="navbar-collapse offcanvas offcanvas-nav offcanvas-start">
                 <div class="offcanvas-header d-lg-none">
@@ -179,7 +179,7 @@ export default {
                     id: 2,
 
                     label: 'Services',
-                    link: '#services',
+                    link: 'services.desktop-app-development',
                     subMenu: [
                         {
                             id: 1,
@@ -233,7 +233,7 @@ export default {
                 {
                     id: 5,
                     label: 'Incubator',
-                    link: '#incubator',
+                    link: 'incubator.why-us',
                     subMenu: [
                         {
                             label: 'Why us?',

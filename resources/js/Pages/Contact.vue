@@ -29,7 +29,7 @@
                             <div class="col-lg-6 align-self-stretch">
                                 <div class="map map-full rounded-top rounded-lg-start">
                                     <iframe
-                                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d25387.23478654725!2d-122.06115399490332!3d37.309248660190086!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x808fb4571bd377ab%3A0x394d3fe1a3e178b4!2sCupertino%2C%20CA%2C%20USA!5e0!3m2!1sen!2str!4v1645437305701!5m2!1sen!2str"
+                                        src="https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d2965.024116715737!2d20.957023076971506!3d41.99975797122866!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zNDHCsDU5JzU5LjEiTiAyMMKwNTcnMzQuNiJF!5e0!3m2!1sen!2sid!4v1706976442005!5m2!1sen!2sid"
                                         style="width:100%; height: 100%; border:0" allowfullscreen></iframe>
                                 </div>
                                 <!-- /.map -->
@@ -44,19 +44,9 @@
                                         </div>
                                         <div class="align-self-start justify-content-start">
                                             <h5 class="mb-1">Address</h5>
-                                            <address>Moonshine St. 14/05 Light City, <br class="d-none d-md-block" />London,
-                                                United Kingdom</address>
-                                        </div>
-                                    </div>
-                                    <!--/div -->
-                                    <div class="d-flex flex-row">
-                                        <div>
-                                            <div class="icon text-primary fs-28 me-4 mt-n1"> <i
-                                                    class="uil uil-phone-volume"></i> </div>
-                                        </div>
-                                        <div>
-                                            <h5 class="mb-1">Phone</h5>
-                                            <p>00 (123) 456 78 90 <br />00 (987) 654 32 10</p>
+                                            <address>Str Pollog 113/36 Б4/11, Tetovo <br class="d-none d-md-block" />North
+                                                Macedonia,
+                                                Macedonia</address>
                                         </div>
                                     </div>
                                     <!--/div -->
@@ -67,16 +57,10 @@
                                         </div>
                                         <div>
                                             <h5 class="mb-1">E-mail</h5>
-                                            <p class="mb-0"><a
-                                                    href="/cdn-cgi/l/email-protection#d9aab8b7bdbbb6a199bcb4b8b0b5f7bab6b4"
-                                                    class="link-body"><span class="__cf_email__"
-                                                        data-cfemail="463527282224293e06232b272f2a6825292b">[email&#160;protected]</span></a>
+                                            <p class="mb-0"><span class="__cf_email__"
+                                                    data-cfemail="463527282224293e06232b272f2a6825292b">info@digitalgate.mk</span>
                                             </p>
-                                            <p class="mb-0"><a
-                                                    href="/cdn-cgi/l/email-protection#ed8588819dad9e8c83898f8295c38e8280"
-                                                    class="link-body"><span class="__cf_email__"
-                                                        data-cfemail="472f222b37073426292325283f6924282a">[email&#160;protected]</span></a>
-                                            </p>
+
                                         </div>
                                     </div>
                                     <!--/div -->

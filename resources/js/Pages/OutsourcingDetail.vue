@@ -1,15 +1,8 @@
 <template>
     <section class="wrapper bg-light container-fluid">
-        <div class="d-flex justify-content-start align-items-center pb-3 w-100">
+        <div class="d-flex justify-content-start align-items-center pb-3 w-100 pt-10">
             <div class="row w-100">
-                <div class="col-1">
-                    <div class="alig-items-start">
-                        <Link :href="route('outsourcing.index')">
-                        <img src="@/img/back.png" alt="back" />
-                        </Link>
-                    </div>
-                </div>
-                <div class="col-10 d-flex justify-content-center">
+                <div class="col-12 d-flex justify-content-center">
                     <div class=" w-100 text-center">
                         <h1 class="display-4 text-primary text-uppercase">{{ page.title }}</h1>
                         <p>{{ page.subtitle }}</p>

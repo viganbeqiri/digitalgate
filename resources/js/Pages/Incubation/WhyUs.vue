@@ -19,13 +19,13 @@
                 </div>
                 <div class="col-md-4 offset-md-8 d-flex justify-content-end align-items-center">
                     <div class="swiper-navigation d-flex justify-content-between">
-                        <Link class="slider__prev">
-                        <img src="@/img/back.png" alt="back" />
-                        </Link>
+                        <a class="slider__prev">
+                            <img src="@/img/back.png" alt="back" />
+                        </a>
 
-                        <Link class="slider__next">
-                        <img src="@/img/next.png" alt="back" />
-                        </Link>
+                        <a class="slider__next">
+                            <img src="@/img/next.png" alt="back" />
+                        </a>
 
                     </div>
                 </div>

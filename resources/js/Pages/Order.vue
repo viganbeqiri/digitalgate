@@ -71,9 +71,11 @@
                                                         <select class="form-select" aria-label="Default select example"
                                                             v-model="submitNDAForm.request_type">
                                                             <option value="" selected disabled>Request type</option>
-                                                            <option value="1">Web Development</option>
-                                                            <option value="2">Cross Platform App</option>
-                                                            <option value="3">Mobile Development</option>
+                                                            <option value="1">Desktop App Development</option>
+                                                            <option value="2">Web Development</option>
+                                                            <option value="3">Cross Platform App</option>
+                                                            <option value="4">Mobile Development</option>
+                                                            <option value="5">Design Services</option>
                                                         </select>
                                                         <div v-if="errors.request_type" class="alert alert-danger">
                                                             {{ errors.request_type }}
@@ -222,7 +224,7 @@
                                                             <option value="" disabled>Type of Business</option>
                                                             <option value="1">Individual</option>
                                                             <option value="2">DOO</option>
-                                                            <option value="3">DOEEL (LLC)</option>
+                                                            <option value="3">DOOEL (LLC)</option>
                                                             <option value="4">SA</option>
                                                             <option value="5">NGO</option>
                                                         </select>
