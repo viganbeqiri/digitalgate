@@ -15,10 +15,6 @@
     "file": "assets/Unicons-7f25d712.woff2",
     "src": "resources/assets/fonts/unicons/Unicons.woff2"
   },
-  "resources/assets/img/back.png": {
-    "file": "assets/back-62664678.png",
-    "src": "resources/assets/img/back.png"
-  },
   "resources/assets/img/background/desktop-app-development.png": {
     "file": "assets/desktop-app-development-8b23c473.png",
     "src": "resources/assets/img/background/desktop-app-development.png"
@@ -43,10 +39,6 @@
     "file": "assets/b1@2x-38f6c64c.png",
     "src": "resources/assets/img/illustrations/b1@2x.png"
   },
-  "resources/assets/img/next.png": {
-    "file": "assets/next-d7002b08.png",
-    "src": "resources/assets/img/next.png"
-  },
   "resources/assets/img/photos/incubator.png": {
     "file": "assets/incubator-abdeca2b.png",
     "src": "resources/assets/img/photos/incubator.png"
@@ -70,8 +62,6 @@
       "assets/world-39cc8a22.png",
       "assets/incubator-abdeca2b.png",
       "assets/office-ba70a9d2.png",
-      "assets/back-62664678.png",
-      "assets/next-d7002b08.png",
       "assets/visa-af65f138.png",
       "assets/b1-bad022e0.png",
       "assets/b1@2x-38f6c64c.png",
@@ -80,7 +70,7 @@
     "css": [
       "assets/app-0bd185d4.css"
     ],
-    "file": "assets/app-ee3e5436.js",
+    "file": "assets/app-50b2b357.js",
     "isEntry": true,
     "src": "resources/js/app.js"
   }

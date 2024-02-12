@@ -18,14 +18,13 @@
                     </div>
                 </div>
                 <div class="col-md-4 offset-md-8 d-flex justify-content-end align-items-center">
-                    <div class="swiper-navigation d-flex justify-content-between">
-                        <a class="slider__prev">
-                            <img src="@/img/back.png" alt="back" />
-                        </a>
-
-                        <a class="slider__next">
-                            <img src="@/img/next.png" alt="back" />
-                        </a>
+                    <div class="swiper-navigation d-flex justify-content-between w-100">
+                        <Link class="slider__prev btn btn-outline-primary btn-circle">
+                        <vue-feather type="arrow-left"></vue-feather>
+                        </Link>
+                        <Link class="slider__next btn btn-primary btn-circle">
+                        <vue-feather type="arrow-right"></vue-feather>
+                        </Link>
 
                     </div>
                 </div>
