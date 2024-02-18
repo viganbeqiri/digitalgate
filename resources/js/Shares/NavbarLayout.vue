@@ -40,7 +40,7 @@
                 <ul class="navbar-nav flex-row align-items-center ms-auto w-75">
                     <li class="nav-item dropdown language-select w-100">
                         <!-- search form -->
-                        <form id="search" class="search-form" action="search" method="get">
+                        <form id="search" class="search-form" action="/search" method="get">
                             <div class="form-group">
                                 <input id="search-form" type="text" name="keyword" class="form-control form-control-rounded"
                                     placeholder="Search Here">
