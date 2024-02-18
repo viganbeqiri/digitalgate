@@ -45,6 +45,11 @@ class Product extends Model
         return $this->hasMany(Product::class, 'parent_id');
     }
 
+    public function page()
+    {
+        return $this->belongsTo(Page::class, 'page_id');
+    }
+
     public function parentProduct()
     {
         return $this->belongsTo(Product::class, 'parent_id');

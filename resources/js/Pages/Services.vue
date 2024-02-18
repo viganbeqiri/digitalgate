@@ -324,6 +324,7 @@ export default {
             }
 
             product.service = this.page
+            console.log(this.page, 'page')
             this.orderItem = [product]
             if (parent) {
                 parent.service = this.page

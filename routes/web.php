@@ -82,6 +82,9 @@ Route::get('/portofolio', function () {
         'portofolios' => $portofolios
     ]);
 })->name('portofolio');
+
+Route::get('/search', [App\Http\Controllers\SearchController::class, 'search'])->name('search');
+
 Route::get('/team', function () {
     $teams = Team::all();
     return Inertia::render('Team', [

@@ -27,6 +27,11 @@ class Page extends Model
         return $this->belongsTo(Page::class, 'parent_id');
     }
 
+    public function children()
+    {
+        return $this->hasMany(Page::class, 'parent_id');
+    }
+
     public function getNextPageAttribute()
     {
         if (empty($this->category_id)) {

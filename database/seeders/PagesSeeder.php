@@ -102,6 +102,7 @@ class PagesSeeder extends Seeder
                 'title' => 'Cybersecurity Service',
                 'slug' => 'cybersecurity-service',
                 'category_id' => 'outsourcing',
+                'parent_id' => 'outsourcing',
                 'subtitle' => 'Secure your digital assets with our cybersecurity services; essential| protection for peace of mind and business continuity.',
                 'description' => 'Secure your peace of mind. Let us handle your cybersecurity needs. We offer comprehensive protection and risk management, freeing you to focus on your core business.',
                 'has_slider' => 1,
@@ -132,7 +133,6 @@ class PagesSeeder extends Seeder
             if (!empty($content['parent_id'])) {
                 $parentPage = Page::where('slug', $content['parent_id'])->first();
                 $content['parent_id'] = $parentPage->id;
-                unset($content['parent_id']);
             }
             $category->pages()->updateOrCreate(['slug' => $content['slug']], $content);
         }
