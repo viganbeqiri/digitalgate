@@ -36,7 +36,7 @@ class OrdersController extends Controller
 
     public function show($id)
     {
-        $order = Order::with('user', 'orderItems.product', 'orderDocument')->where('id', $id)->first();
+        $order = Order::with('user', 'orderItems.product', 'orderDocument', 'orderDetail')->where('id', $id)->first();
         if (!$order) {
             abort(404);
         }
@@ -44,6 +44,7 @@ class OrdersController extends Controller
             abort(404);
         }
 
+        $order->documents = $order->documents;
         return Inertia::render('OrderDetail', [
             'order' => $order
         ]);
@@ -95,8 +96,8 @@ class OrdersController extends Controller
         $order->orderDocument()->create([
             'order_id' => $order->id,
             'request_type' => $request->request_type,
-            'license_file_url' => 'orders/document/' . $license_file,
-            'nda_file_url' => 'orders/document/' . $nda_file,
+            'license_file_url' => 'orders/documents/' . $order->id . '/' . $license_file,
+            'nda_file_url' => 'orders/documents/' . $order->id . '/' . $nda_file,
         ]);
 
 

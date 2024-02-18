@@ -15,9 +15,9 @@ class Order extends Model
     public $guarded = [];
     public $appends = ['order_type', 'order_status'];
 
-    public function orderDocument(): HasOne
+    public function orderDocument(): HasMany
     {
-        return $this->hasOne(OrderDocument::class);
+        return $this->HasMany(OrderDocument::class);
     }
 
     public static function generateSerialNumber(): array|string
@@ -76,5 +76,41 @@ class Order extends Model
     {
         // ('0 = draft, 1 = pending, 2 = processing, 3 = completed'
         return $this->status == 0 ? 'draft' : ($this->status == 1 ? 'pending' : ($this->status == 2 ? 'processing' : 'completed'));
+    }
+
+    public function getDocumentsAttribute()
+    {
+        $detail = $this->orderDetail;
+        $documents = $this->orderDocument;
+        $file = [
+            [
+                'name' => 'business_logo_url',
+                'url' => url('') . '/storage' . '/' . $detail->business_logo_url
+            ],
+            [
+                'name' => 'content_zip_url',
+                'url' => url('') . '/storage' . '/' . $detail->content_zip_url
+            ],
+            [
+                'name' => 'company_profile_url',
+                'url' => url('') . '/storage' . '/' . $detail->company_profile_url
+            ]
+        ];
+
+        if ($documents) {
+            $doc = $documents->map(function ($document) {
+                return [
+                    [
+                        'name' => 'license_file_url',
+                        'url' => url('') . '/storage' . '/' . $document->license_file_url
+                    ], [
+                        'name' => 'nda_file_url',
+                        'url' => url('') . '/storage' . '/' . $document->nda_file_url
+                    ]
+                ];
+            })->flatten(1)->toArray();
+            array_push($file, ...$doc);
+        }
+        return $file;
     }
 }
