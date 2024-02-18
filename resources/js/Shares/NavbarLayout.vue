@@ -39,12 +39,15 @@
             <div class="navbar-other w-100 d-flex ms-auto p-2">
                 <ul class="navbar-nav flex-row align-items-center ms-auto w-75">
                     <li class="nav-item dropdown language-select w-100">
-                        <div class="form-group">
-                            <input id="search-form" type="text" class="form-control form-control-rounded"
-                                placeholder="Search Here">
-                            <i class="uil uil-search form-control-icon"></i>
+                        <!-- search form -->
+                        <form id="search" class="search-form" action="search" method="get">
+                            <div class="form-group">
+                                <input id="search-form" type="text" name="keyword" class="form-control form-control-rounded"
+                                    placeholder="Search Here">
+                                <i class="uil uil-search form-control-icon"></i>
 
-                        </div>
+                            </div>
+                        </form>
                     </li>
                 </ul>
                 <!-- /.navbar-nav -->
