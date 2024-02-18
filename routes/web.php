@@ -54,6 +54,7 @@ Route::prefix('order')->name('order.')->middleware('auth')->group(function () {
     Route::post('/details', [App\Http\Controllers\OrdersController::class, 'storeDetail'])->name('storeDetail');
     Route::post('/payment', [App\Http\Controllers\OrdersController::class, 'storePaymentDetail'])->name('storePaymentDetail');
     Route::get('/', [App\Http\Controllers\OrdersController::class, 'index'])->name('index');
+    Route::get('/{id}', [App\Http\Controllers\OrdersController::class, 'show'])->name('show');
 });
 
 Route::prefix('outsourcing')->name('outsourcing.')->group(function () {

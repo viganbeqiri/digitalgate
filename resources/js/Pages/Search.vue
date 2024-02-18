@@ -13,7 +13,8 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <label class="form-label">Keyword</label>
-                            <input type="text" class="form-control" placeholder="Keyword" v-model="keyword" name="keyword">
+                            <input type="text" class="form-control" placeholder="Keyword" v-model="params.keyword"
+                                name="keyword">
                         </div>
                     </div>
                     <!-- search button -->
@@ -56,7 +57,7 @@ import { usePage, Head, Link, router } from '@inertiajs/vue3'
 export default {
     layout: FrontLayout,
     props: {
-        results: Array,
+        results: Object,
         query: String,
         auth: Object
 
@@ -66,7 +67,10 @@ export default {
             keyword: this.query,
             convertedInitials: '',
             orderItem: [],
-            page: null
+            page: null,
+            params: {
+                keyword: this.query
+            }
         }
     },
 
@@ -97,7 +101,10 @@ export default {
             }
         },
         search() {
-            this.$inertia.get(route('search', this.keyword))
+            this.$inertia.get('/search', this.params, {
+                replace: true,
+                preserveState: true
+            })
         },
         doOrder(product, parent = null, page) {
             if (!parent) {
@@ -142,6 +149,17 @@ export default {
     },
     mounted() {
         console.log(this.results)
+    },
+    watch: {
+        params: {
+            handler() {
+                this.$inertia.get('/search', this.params, {
+                    replace: true,
+                    preserveState: true
+                })
+            },
+            deep: true
+        }
     }
 }
 </script>

@@ -10,11 +10,42 @@ use Inertia\Inertia;
 
 class OrdersController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $orders = Order::where('user_id', auth()->user()->id)->get();
+        $orders = $orders = Order::where('user_id', auth()->user()->id);
+
+        if ($request->search) {
+            $orders->whereRaw('concat_ws("|", full_name, order_no, created_at) like ?', '%' . $request->search . '%');
+        }
+
+        if ($request->field && $request->direction) {
+            $orders->orderBy($request->field, $request->direction);
+        }
+
+        if ($request->status) {
+            $orders->where('status', $request->status);
+        }
+
+        $limit = $request->limit ?? 10;
+
         return Inertia::render('MyOrder', [
-            'orders' => $orders
+            'orders' => $orders->paginate($limit),
+            'query' => $request->all()
+        ]);
+    }
+
+    public function show($id)
+    {
+        $order = Order::with('user', 'orderItems.product', 'orderDocument')->where('id', $id)->first();
+        if (!$order) {
+            abort(404);
+        }
+        if ($order->user_id != auth()->user()->id) {
+            abort(404);
+        }
+
+        return Inertia::render('OrderDetail', [
+            'order' => $order
         ]);
     }
     public function storeNDA(Request $request)
@@ -52,19 +83,20 @@ class OrdersController extends Controller
 
         // upload NDA file
         if ($request->hasFile('nda_file')) {
-            Storage::put('orders/documents/' . $order->id, $request->nda_file);
-            //            $request->nda_file = $this->uploadFile($request, 'nda_file', $order);
+            $nda_file = time() . '.' . $request->nda_file->extension();
+            $request->file('nda_file')->storeAs('orders/document', $nda_file);
         }
         if ($request->hasFile('license_file')) {
-            Storage::put('orders/documents/' . $order->id, $request->license_file);
-            //            $request->nda_file = $this->uploadFile($request,'license_file', $order);
+            $license_file = time() . '.' . $request->license_file->extension();
+
+            $request->file('license_file')->storeAs('orders/document', $license_file);
         }
 
         $order->orderDocument()->create([
             'order_id' => $order->id,
             'request_type' => $request->request_type,
-            'license_file_url' => $request->license_file,
-            'nda_file_url' => $request->nda_file,
+            'license_file_url' => 'orders/document/' . $license_file,
+            'nda_file_url' => 'orders/document/' . $nda_file,
         ]);
 
 

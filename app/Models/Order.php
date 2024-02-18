@@ -38,7 +38,10 @@ class Order extends Model
 
         return $serial;
     }
-
+    public function user(): HasOne
+    {
+        return $this->hasOne(User::class, 'id', 'user_id');
+    }
     public function orderItems(): HasMany
     {
         return $this->hasMany(OrderItem::class);
