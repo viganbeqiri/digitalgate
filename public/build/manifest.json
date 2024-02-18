@@ -48,12 +48,12 @@
     "src": "resources/assets/img/photos/office.png"
   },
   "resources/assets/scss/style.scss": {
-    "file": "assets/style-191fed85.css",
+    "file": "assets/style-7ea2074e.css",
     "isEntry": true,
     "src": "resources/assets/scss/style.scss"
   },
   "resources/js/app.css": {
-    "file": "assets/app-0bd185d4.css",
+    "file": "assets/app-22ecd750.css",
     "src": "resources/js/app.css"
   },
   "resources/js/app.js": {
@@ -68,9 +68,9 @@
       "assets/desktop-app-development-8b23c473.png"
     ],
     "css": [
-      "assets/app-0bd185d4.css"
+      "assets/app-22ecd750.css"
     ],
-    "file": "assets/app-d7582fe8.js",
+    "file": "assets/app-ddf3bd44.js",
     "isEntry": true,
     "src": "resources/js/app.js"
   }
