@@ -53,6 +53,7 @@
 import { faThermometer } from "@fortawesome/free-solid-svg-icons";
 import FrontLayout from "../Shares/FrontLayout.vue";
 import { usePage, Head, Link, router } from '@inertiajs/vue3'
+import { toast } from 'vue3-toastify';
 
 export default {
     layout: FrontLayout,
@@ -107,6 +108,10 @@ export default {
             })
         },
         doOrder(product, parent = null, page) {
+            if (product.search_type == 'outsourcing') {
+                router.get('/outsourcing/' + product.slug);
+                return false
+            }
             if (!parent) {
                 parent = product.parent_product
             }

@@ -230,8 +230,8 @@ export default {
                 {
                     id: 4,
 
-                    label: 'Portofolio',
-                    link: 'portofolio'
+                    label: 'Portfolio',
+                    link: 'portfolio'
                 },
                 {
                     id: 5,

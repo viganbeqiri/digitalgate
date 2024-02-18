@@ -9,7 +9,7 @@
                         <img class="mb-4" style="height: 1rem" src="@/img/digital-gate-logo.png"
                             srcset="@/img/digital-gate-logo.png 2x" alt="" />
                         <p class="mb-4 fs-16">Copyright ©<br class="d-none d-lg-block" />DigitalGate Macedonia</p>
-                        <p>Str Pollog 113/36 Б4/11 (41.999758, 20.959598 coordinates)</p>
+                        <p>Str Pollog 113/36 Б4/11 </p>
                         <p><a href="mail:to:info@digitalgate.mk" class="link-body">info@digitalgate.mk</a></p>
                         <nav class="nav social social-muted">
                             <a href="#"><i class="uil uil-twitter"></i></a>

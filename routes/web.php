@@ -81,12 +81,12 @@ Route::prefix('outsourcing')->name('outsourcing.')->group(function () {
     }
 });
 
-Route::get('/portofolio', function () {
+Route::get('/portfolio', function () {
     $portofolios = Portofolio::all();
     return Inertia::render('Portofolio', [
         'portofolios' => $portofolios
     ]);
-})->name('portofolio');
+})->name('portfolio');
 
 Route::get('/search', [App\Http\Controllers\SearchController::class, 'search'])->name('search');
 
@@ -179,7 +179,7 @@ Route::prefix('panel')->name('admin.')->middleware('auth.admin')->group(function
         Route::get('/add-edit/{slug?}', [TeamsController::class, 'createEdit'])->name('createEdit');
     });
 
-    Route::prefix('portofolios')->name('portofolios.')->group(function () {
+    Route::prefix('portfolio')->name('portfolio.')->group(function () {
         Route::get('/', [PortofolioController::class, 'index'])->name('index');
         Route::get('/add-edit/{slug?}', [PortofolioController::class, 'createEdit'])->name('createEdit');
     });
