@@ -53,7 +53,7 @@
                 </div>
             </div>
             <div class="d-flex justify-content-end">
-                <button class="btn btn-primary">Get Quote</button>
+                <button class="btn btn-primary" @click="handleClick">Get Quote</button>
             </div>
         </div>
 
@@ -102,6 +102,10 @@ export default {
                 console.log(cardElements)
             }
         },
+
+        handleClick() {
+            router.get('/outsourcing/get-quote')
+        }
     }
 
 }

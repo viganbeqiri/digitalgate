@@ -96,11 +96,11 @@
     <nav class="navbar fixed-top pt-12  navbar-expand-lg center-nav navbar-light navbar-bg-light seconday-nav-header">
         <div class="container flex-lg-row flex-nowrap align-items-center justify-content-center">
             <div class="navbar-collapse offcanvas offcanvas-nav offcanvas-start">
-                <div class="offcanvas-body d-flex justify-content-center" style="margin-left: 8vw" v-if="subMenu">
+                <div class="offcanvas-body d-flex justify-content-center align-items-center"
+                    style="margin-left: 8vw; height: 40px;" v-if="subMenu">
                     <ul class="navbar-nav secondary-nav">
                         <li class="nav-item" v-for="subMenu in subMenu">
-                            <Link class="nav-link opacity-100 hover-opacity-100 weight-100" v-if="subMenu.link != '#'"
-                                :href="route(subMenu.link)"
+                            <Link class="nav-link weight-200 fs-16" v-if="subMenu.link != '#'" :href="route(subMenu.link)"
                                 :class="route().current().split('.')[1] == subMenu.link.split('.')[1] ? 'text-primary' : ''">
                             {{
                                 subMenu.label }}</Link>
@@ -352,5 +352,9 @@ export default {
 
 .seconday-nav-header {
     background: var(--bs-gray-200) !important;
+}
+
+.nav-link {
+    /* color: #9dafbe !important; */
 }
 </style>

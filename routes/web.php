@@ -66,6 +66,10 @@ Route::prefix('outsourcing')->name('outsourcing.')->group(function () {
             ]);
         }
     })->name('index');
+
+    Route::get('/get-quote', [App\Http\Controllers\OutsourcingController::class, 'quote'])->name('quote');
+    Route::post('/get-quote', [App\Http\Controllers\OutsourcingController::class, 'storeQuote'])->name('store');
+
     try {
         $pages = Category::where('slug', 'outsourcing')->with('pages.parent')->first();
         if ($pages) {
