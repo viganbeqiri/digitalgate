@@ -1,5 +1,12 @@
 <template>
-    <div class="container">
+    <div class="container mt-5 mb-5">
+
+        <div class="row">
+            <div class="col-12">
+                <h3 class="fs-21 text-uppercase text-muted mb-3">My Order</h3>
+            </div>
+            <!-- /column -->
+        </div>
         <!-- search form -->
         <div class="row">
             <div class="col-4">
