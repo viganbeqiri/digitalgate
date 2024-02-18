@@ -143,6 +143,10 @@ Route::prefix('auth')->name('auth.')->group(function () {
 Route::get('sign-up', function () {
     return Inertia::render('Auth/SignUp', []);
 })->name('sign-up');
+Route::get('gdrp', function () {
+    return Inertia::render('gdrp', []);
+})->name('gdrp');
+
 
 Route::get('sign-in', function () {
     return Inertia::render('Auth/SignIn', []);

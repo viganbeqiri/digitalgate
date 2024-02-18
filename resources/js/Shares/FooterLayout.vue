@@ -46,7 +46,7 @@
                             <li>
                                 <Link :href="route('team')">Team</Link>
                             </li>
-                            <li><a href="#">GDRP</a></li>
+                            <li><a :href="route('gdrp')">GDRP</a></li>
                             <li>
                                 <Link :href="route('contact-us')">Contact</Link>
 
