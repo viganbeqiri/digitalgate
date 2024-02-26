@@ -60,8 +60,8 @@
     "assets": [
       "assets/digital-gate-logo-8c8f03f6.png",
       "assets/world-39cc8a22.png",
-      "assets/incubator-abdeca2b.png",
       "assets/office-ba70a9d2.png",
+      "assets/incubator-abdeca2b.png",
       "assets/visa-af65f138.png",
       "assets/b1-bad022e0.png",
       "assets/b1@2x-38f6c64c.png",
@@ -70,7 +70,7 @@
     "css": [
       "assets/app-073e0566.css"
     ],
-    "file": "assets/app-d5612194.js",
+    "file": "assets/app-7279aa7c.js",
     "isEntry": true,
     "src": "resources/js/app.js"
   }
