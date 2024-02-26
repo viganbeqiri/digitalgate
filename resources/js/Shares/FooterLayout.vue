@@ -52,13 +52,6 @@
 
                             </li>
 
-                            <li>
-                                <Link :href="route('privacy')">Privacy Policy</Link>
-                            </li>
-                            <li>
-                                <Link :href="route('cookies')">Cookies Policy</Link>
-
-                            </li>
 
                         </ul>
                     </div>
@@ -69,9 +62,14 @@
                     <div class="widget">
                         <h4 class="widget-title text-ash mb-3">Support</h4>
                         <ul class="list-unstyled  mb-0">
-                            <li><a href="#">Support Center</a></li>
-                            <li><a href="#">Help Desk</a></li>
-                            <li><a href="#">FAQ</a></li>
+
+                            <li>
+                                <Link :href="route('privacy')">Privacy Policy</Link>
+                            </li>
+                            <li>
+                                <Link :href="route('cookies')">Cookies Policy</Link>
+
+                            </li>
                         </ul>
                     </div>
                     <!-- /.widget -->
