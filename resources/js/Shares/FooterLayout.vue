@@ -51,6 +51,15 @@
                                 <Link :href="route('contact-us')">Contact</Link>
 
                             </li>
+
+                            <li>
+                                <Link :href="route('privacy')">Privacy Policy</Link>
+                            </li>
+                            <li>
+                                <Link :href="route('cookies')">Cookies Policy</Link>
+
+                            </li>
+
                         </ul>
                     </div>
                     <!-- /.widget -->

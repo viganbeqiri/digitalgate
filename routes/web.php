@@ -147,6 +147,15 @@ Route::get('gdrp', function () {
     return Inertia::render('gdrp', []);
 })->name('gdrp');
 
+Route::get('privacy', function () {
+    return Inertia::render('Privacy', []);
+})->name('privacy');
+Route::get('cookies', function () {
+    return Inertia::render('Cookies', []);
+})->name('cookies');
+
+
+
 
 Route::get('sign-in', function () {
     return Inertia::render('Auth/SignIn', []);
