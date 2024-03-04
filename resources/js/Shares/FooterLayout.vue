@@ -25,12 +25,20 @@
                 <!-- /column -->
                 <div class="col-md-3 col-lg-2 text-color-primary">
                     <div class="widget">
-                        <h4 class="widget-title text-ash mb-3">Product</h4>
+                        <h4 class="widget-title text-ash mb-3">Features</h4>
                         <ul class="list-unstyled  mb-0">
-                            <li><a href="#">Features</a></li>
-                            <li><a href="#">Personal License</a></li>
-                            <li><a href="#">Business License</a></li>
-                            <li><a href="#">Pricing Options</a></li>
+                            <li>
+                                <Link :href="route('services.desktop-app-development')">Services</Link>
+                            </li>
+                            <li>
+                                <Link :href="route('outsourcing.index')">Outsourcing</Link>
+                            </li>
+                            <li>
+                                <Link :href="route('portfolio')">Portfolio</Link>
+                            </li>
+                            <li>
+                                <Link :href="route('incubator.why-us')">Incubator</Link>
+                            </li>
                         </ul>
                     </div>
                     <!-- /.widget -->

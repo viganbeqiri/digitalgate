@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\ProductsController;
 use App\Http\Controllers\Admin\TeamsController;
 use App\Http\Controllers\Admin\UsersController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ContactController;
 use App\Http\Controllers\DynamicFormsStorageController;
 use App\Models\AboutUs;
 use App\Models\Category;
@@ -155,7 +156,7 @@ Route::get('cookies', function () {
 })->name('cookies');
 
 
-
+Route::post('contact-us', [ContactController::class, 'sendContactForm'])->name('contact-us.send');
 
 Route::get('sign-in', function () {
     return Inertia::render('Auth/SignIn', []);

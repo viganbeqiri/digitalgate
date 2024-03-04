@@ -81,13 +81,14 @@
                     <h2 class="display-4 mb-3 text-center">Drop Us a Line</h2>
                     <p class="lead text-center mb-10">Reach out to us from our contact form and we will get back to you
                         shortly.</p>
-                    <form class="contact-form needs-validation" method="post" action="./assets/php/contact.php" novalidate>
+                    <form @submit.prevent="submit" method="post" novalidate="">
                         <div class="messages"></div>
+
                         <div class="row gx-4">
                             <div class="col-md-6">
                                 <div class="form-floating mb-4">
-                                    <input id="form_name" type="text" name="name" class="form-control" placeholder="Jane"
-                                        required>
+                                    <input id="form_name" type="text" v-model="submitContact.first_name" name="name"
+                                        class="form-control" placeholder="Jane" required>
                                     <label for="form_name">First Name *</label>
                                     <div class="valid-feedback"> Looks good! </div>
                                     <div class="invalid-feedback"> Please enter your first name. </div>
@@ -96,8 +97,8 @@
                             <!-- /column -->
                             <div class="col-md-6">
                                 <div class="form-floating mb-4">
-                                    <input id="form_lastname" type="text" name="surname" class="form-control"
-                                        placeholder="Doe" required>
+                                    <input id="form_lastname" type="text" v-model="submitContact.last_name" name="surname"
+                                        class="form-control" placeholder="Doe" required>
                                     <label for="form_lastname">Last Name *</label>
                                     <div class="valid-feedback"> Looks good! </div>
                                     <div class="invalid-feedback"> Please enter your last name. </div>
@@ -106,31 +107,20 @@
                             <!-- /column -->
                             <div class="col-md-6">
                                 <div class="form-floating mb-4">
-                                    <input id="form_email" type="email" name="email" class="form-control"
-                                        placeholder="jane.doe@example.com" required>
+                                    <input id="form_email" type="email" v-model="submitContact.email" name="email"
+                                        class="form-control" placeholder="jane.doe@example.com" required>
                                     <label for="form_email">Email *</label>
                                     <div class="valid-feedback"> Looks good! </div>
                                     <div class="invalid-feedback"> Please provide a valid email address. </div>
                                 </div>
                             </div>
                             <!-- /column -->
-                            <div class="col-md-6">
-                                <div class="form-select-wrapper mb-4">
-                                    <select class="form-select" id="form-select" name="department" required>
-                                        <option selected disabled value="">Select a department</option>
-                                        <option value="Sales">Sales</option>
-                                        <option value="Marketing">Marketing</option>
-                                        <option value="Customer Support">Customer Support</option>
-                                    </select>
-                                    <div class="valid-feedback"> Looks good! </div>
-                                    <div class="invalid-feedback"> Please select a department. </div>
-                                </div>
-                            </div>
                             <!-- /column -->
                             <div class="col-12">
                                 <div class="form-floating mb-4">
                                     <textarea id="form_message" name="message" class="form-control"
-                                        placeholder="Your message" style="height: 150px" required></textarea>
+                                        placeholder="Your message" v-model="submitContact.message" style="height: 150px"
+                                        required></textarea>
                                     <label for="form_message">Message *</label>
                                     <div class="valid-feedback"> Looks good! </div>
                                     <div class="invalid-feedback"> Please enter your messsage. </div>
@@ -157,8 +147,35 @@
 </template>
 
 <script>
+import { useForm } from '@inertiajs/vue3';
 import FrontLayout from '../Shares/FrontLayout.vue';
+import { toast } from 'vue3-toastify';
+
 export default {
-    layout: FrontLayout
+    layout: FrontLayout,
+    setup() {
+        const submitContact = useForm({
+            first_name: '',
+            last_name: '',
+            email: '',
+            message: '',
+        })
+        return { submitContact }
+    },
+    methods: {
+        submit() {
+            console.log(this.submitContact)
+            this.submitContact.post(route('contact-us.send'), {
+                onSuccess: () => {
+                    this.submitContact.reset();
+                    toast(this.$page.props.flash.messages);
+                    console.log('success')
+                },
+                onError: () => {
+                    console.log('error')
+                }
+            })
+        }
+    }
 }
 </script>
