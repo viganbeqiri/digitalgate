@@ -27,6 +27,22 @@
     "file": "assets/digital-gate-logo-8c8f03f6.png",
     "src": "resources/assets/img/digital-gate-logo.png"
   },
+  "resources/assets/img/icons/audience.png": {
+    "file": "assets/audience-f162764b.png",
+    "src": "resources/assets/img/icons/audience.png"
+  },
+  "resources/assets/img/icons/brainstrom-brain-think-design.png": {
+    "file": "assets/brainstrom-brain-think-design-dd8d3ebc.png",
+    "src": "resources/assets/img/icons/brainstrom-brain-think-design.png"
+  },
+  "resources/assets/img/icons/keybroad-eletronic-device-computer.png": {
+    "file": "assets/keybroad-eletronic-device-computer-1d674716.png",
+    "src": "resources/assets/img/icons/keybroad-eletronic-device-computer.png"
+  },
+  "resources/assets/img/icons/loudspeaker.png": {
+    "file": "assets/loudspeaker-469cd093.png",
+    "src": "resources/assets/img/icons/loudspeaker.png"
+  },
   "resources/assets/img/icons/visa.png": {
     "file": "assets/visa-af65f138.png",
     "src": "resources/assets/img/icons/visa.png"
@@ -39,38 +55,32 @@
     "file": "assets/b1@2x-38f6c64c.png",
     "src": "resources/assets/img/illustrations/b1@2x.png"
   },
-  "resources/assets/img/photos/incubator.png": {
-    "file": "assets/incubator-abdeca2b.png",
-    "src": "resources/assets/img/photos/incubator.png"
-  },
-  "resources/assets/img/photos/office.png": {
-    "file": "assets/office-ba70a9d2.png",
-    "src": "resources/assets/img/photos/office.png"
-  },
   "resources/assets/scss/style.scss": {
     "file": "assets/style-7ea2074e.css",
     "isEntry": true,
     "src": "resources/assets/scss/style.scss"
   },
   "resources/js/app.css": {
-    "file": "assets/app-073e0566.css",
+    "file": "assets/app-fbd7a9c9.css",
     "src": "resources/js/app.css"
   },
   "resources/js/app.js": {
     "assets": [
       "assets/digital-gate-logo-8c8f03f6.png",
       "assets/world-39cc8a22.png",
-      "assets/office-ba70a9d2.png",
-      "assets/incubator-abdeca2b.png",
+      "assets/brainstrom-brain-think-design-dd8d3ebc.png",
+      "assets/loudspeaker-469cd093.png",
+      "assets/audience-f162764b.png",
+      "assets/keybroad-eletronic-device-computer-1d674716.png",
       "assets/visa-af65f138.png",
       "assets/b1-bad022e0.png",
       "assets/b1@2x-38f6c64c.png",
       "assets/desktop-app-development-8b23c473.png"
     ],
     "css": [
-      "assets/app-073e0566.css"
+      "assets/app-fbd7a9c9.css"
     ],
-    "file": "assets/app-7279aa7c.js",
+    "file": "assets/app-6e9f01f5.js",
     "isEntry": true,
     "src": "resources/js/app.js"
   }
