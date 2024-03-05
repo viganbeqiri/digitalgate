@@ -138,7 +138,7 @@
                         </a>
                     </li>
                     <li class="menu-item">
-                        <a href="{{ route('admin.portofolios.index') }}" class="menu-link">
+                        <a href="{{ route('admin.portfolio.index') }}" class="menu-link">
                             <span class="menu-icon"><i data-feather="message-square"></i></span>
                             <span class="menu-text"> Portofolio </span>
                         </a>
