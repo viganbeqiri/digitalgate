@@ -26,8 +26,7 @@
                         <img src="@/img/background/desktop-app-development.png"
                             style="width: 444px; height: 400px; object-fit: cover; object-position: -20% 0;"
                             class="img-fluid" alt="desktop-app" />
-                        <div class="text-start fs-21 ms-5">
-                            {{ page.description }}
+                        <div class="text-start fs-21 ms-5" v-html="page.description">
                         </div>
 
                     </div>
@@ -48,8 +47,7 @@
                     <div class="mt-0 d-flex justify-content-between col-9 container mt-5"
                         style="background: url(/assets/img/background/web-app-dev.png);background-size: cover;">
 
-                        <div class="text-start fs-21 ms-5 mt-5">
-                            {{ page.description }}
+                        <div class="text-start fs-21 ms-5 mt-5" v-html="page.description">
                         </div>
 
                     </div>
@@ -59,8 +57,7 @@
                     <div class="d-flex justify-content-between container">
                         <div class="page-title">
                             <h1 class="text-primary fw-light" style="font-size: 50px;">{{ page.title }}</h1>
-                            <div class="text-start fs-21 mt-5 col-8">
-                                {{ page.description }}
+                            <div class="text-start fs-21 mt-5 col-8" v-html="page.description">
                             </div>
                         </div>
 

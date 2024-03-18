@@ -25,6 +25,12 @@
 
     <!-- Icons css -->
     <link href="{{ asset('/') }}admin/assets/css/icons.min.css" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('/') }}admin/assets/libs/quill/quill.core.css" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('/') }}admin/assets/libs/quill/quill.bubble.css" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('/') }}admin/assets/libs/quill/quill.snow.css" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('/') }}admin/assets/libs/sweetalert2/sweetalert2.min.css" rel="stylesheet" type="text/css" />
+
+
 </head>
 
 <body>
@@ -62,27 +68,8 @@
                         <a href="javascript: void(0);" class="dropdown-toggle h5 mb-1 d-block"
                             data-bs-toggle="dropdown">Geneva Kennedy</a>
                         <div class="dropdown-menu user-pro-dropdown">
-
                             <!-- item-->
-                            <a href="javascript:void(0);" class="dropdown-item notify-item">
-                                <i class="fe-user me-1"></i>
-                                <span>My Account</span>
-                            </a>
-
-                            <!-- item-->
-                            <a href="javascript:void(0);" class="dropdown-item notify-item">
-                                <i class="fe-settings me-1"></i>
-                                <span>Settings</span>
-                            </a>
-
-                            <!-- item-->
-                            <a href="javascript:void(0);" class="dropdown-item notify-item">
-                                <i class="fe-lock me-1"></i>
-                                <span>Lock Screen</span>
-                            </a>
-
-                            <!-- item-->
-                            <a href="javascript:void(0);" class="dropdown-item notify-item">
+                            <a href="" class="dropdown-item notify-item">
                                 <i class="fe-log-out me-1"></i>
                                 <span>Logout</span>
                             </a>
@@ -202,36 +189,13 @@
                             </a>
                             <div class="dropdown-menu dropdown-menu-end profile-dropdown ">
                                 <!-- item-->
-                                <div class="dropdown-header noti-title">
-                                    <h6 class="text-overflow m-0">Welcome !</h6>
-                                </div>
-
-                                <!-- item-->
-                                <a href="javascript:void(0);" class="dropdown-item notify-item">
-                                    <i class="fe-user"></i>
-                                    <span>My Account</span>
-                                </a>
-
-                                <!-- item-->
-                                <a href="javascript:void(0);" class="dropdown-item notify-item">
-                                    <i class="fe-settings"></i>
-                                    <span>Settings</span>
-                                </a>
-
-                                <!-- item-->
-                                <a href="javascript:void(0);" class="dropdown-item notify-item">
-                                    <i class="fe-lock"></i>
-                                    <span>Lock Screen</span>
-                                </a>
-
-                                <div class="dropdown-divider"></div>
-
-                                <!-- item-->
-                                <a href="javascript:void(0);" class="dropdown-item notify-item">
+                                <a href="{{ route('auth.logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"  class="dropdown-item notify-item">
                                     <i class="fe-log-out"></i>
                                     <span>Logout</span>
                                 </a>
-
+                                <form id="logout-form" action="{{ route('auth.logout') }}" method="POST" style="display: none;">
+                                    {{ csrf_field() }}
+                                </form>
                             </div>
                         </li>
 
@@ -309,6 +273,11 @@
 
     <!-- App js -->
     <script src="{{ asset('/') }}admin/assets/js/app.min.js"></script>
+    <script src="{{ asset('/') }}admin/assets/libs/quill/quill.min.js"></script>
+    <script src="{{ asset('/') }}admin/assets/libs/sweetalert2/sweetalert2.all.min.js"></script>
+
+    <!-- Init js-->
+
     @yield('scripts')
 </body>
 

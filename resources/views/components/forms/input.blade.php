@@ -7,7 +7,9 @@
         @if ($value !== null && $value !== '') value="{{ $value }}"
         @else
             value="{{ old($name) }}" @endif
-        {{ $isRequired ? 'required' : '' }} {{ $disabled }}>
+        {{ $isRequired ? 'required' : '' }} {{ $disabled ? 'disabled' : '' }}
+
+    >
 
     @if ($hintText)
         <small class="form-text text-muted">{{ $hintText }}</small>

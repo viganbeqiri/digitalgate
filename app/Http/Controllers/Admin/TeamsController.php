@@ -21,4 +21,32 @@ class TeamsController extends Controller
             'data' => $data
         ]);
     }
+
+    public function updateOrSave(Request $request)
+    {
+        $data = $request->all();
+        if (isset($data['id']) && $data['id'] != '') {
+            $model = \App\Models\Team::find($data['id']);
+        } else {
+            $model = new \App\Models\Team();
+        }
+//        dd($request->all());
+
+        if ($request->hasFile('image')) {
+            $image = $this->uploadImage($request->file('image'));
+            $data['image'] = $image;
+        }
+
+        $model->fill($data);
+        $model->save();
+        return redirect()->route('admin.teams.index');
+    }
+
+    private function uploadImage($file)
+    {
+        $fileName = time() . '.' . $file->getClientOriginalExtension();
+        $path = 'assets/uploads/team';
+        $file->move(public_path($path), $fileName);
+        return $path.'/'.$fileName;
+    }
 }

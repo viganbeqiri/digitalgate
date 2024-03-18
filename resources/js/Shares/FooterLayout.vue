@@ -8,9 +8,8 @@
                     <div class="widget">
                         <img class="mb-4" style="height: 1rem" src="@/img/digital-gate-logo.png"
                             srcset="@/img/digital-gate-logo.png 2x" alt="" />
-                        <p class="mb-4 fs-16">Copyright ©<br class="d-none d-lg-block" />DigitalGate Macedonia</p>
-                        <p>Str Pollog 113/36 Б4/11 </p>
-                        <p><a href="mail:to:info@digitalgate.mk" class="link-body">info@digitalgate.mk</a></p>
+                        <p class="mb-4 fs-16">Copyright © DigitalGate Macedonia</p>
+                        <p class="text-ash fs-9">Digital Gate is a fully registered trademark of DTU Enermak DOOEL, and protected by local and international copyright law.</p>
                         <nav class="nav social social-muted">
                             <a href="#"><i class="uil uil-twitter"></i></a>
                             <a href="#"><i class="uil uil-facebook-f"></i></a>

@@ -139,6 +139,7 @@ Route::prefix('auth')->name('auth.')->group(function () {
     })->name('index');
     Route::post('register', [AuthController::class, 'register'])->name('register');
     Route::post('login', [AuthController::class, 'login'])->name('login');
+    Route::post('logout', [AuthController::class, 'logout'])->name('logout');
 });
 
 Route::get('sign-up', function () {
@@ -177,16 +178,19 @@ Route::prefix('panel')->name('admin.')->middleware('auth.admin')->group(function
     Route::prefix('pages')->name('pages.')->group(function () {
         Route::get('/', [PagesController::class, 'index'])->name('index');
         Route::get('/add-edit/{slug?}', [PagesController::class, 'createEdit'])->name('createEdit');
+        Route::post('/add-edit/{slug?}', [PagesController::class, 'updateOrSave'])->name('updateOrSave');
     });
 
     Route::prefix('products')->name('products.')->group(function () {
         Route::get('/', [ProductsController::class, 'index'])->name('index');
         Route::get('/add-edit/{slug?}', [ProductsController::class, 'createEdit'])->name('createEdit');
+        Route::post('/store', [ProductsController::class, 'store'])->name('store');
     });
 
     Route::prefix('teams')->name('teams.')->group(function () {
         Route::get('/', [TeamsController::class, 'index'])->name('index');
         Route::get('/add-edit/{slug?}', [TeamsController::class, 'createEdit'])->name('createEdit');
+        Route::post('/store', [TeamsController::class, 'updateOrSave'])->name('store');
     });
 
     Route::prefix('portfolio')->name('portfolio.')->group(function () {

@@ -10,7 +10,7 @@
         <div class="col-xl-10 mx-auto">
             <form class="filter-form mb-10">
                 <div class="row">
-                    <div class="col-md-6">
+                    <div class="col-md-11">
                         <div class="form-group">
                             <label class="form-label">Keyword</label>
                             <input type="text" class="form-control" placeholder="Keyword" v-model="params.keyword"
@@ -18,7 +18,7 @@
                         </div>
                     </div>
                     <!-- search button -->
-                    <div class="col-md-6 d-flex align-items-end">
+                    <div class="col-md-1 d-flex align-items-end">
                         <div class="form-group">
                             <button type="submit" class="btn btn-primary" @click="search">Search</button>
                         </div>

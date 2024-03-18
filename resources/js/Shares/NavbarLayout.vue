@@ -44,7 +44,6 @@
                             <div class="form-group">
                                 <input id="search-form" type="text" name="keyword" class="form-control form-control-rounded"
                                     placeholder="Search Here">
-                                <i class="uil uil-search form-control-icon"></i>
 
                             </div>
                         </form>
@@ -78,6 +77,7 @@
                         <ul class="dropdown-menu">
                             <li class="nav-item">
                                 <Link class="dropdown-item" :href="route('order.index')">Orders</Link>
+                                <a class="dropdown-item" @click="logout()" href="#">Logout</a>
                             </li>
                         </ul>
                     </li>
@@ -304,6 +304,19 @@ export default {
             } else {
                 return false
             }
+        },
+
+        logout() {
+            this.$inertia.post(route('auth.logout'), {
+                onSuccess: () => {
+                            toast.success('Logout Successful');
+                            localStorage.clear();
+                            router.visit('/', {
+                                onSuccess: () => {
+                                    location.reload();
+                                }
+                            });}
+            })
         }
     },
     computed() {

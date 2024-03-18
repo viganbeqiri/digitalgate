@@ -12,6 +12,9 @@
 @endsection
 @section('content')
     <div class="row">
+        @if(session()->has('message'))
+            <x-alert type="{{ session()->get('type') }}" message="{{ session()->get('message') }}"/>
+        @endif
         <div class="col-12">
             <div class="card">
                 <div class="card-body">

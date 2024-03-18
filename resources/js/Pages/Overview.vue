@@ -1,6 +1,6 @@
 <template>
     <section class="wrapper bg-gradient-primary">
-        <div class="container-fluid  pb-8 text-center">
+        <div class="container-fluid  pb-2 text-center">
             <div class="row gx-lg-8 gx-xl-12 gy-10 align-items-start pt-5" data-cues="fadeIn" data-interval="-200">
                 <div class="col-md-10 offset-md-1 offset-lg-1 col-lg-5 text-center text-lg-start">
                     <h2 class="display-3 mb-5 mx-md-n5 mx-lg-0 text-uppercase" style="color: var(--bs-primary);">Create Your
@@ -18,7 +18,7 @@
                     </span>
                 </div>
                 <div class="col-lg-6">
-                    <figure><img class="w-auto" data-cue="fadeIn" src="@/img/illustrations/b1.png"
+                    <figure class="text-end"><img class="w-auto" data-cue="fadeIn" src="@/img/illustrations/b1.png" style="    height: 700px !important;"
                             srcset="@/img/illustrations/b1@2x.png 2x" alt="" /></figure>
                 </div>
                 <!-- /column -->
